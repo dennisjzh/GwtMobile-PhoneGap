@@ -1,0 +1,29 @@
+body {
+	font-size: 100%;
+}
+.fill {
+	height:100%;
+	width:100%;
+}
+
+td {
+	text-align:center;
+}
+
+.gwt-Button {
+	font-size: 1em;
+	padding: 0.5em;
+	width: 80%;
+}
+
+.WVGA {
+	font-size: 150%;
+}
+
+.HVGA {
+	font-size: 100%;
+}
+
+.QVGA {
+	font-size: 75%;
+}

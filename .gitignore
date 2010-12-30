@@ -1,0 +1,5 @@
+lib
+classes
+*~
+war/GwtMobilePhoneGapKitchenSink
+.gwt-tmp

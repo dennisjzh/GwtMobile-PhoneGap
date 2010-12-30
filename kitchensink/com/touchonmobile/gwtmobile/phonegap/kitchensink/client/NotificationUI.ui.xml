@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:com.touchonmobile.gwtmobile.phonegap.kitchensink.client">
+	<ui:style>
+	</ui:style>
+	<g:VerticalPanel styleName="fill" >
+		<m:Header title="Notification"></m:Header>
+	
+		<g:Button ui:field="alert">Alert</g:Button>
+		<g:Button ui:field="confirm">Confirm</g:Button>
+		<g:Button ui:field="beep">Beep</g:Button>
+		<g:Button ui:field="vibrate">Vibrate</g:Button>
+		<g:TextBox ui:field="text"></g:TextBox>
+		<g:Button ui:field="blink">Blink</g:Button>
+		<g:Button ui:field="activity">Activity</g:Button>
+		<g:Button ui:field="progress">Progress</g:Button>
+	</g:VerticalPanel>
+</ui:UiBinder> 
