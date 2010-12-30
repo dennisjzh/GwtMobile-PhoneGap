@@ -14,12 +14,12 @@ public class KitchenSink implements EntryPoint {
 	public void onModuleLoad() {
 		setCSS();
 
-		PhoneGap.onDeviceReady(new Callback() {			
-			@Override
-			public void onEventFired() {
+//		PhoneGap.onDeviceReady(new Callback() {			
+//			@Override
+//			public void onEventFired() {
 				RootLayoutPanel.get().add(mainUi);				
-			}
-		});
+//			}
+//		});
 		
 	}
 

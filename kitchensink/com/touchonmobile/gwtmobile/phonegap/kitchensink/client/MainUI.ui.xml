@@ -6,6 +6,8 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<g:Button ui:field="accelerometer">Accelerometer</g:Button>
+		<g:Button ui:field="compass">Compass</g:Button>
+		<g:Button ui:field="geolocation">Geolocation</g:Button>
 		<g:Button ui:field="notification">Notification</g:Button>
 		<g:Button ui:field="event">Event</g:Button>
 	</g:HTMLPanel>

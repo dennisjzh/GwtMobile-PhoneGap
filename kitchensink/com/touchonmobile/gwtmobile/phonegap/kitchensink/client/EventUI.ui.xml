@@ -3,14 +3,10 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:com.touchonmobile.gwtmobile.phonegap.kitchensink.client">
 	<ui:style>
-		.fill {
-			width: 100%;
-			height: 100%;
-		}
 	</ui:style>
-	<g:VerticalPanel styleName="{style.fill}">
+	<g:VerticalPanel>
 	<m:Header title="Event"></m:Header>
 	<g:Label>Note: onPause and onResume events only work on an Android device.</g:Label>
-	<g:TextArea ui:field="text" styleName="{style.fill}" />
+	<g:TextArea ui:field="text" />
 	</g:VerticalPanel> 
 </ui:UiBinder> 

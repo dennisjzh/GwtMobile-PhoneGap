@@ -1,7 +1,7 @@
 body {
 	font-size: 100%;
 }
-.fill {
+table,textarea {
 	height:100%;
 	width:100%;
 }

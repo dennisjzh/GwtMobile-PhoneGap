@@ -5,9 +5,9 @@
 	<ui:style>
 	</ui:style>
 	<g:VerticalPanel>
-		<m:Header title="Accelerometer"></m:Header>
-		<g:Button ui:field="current">Get Current  Acceleration</g:Button>
-		<g:Button ui:field="watch">Watch Accelerometer</g:Button>
+		<m:Header title="Compass"></m:Header>
+		<g:Button ui:field="current">Get Current Heading</g:Button>
+		<g:Button ui:field="watch">Watch Heading</g:Button>
 		<g:Button ui:field="clear">Clear Watch</g:Button>
 		<g:TextArea ui:field="text"/>
 	</g:VerticalPanel>

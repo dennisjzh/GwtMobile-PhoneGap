@@ -3,11 +3,14 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:com.touchonmobile.gwtmobile.phonegap.kitchensink.client">
 	<ui:style>
+		table > tbody > tr:last-child {
+			height: 50%;
+		}
 	</ui:style>
 	<g:VerticalPanel>
-		<m:Header title="Accelerometer"></m:Header>
-		<g:Button ui:field="current">Get Current  Acceleration</g:Button>
-		<g:Button ui:field="watch">Watch Accelerometer</g:Button>
+		<m:Header title="Geolocation"></m:Header>
+		<g:Button ui:field="current">Get Current Position</g:Button>
+		<g:Button ui:field="watch">Watch Position</g:Button>
 		<g:Button ui:field="clear">Clear Watch</g:Button>
 		<g:TextArea ui:field="text"/>
 	</g:VerticalPanel>
