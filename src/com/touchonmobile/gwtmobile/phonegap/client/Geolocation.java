@@ -142,19 +142,19 @@ public class Geolocation {
     		return this;
     	}
     	
-    	private native JavaScriptObject setFrequency(int f, JavaScriptObject options) /*-{
+    	private native void setFrequency(int f, JavaScriptObject options) /*-{
 			options.frequency = f;			
 		}-*/;
 
-    	private native JavaScriptObject setEnableHighAccuracy(boolean b, JavaScriptObject options) /*-{
+    	private native void setEnableHighAccuracy(boolean b, JavaScriptObject options) /*-{
 			options.enableHighAccuracy = b;			
 		}-*/;
 
-    	private native JavaScriptObject setTimeout(int t, JavaScriptObject options) /*-{
+    	private native void setTimeout(int t, JavaScriptObject options) /*-{
 			options.timeout = t;			
 		}-*/;
 
-    	private native JavaScriptObject setMaximumAge(int a, JavaScriptObject options) /*-{
+    	private native void setMaximumAge(int a, JavaScriptObject options) /*-{
 			options.maximumAge = a;			
 		}-*/;
 
