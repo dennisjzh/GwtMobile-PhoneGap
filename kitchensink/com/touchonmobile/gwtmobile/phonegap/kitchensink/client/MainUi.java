@@ -49,6 +49,11 @@ public class MainUi extends Composite {
     	goTo(new CompassUi());
     }   
 
+    @UiHandler("device")
+    public void handleDeviceClick(ClickEvent e) {
+    	goTo(new DeviceUi());
+    }   
+
     @UiHandler("geolocation")
     public void handleGeolocationClick(ClickEvent e) {
     	goTo(new GeolocationUi());
