@@ -59,6 +59,11 @@ public class MainUi extends Composite {
     	goTo(new GeolocationUi());
     }   
 
+    @UiHandler("media")
+    public void handleMediaClick(ClickEvent e) {
+    	goTo(new MediaUi());
+    }   
+
     @UiHandler("network")
     public void handleNetworkClick(ClickEvent e) {
     	goTo(new NetworkUi());

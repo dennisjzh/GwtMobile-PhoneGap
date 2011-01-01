@@ -10,6 +10,7 @@
 		<g:Button ui:field="compass">Compass</g:Button>
 		<g:Button ui:field="device">Device</g:Button>
 		<g:Button ui:field="geolocation">Geolocation</g:Button>
+		<g:Button ui:field="media">Media</g:Button>		
 		<g:Button ui:field="network">Network</g:Button>
 		<g:Button ui:field="notification">Notification</g:Button>
 		<g:Button ui:field="event">Event</g:Button>
