@@ -56,20 +56,20 @@ public class Compass {
     }
     
     public static class Options {
+
     	@SuppressWarnings("unused")
-		private int frequency;
+		private Options self = this;
+		private JavaScriptObject options = JavaScriptObject.createObject();
     	
-    	public Options frequency(int f) {
-    		this.frequency = f;
-    		return this;
-    	}
-    	
-    	private native JavaScriptObject getOptions() /*-{
-    		var f = this.@com.touchonmobile.gwtmobile.phonegap.client.Compass.Options::frequency;
-    		var options = { frequency : f }; 
-			return options;    		
+    	public native Options frequency(int f) /*-{
+    		this.@com.touchonmobile.gwtmobile.phonegap.client.Compass.Options::options.frequency = f;
+    		return this.@com.touchonmobile.gwtmobile.phonegap.client.Compass.Options::self;
     	}-*/;
     	
+    	private JavaScriptObject getOptions() {
+			return options;    		
+    	}
+
     }
 
 }

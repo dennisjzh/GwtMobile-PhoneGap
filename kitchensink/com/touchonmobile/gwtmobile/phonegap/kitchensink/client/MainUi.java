@@ -23,20 +23,25 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MainUI extends Composite {
+public class MainUi extends Composite {
 
-	private static MainUIUiBinder uiBinder = GWT.create(MainUIUiBinder.class);
+	private static MainUiUiBinder uiBinder = GWT.create(MainUiUiBinder.class);
 
-	interface MainUIUiBinder extends UiBinder<Widget, MainUI> {
+	interface MainUiUiBinder extends UiBinder<Widget, MainUi> {
 	}
 
-	public MainUI() {
+	public MainUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
     @UiHandler("accelerometer")
     public void handleAccelerometerClick(ClickEvent e) {
     	goTo(new AccelerometerUi());
+    }   
+
+    @UiHandler("camera")
+    public void handleCameraClick(ClickEvent e) {
+    	goTo(new CameraUi());
     }   
 
     @UiHandler("compass")
@@ -51,17 +56,17 @@ public class MainUI extends Composite {
 
     @UiHandler("network")
     public void handleNetworkClick(ClickEvent e) {
-    	goTo(new NetworkUI());
+    	goTo(new NetworkUi());
     }   
 
     @UiHandler("notification")
     public void handleNotificationClick(ClickEvent e) {
-    	goTo(new NotificationUI());
+    	goTo(new NotificationUi());
     }   
 
     @UiHandler("event")
     public void handleEventClick(ClickEvent e) {
-    	goTo(new EventUI());
+    	goTo(new EventUi());
     }   
 
     private void goTo(Composite page) {

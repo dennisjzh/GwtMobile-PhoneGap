@@ -27,14 +27,14 @@ import com.touchonmobile.gwtmobile.phonegap.client.Network.Callback;
 import com.touchonmobile.gwtmobile.phonegap.client.Network.NetworkStatus;
 import com.touchonmobile.gwtmobile.phonegap.client.Network.Options;
 
-public class NetworkUI extends Composite {
+public class NetworkUi extends Composite {
 
-	private static NetworkUIUiBinder uiBinder = GWT.create(NetworkUIUiBinder.class);
+	private static NetworkUiUiBinder uiBinder = GWT.create(NetworkUiUiBinder.class);
 	
-	interface NetworkUIUiBinder extends UiBinder<Widget, NetworkUI> {
+	interface NetworkUiUiBinder extends UiBinder<Widget, NetworkUi> {
 	}
 
-	public NetworkUI() {
+	public NetworkUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 

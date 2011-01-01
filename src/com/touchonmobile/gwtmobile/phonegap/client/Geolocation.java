@@ -120,42 +120,27 @@ public class Geolocation {
 
 
     public static class Options {
+    	Options self = this;
     	JavaScriptObject options = JavaScriptObject.createObject();
     	
-    	public Options frequency(int f) {
-    		setFrequency(f, options);
-    		return this;
-    	}
-    	
-    	public Options enableHighAccuracy(boolean b) {
-    		setEnableHighAccuracy(b, options);
-    		return this;
-    	}
-    	
-    	public Options timeout(int t) {
-    		setTimeout(t, options);
-    		return this;
-    	}
-    	
-    	public Options maximumAge(int a) {
-    		setMaximumAge(a, options);
-    		return this;
-    	}
-    	
-    	private native void setFrequency(int f, JavaScriptObject options) /*-{
-			options.frequency = f;			
+    	public native Options frequency(int f) /*-{
+    		this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::options.frequency = f;
+    		return this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::self;			
 		}-*/;
 
-    	private native void setEnableHighAccuracy(boolean b, JavaScriptObject options) /*-{
-			options.enableHighAccuracy = b;			
+    	public native Options enableHighAccuracy(boolean b) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::options.enableHighAccuracy = b;			
+    		return this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::self;			
 		}-*/;
 
-    	private native void setTimeout(int t, JavaScriptObject options) /*-{
-			options.timeout = t;			
+    	public native Options timeout(int t) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::options.timeout = t;			
+    		return this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::self;			
 		}-*/;
 
-    	private native void setMaximumAge(int a, JavaScriptObject options) /*-{
-			options.maximumAge = a;			
+    	public native Options maximumAge(int a) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::options.maximumAge = a;			
+    		return this.@com.touchonmobile.gwtmobile.phonegap.client.Geolocation.Options::self;			
 		}-*/;
 
 		private JavaScriptObject getOptions() {

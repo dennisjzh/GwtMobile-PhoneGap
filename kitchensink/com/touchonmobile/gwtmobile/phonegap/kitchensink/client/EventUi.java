@@ -26,16 +26,16 @@ import com.google.gwt.user.client.ui.Widget;
 import com.touchonmobile.gwtmobile.phonegap.client.PhoneGap;
 import com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback;
 
-public class EventUI extends Composite {
+public class EventUi extends Composite {
 
-	private static EventUIUiBinder uiBinder = GWT.create(EventUIUiBinder.class);
+	private static EventUiUiBinder uiBinder = GWT.create(EventUiUiBinder.class);
 	
 	@UiField TextArea text;
 
-	interface EventUIUiBinder extends UiBinder<Widget, EventUI> {
+	interface EventUiUiBinder extends UiBinder<Widget, EventUi> {
 	}
 
-	public EventUI() {
+	public EventUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	

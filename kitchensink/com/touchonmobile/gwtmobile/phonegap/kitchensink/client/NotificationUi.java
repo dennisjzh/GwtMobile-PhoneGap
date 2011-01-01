@@ -29,17 +29,17 @@ import com.touchonmobile.gwtmobile.phonegap.client.Notification;
 import com.touchonmobile.gwtmobile.phonegap.client.Notification.Callback;
 import com.touchonmobile.gwtmobile.phonegap.client.Notification.ConfirmCallback;
 
-public class NotificationUI extends Composite {
+public class NotificationUi extends Composite {
 
 	private static NotificationUiBinder uiBinder = GWT
 			.create(NotificationUiBinder.class);
 
-	interface NotificationUiBinder extends UiBinder<Widget, NotificationUI> {
+	interface NotificationUiBinder extends UiBinder<Widget, NotificationUi> {
 	}
 
 	@UiField TextBox text;
 	
-	public NotificationUI() {
+	public NotificationUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	

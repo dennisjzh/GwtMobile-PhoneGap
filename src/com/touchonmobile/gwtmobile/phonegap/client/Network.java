@@ -48,15 +48,12 @@ public class Network {
 	}
 	
     public static class Options {
+    	Options self = this;
     	JavaScriptObject options = JavaScriptObject.createObject();
     	
-    	public Options isIpAddress(boolean b) {
-    		isIpAddress(b, options);
-    		return this;
-    	}
-    	
-    	private native void isIpAddress(boolean b, JavaScriptObject options) /*-{
-			options.isIpAddress = b;			
+    	public native Options isIpAddress(boolean b) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Network.Options::options.isIpAddress = b;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Network.Options::self;
 		}-*/;
 
 		private JavaScriptObject getOptions() {

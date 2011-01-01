@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:com.touchonmobile.gwtmobile.phonegap.kitchensink.client">
+	<ui:style>
+	</ui:style>
+	<g:VerticalPanel>
+	<m:Header title="Camera"></m:Header>
+	<g:Button ui:field="get">Get Picture</g:Button>
+	</g:VerticalPanel> 
+</ui:UiBinder> 

@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class KitchenSink implements EntryPoint {
 
-	public static MainUI mainUi = new MainUI();
+	public static MainUi mainUi = new MainUi();
 	
 	@Override
 	public void onModuleLoad() {
