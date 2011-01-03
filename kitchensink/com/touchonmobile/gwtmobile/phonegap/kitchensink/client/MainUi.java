@@ -54,6 +54,11 @@ public class MainUi extends Composite {
     	goTo(new DeviceUi());
     }   
 
+    @UiHandler("file")
+    public void handleFileClick(ClickEvent e) {
+    	goTo(new FileUi());
+    }   
+
     @UiHandler("geolocation")
     public void handleGeolocationClick(ClickEvent e) {
     	goTo(new GeolocationUi());
