@@ -16,137 +16,237 @@
 
 package com.touchonmobile.gwtmobile.phonegap.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
 
 public class Contacts {
 	
-	public static final native Contacts newInstance() /*-{
+	public static final native Contact newInstance() /*-{
 		return new $wnd.navigator.service.contacts.create();
 	}-*/;
+
+	public static final void find(ContactFields fields, ContactFindCallback callback, ContactFindOptions options) {
+		find(fields.getFields(), callback, options.getOptions());
+	}
+	
+	private static final native void find(JsArrayString fields, ContactFindCallback callback, JavaScriptObject options) /*-{
+		$wnd.navigator.service.contacts.find(fields, function(contacts) {
+			callback.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(contacts);
+		}, function(error) {
+			callback.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindCallback::onError(Lcom/touchonmobile/gwtmobile/phonegap/client/Contacts$ContactError;)(error);
+		}, options);
+	}-*/;
+	
 	
 	public static class Contact extends JavaScriptObject {
 		
 		protected Contact() {}
 		
-		public static final native String getId() /*-{
+		public final native void save(Callback callback) /*-{
+			this.save(function() {
+				callback.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.Callback::onSuccess()();
+			}, function(error) {
+				callback.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.Callback::onError(Lcom/touchonmobile/gwtmobile/phonegap/client/Contacts$ContactError;)(error);
+			});
+		}-*/;
+		
+		public final native Contact clone() /*-{
+			return this.clone();
+		}-*/;
+		
+		public final native void remove(Callback callback) /*-{
+			this.remove(function() {
+				callback.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.Callback::onSuccess()();
+			}, function(error) {
+				callback.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.Callback::onError(Lcom/touchonmobile/gwtmobile/phonegap/client/Contacts$ContactError;)(error);
+			});
+		}-*/;
+		
+		public final native String getId() /*-{
 			return this.id;
 		}-*/;
 	
-		public static final native void setId(String id) /*-{
+		public final native void setId(String id) /*-{
 			this.id = id;
 		}-*/;
 
-		public static final native String getDisplayName() /*-{
+		public final native String getDisplayName() /*-{
 			return this.displayName;
 		}-*/;
 	
-		public static final native void setDisplayName(String displayName) /*-{
+		public final native void setDisplayName(String displayName) /*-{
 			this.displayName = displayName;
 		}-*/;
 
-		public static final native ContactName getName() /*-{
+		public final native ContactName getName() /*-{
 			return this.name;
 		}-*/;
 	
-		public static final native void setName(ContactName name) /*-{
+		public final native void setName(ContactName name) /*-{
 			this.name = name;
 		}-*/;
 
-		public static final native String getNickname() /*-{
+		public final native String getNickname() /*-{
 			return this.nickname;
 		}-*/;
 	
-		public static final native void setNickname(String nickname) /*-{
+		public final native void setNickname(String nickname) /*-{
 			this.nickname = nickname;
 		}-*/;
 
-		public static final native JsArray<ContactField> getPhoneNumbers() /*-{
+		public final native JsArray<ContactField> getPhoneNumbers() /*-{
 			return this.phoneNumbers;
 		}-*/;
 	
-		public static final native void getPhoneNumbers(JsArray<ContactField> phoneNumbers) /*-{
+		public final native void getPhoneNumbers(JsArray<ContactField> phoneNumbers) /*-{
 			this.phoneNumbers = phoneNumbers;
 		}-*/;
 
-		public static final native JsArray<ContactField> getEmails() /*-{
+		public final native JsArray<ContactField> getEmails() /*-{
 			return this.emails;
 		}-*/;
 	
-		public static final native void setEmails(JsArray<ContactField> emails) /*-{
+		public final native void setEmails(JsArray<ContactField> emails) /*-{
 			this.emails = emails;
 		}-*/;
 
-		public static final native JsArray<ContactAddress> getAddresses() /*-{
+		public final native JsArray<ContactAddress> getAddresses() /*-{
 			return this.addresses;
 		}-*/;
 	
-		public static final native void setAddresses(JsArray<ContactAddress> addresses) /*-{
+		public final native void setAddresses(JsArray<ContactAddress> addresses) /*-{
 			this.addresses = addresses;
 		}-*/;
 
-		public static final native JsArray<ContactField> getIMs() /*-{
+		public final native JsArray<ContactField> getIMs() /*-{
 			return this.ims;
 		}-*/;
 	
-		public static final native JsArray<ContactOrganization> getOrganizations() /*-{
+		public final native void setIMs(JsArray<ContactField> ims) /*-{
+			this.ims = ims;
+		}-*/;
+	
+		public final native JsArray<ContactOrganization> getOrganizations() /*-{
 			return this.organizations;
 		}-*/;
 	
-		public static final native String getPublished() /*-{
+		public final native void getOrganizations(JsArray<ContactOrganization> organizations) /*-{
+			this.organizations = organizations;
+		}-*/;
+	
+		public final native String getPublished() /*-{
 			return this.published;
 		}-*/;
 	
-		public static final native String getUpdated() /*-{
+		public final native void setPublished(String published) /*-{
+			this.published = published;
+		}-*/;
+	
+		public final native String getUpdated() /*-{
 			return this.updated;
 		}-*/;
 	
-		public static final native String getBirthday() /*-{
+		public final native void setUpdated(String updated) /*-{
+			this.updated = updated;
+		}-*/;
+	
+		public final native String getBirthday() /*-{
 			return this.birthday;
 		}-*/;
 	
-		public static final native String getAnniversary() /*-{
+		public final native void setBirthday(String birthday) /*-{
+			this.birthday = birthday;
+		}-*/;
+	
+		public final native String getAnniversary() /*-{
 			return this.anniversary;
 		}-*/;
 	
-		public static final native String getGender() /*-{
+		public final native void setAnniversary(String anniversity) /*-{
+			this.anniversary = anniversity;
+		}-*/;
+	
+		public final native String getGender() /*-{
 			return this.gender;
 		}-*/;
 	
-		public static final native String getNote() /*-{
+		public final native void setGender(String gender) /*-{
+			this.gender = gender;
+		}-*/;
+	
+		public final native String getNote() /*-{
 			return this.note;
 		}-*/;
 	
-		public static final native String getPreferredUsername() /*-{
+		public final native void setNote(String note) /*-{
+			this.note = note;
+		}-*/;
+	
+		public final native String getPreferredUsername() /*-{
 			return this.preferredUsername;
 		}-*/;
 	
-		public static final native JsArray<ContactField> getPhotos() /*-{
+		public final native void setPreferredUsername(String preferredUsername) /*-{
+			this.preferredUsername = preferredUsername;
+		}-*/;
+	
+		public final native JsArray<ContactField> getPhotos() /*-{
 			return this.photos;
 		}-*/;
 	
-		public static final native JsArray<ContactField> getTags() /*-{
+		public final native void setPhotos(JsArray<ContactField> photos) /*-{
+			this.photos = photos;
+		}-*/;
+	
+		public final native JsArray<ContactField> getTags() /*-{
 			return this.tags;
 		}-*/;
 	
-		public static final native JsArray<ContactField> getRelationships() /*-{
+		public final native void setTags(JsArray<ContactField> tags) /*-{
+			this.tags = tags;
+		}-*/;
+	
+		public final native JsArray<ContactField> getRelationships() /*-{
 			return this.relationships;
 		}-*/;
 	
-		public static final native JsArray<ContactField> getURLs() /*-{
+		public final native void setRelationships(JsArray<ContactField> relationships) /*-{
+			this.relationships = relationships;
+		}-*/;
+	
+		public final native JsArray<ContactField> getURLs() /*-{
 			return this.urls;
 		}-*/;
 	
-		public static final native JsArray<ContactAccount> getAccounts() /*-{
+		public final native void setURLs(JsArray<ContactField> urls) /*-{
+			this.urls = urls;
+		}-*/;
+	
+		public final native JsArray<ContactAccount> getAccounts() /*-{
 			return this.accounts;
 		}-*/;
 	
-		public static final native String getUTCOffset() /*-{
+		public final native void setAccounts(JsArray<ContactAccount> accounts) /*-{
+			this.accounts = accounts;
+		}-*/;
+	
+		public final native String getUTCOffset() /*-{
 			return this.utcOffset;
 		}-*/;
 	
-		public static final native boolean getConnected() /*-{
+		public final native void setUTCOffset(String utcOffset) /*-{
+			this.utcOffset = utcOffset;
+		}-*/;
+	
+		public final native boolean getConnected() /*-{
 			return this.connected;
+		}-*/;
+
+		public final native void setConnected(boolean connected) /*-{
+			this.connected = connected;
 		}-*/;
 	}
 
@@ -154,28 +254,56 @@ public class Contacts {
 		
 		protected ContactName() {};
 		
+		public static final ContactName newInstance() {
+			return (ContactName) JavaScriptObject.createObject();
+		}
+		
 		public final native String getFormatted() /*-{
 			return this.formatted;
+		}-*/;
+
+		public final native void setFormatted(String formatted) /*-{
+			this.formatted = formatted;
 		}-*/;
 
 		public final native String getFamilyName() /*-{
 			return this.familyName;
 		}-*/;
 
+		public final native void setFamilyName(String familyName) /*-{
+			this.familyName = familyName;
+		}-*/;
+
 		public final native String getGivenName() /*-{
 			return this.givenName;
+		}-*/;
+
+		public final native void setGivenName(String givenName) /*-{
+			this.givenName = givenName;
 		}-*/;
 
 		public final native String getMiddleName() /*-{
 			return this.middleName;
 		}-*/;
 
+		public final native void setMiddleName(String middleName) /*-{
+			this.middleName = middleName;
+		}-*/;
+
 		public final native String getHororificPrefix() /*-{
 			return this.hororificPrefix;
 		}-*/;
 
+		public final native void setHororificPrefix(String hororificPrefix) /*-{
+			this.hororificPrefix = hororificPrefix;
+		}-*/;
+
 		public final native String getHonorificSuffix() /*-{
 			return this.honorificSuffix;
+		}-*/;
+
+		public final native void setHonorificSuffix(String honorificSuffix) /*-{
+			this.honorificSuffix = honorificSuffix;
 		}-*/;
 
 	}
@@ -184,16 +312,32 @@ public class Contacts {
 		
 		protected ContactField() {};
 		
+		public static final ContactField newInstance() {
+			return (ContactField) JavaScriptObject.createObject();
+		}
+
 		public final native String getType() /*-{
 			return this.type;
+		}-*/;
+
+		public final native void setType(String type) /*-{
+			this.type = type;
 		}-*/;
 
 		public final native String getValue() /*-{
 			return this.value;
 		}-*/;
 
+		public final native void setValue(String value) /*-{
+			this.value = value;
+		}-*/;
+
 		public final native boolean getPrimary() /*-{
 			return this.primary;
+		}-*/;
+
+		public final native void setPrimary(boolean primary) /*-{
+			this.primary = primary;
 		}-*/;
 
 	}
@@ -202,28 +346,56 @@ public class Contacts {
 		
 		protected ContactAddress() {};
 		
+		public static final ContactAddress newInstance() {
+			return (ContactAddress) JavaScriptObject.createObject();
+		}
+
 		public final native String getFormatted() /*-{
 			return this.formatted;
+		}-*/;
+
+		public final native void setFormatted(String formatted) /*-{
+			this.formatted = formatted;
 		}-*/;
 
 		public final native String getStreetAddress() /*-{
 			return this.streetAddress;
 		}-*/;
 
+		public final native void setStreetAddress(String streetAddress) /*-{
+			this.streetAddress = streetAddress;
+		}-*/;
+
 		public final native String getLocality() /*-{
 			return this.locality;
+		}-*/;
+
+		public final native void getLocality(String locality) /*-{
+			this.locality = locality;
 		}-*/;
 
 		public final native String getRegion() /*-{
 			return this.region;
 		}-*/;
 
+		public final native void setRegion(String region) /*-{
+			this.region = region;
+		}-*/;
+
 		public final native String getPostalCode() /*-{
 			return this.postalCode;
 		}-*/;
 
+		public final native void setPostalCode(String postalCode) /*-{
+			this.postalCode = postalCode;
+		}-*/;
+
 		public final native String getCountry() /*-{
 			return this.country;
+		}-*/;
+
+		public final native void setCountry(String country) /*-{
+			this.country = country;
 		}-*/;
 
 	}
@@ -232,32 +404,64 @@ public class Contacts {
 		
 		protected ContactOrganization() {};
 		
+		public static final ContactOrganization newInstance() {
+			return (ContactOrganization) JavaScriptObject.createObject();
+		}
+
 		public final native String getName() /*-{
 			return this.name;
+		}-*/;
+
+		public final native void setName(String name) /*-{
+			this.name = name;
 		}-*/;
 
 		public final native String getDepartment() /*-{
 			return this.department;
 		}-*/;
 
+		public final native void setDepartment(String department) /*-{
+			this.department = department;
+		}-*/;
+
 		public final native String getTitle() /*-{
 			return this.title;
+		}-*/;
+
+		public final native void setTitle(String title) /*-{
+			this.title = title;
 		}-*/;
 
 		public final native String getStartDate() /*-{
 			return this.startDate;
 		}-*/;
 
+		public final native void setStartDate(String startDate) /*-{
+			this.startDate = startDate;
+		}-*/;
+
 		public final native String getEndDate() /*-{
 			return this.endDate;
+		}-*/;
+
+		public final native void setEndDate(String endDate) /*-{
+			this.endDate = endDate;
 		}-*/;
 
 		public final native String getLocation() /*-{
 			return this.location;
 		}-*/;
 
+		public final native void setLocation(String location) /*-{
+			this.location = location;
+		}-*/;
+
 		public final native String getDescription() /*-{
 			return this.description;
+		}-*/;
+
+		public final native void setDescription(String description) /*-{
+			this.description = description;
 		}-*/;
 
 	}
@@ -266,18 +470,119 @@ public class Contacts {
 		
 		protected ContactAccount() {};
 		
+		public static final ContactAccount newInstance() {
+			return (ContactAccount) JavaScriptObject.createObject();
+		}
+
 		public final native String getDomain() /*-{
 			return this.domain;
+		}-*/;
+
+		public final native void setDomain(String domain) /*-{
+			this.domain = domain;
 		}-*/;
 
 		public final native String getUserName() /*-{
 			return this.username;
 		}-*/;
 
+		public final native void setUserName(String username) /*-{
+			this.username = username;
+		}-*/;
+
 		public final native String getUserId() /*-{
 			return this.userid;
 		}-*/;
 
+		public final native void getUserId(String userid) /*-{
+			this.userid = userid;
+		}-*/;
+
+	}
+	
+	public interface Callback {
+		void onSuccess();
+		void onError(ContactError error); 
+	}
+	
+	public interface ContactFindCallback {
+		void onSuccess(JsArray<Contact> contacts);
+		void onError(ContactError error); 
+	}
+	
+	public enum ContactErrorCode {
+		UNKNOWN_ERROR, 
+		INVALID_ARGUMENT_ERROR, 
+		NOT_FOUND_ERROR, 
+		TIMEOUT_ERROR, 
+		PENDING_OPERATION_ERROR, 
+		IO_ERROR, 
+		NOT_SUPPORTED_ERROR, 
+		PERMISSION_DENIED_ERROR
+	}
+	
+	public static class ContactError extends JavaScriptObject {
+		
+		protected ContactError() {};
+		
+		public final ContactErrorCode getCode() {
+			return ContactErrorCode.values()[getCodeNative()];
+		}
+		
+		private final native int getCodeNative() /*-{
+			return this.code;
+		}-*/;
+	}
+	
+	public static class ContactFields {
+		
+		JsArrayString fields = (JsArrayString) JsArrayString.createArray();
+		
+		public ContactFields(String field1, String... fields) {
+			this.fields.push(field1);
+			if (fields != null) {
+				for (String field : fields) {
+					this.fields.push(field);
+				} 
+			}
+		};
+		
+		public JsArrayString getFields() {
+			return fields;
+		}
+	}
+
+	public static class ContactFindOptions {
+		ContactFindOptions self = this;
+		JavaScriptObject options = JavaScriptObject.createObject();
+
+		public native ContactFindOptions filter(String filter) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.filter = filter;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+		}-*/;
+
+		public native ContactFindOptions multiple(boolean multiple) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.multiple = multiple;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+		}-*/;
+
+		public native ContactFindOptions limit(int limit) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.limit = limit;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+		}-*/;
+
+		public ContactFindOptions updatedSince(Date updatedSince) {
+			return updatedSince(updatedSince.toString());
+		}
+
+		private native ContactFindOptions updatedSince(String updatedSince) /*-{
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.updatedSince = filter;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+		}-*/;
+
+		private JavaScriptObject getOptions() {
+			return options;
+		}
 	}
 
 }

@@ -49,6 +49,11 @@ public class MainUi extends Composite {
     	goTo(new CompassUi());
     }   
 
+    @UiHandler("contacts")
+    public void handleContactsClick(ClickEvent e) {
+    	goTo(new ContactsUi());
+    }   
+
     @UiHandler("device")
     public void handleDeviceClick(ClickEvent e) {
     	goTo(new DeviceUi());
