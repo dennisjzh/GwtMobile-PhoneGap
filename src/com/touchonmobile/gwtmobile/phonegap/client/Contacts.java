@@ -557,18 +557,18 @@ public class Contacts {
 		JavaScriptObject options = JavaScriptObject.createObject();
 
 		public native ContactFindOptions filter(String filter) /*-{
-			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.filter = filter;
-			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.filter = filter;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
 		}-*/;
 
 		public native ContactFindOptions multiple(boolean multiple) /*-{
-			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.multiple = multiple;
-			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.multiple = multiple;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
 		}-*/;
 
 		public native ContactFindOptions limit(int limit) /*-{
-			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.limit = limit;
-			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.limit = limit;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
 		}-*/;
 
 		public ContactFindOptions updatedSince(Date updatedSince) {
@@ -576,8 +576,8 @@ public class Contacts {
 		}
 
 		private native ContactFindOptions updatedSince(String updatedSince) /*-{
-			this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::options.updatedSince = filter;
-			return this.@com.touchonmobile.gwtmobile.phonegap.client.Camera.Options::self;
+			this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.updatedSince = filter;
+			return this.@com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
 		}-*/;
 
 		private JavaScriptObject getOptions() {

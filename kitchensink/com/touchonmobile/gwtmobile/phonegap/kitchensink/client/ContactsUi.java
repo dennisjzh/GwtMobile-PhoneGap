@@ -18,16 +18,20 @@ package com.touchonmobile.gwtmobile.phonegap.kitchensink.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.touchonmobile.gwtmobile.phonegap.client.Contacts;
-import com.touchonmobile.gwtmobile.phonegap.client.Contacts.*;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.Callback;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.Contact;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactError;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFields;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindCallback;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactFindOptions;
+import com.touchonmobile.gwtmobile.phonegap.client.Contacts.ContactName;
 
 public class ContactsUi extends Composite {
 
@@ -71,10 +75,13 @@ public class ContactsUi extends Composite {
     public void handleFindClick(ClickEvent e) {
 		try {
 			
-			Contacts.find(new ContactFields("displayName"), new ContactFindCallback() {
+			Contacts.find(new ContactFields("nickname"), new ContactFindCallback() {
 				@Override
 				public void onSuccess(JsArray<Contact> contacts) {
-					text.setText("Find contact " + contacts);
+					text.setText("Find contact " + contacts.length());
+					if (contacts.length() > 0) {
+						text.setText(text.getText() + "\nNickname: " + contacts.get(0).getNickname());
+					}
 				}
 				@Override
 				public void onError(ContactError error) {
