@@ -53,7 +53,7 @@ public class FileUi extends Composite {
 	protected void onLoad() {
 		super.onLoad();
 
-		dirName = File.getRootPaths()[0] + "gwtmobile-phonegap/";
+		dirName = File.getRootPaths()[0] + "/gwtmobile-phonegap/";
 		fileName = dirName + "kitchensink-file.txt";
 		writer = File.newWriterInstance(fileName, true);
 		reader = File.newReaderInstance();

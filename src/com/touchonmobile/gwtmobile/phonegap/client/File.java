@@ -47,7 +47,7 @@ public class File {
 	}
 	
 	private static native JsArrayString getRootPathsNative() /*-{
-		return new $wnd.navigator.fileMgr.getRootPaths();
+		return $wnd.navigator.fileMgr.getRootPaths();
 	}-*/;
 
 	public static String[] getFileBasePaths() {
@@ -60,7 +60,7 @@ public class File {
 	}
 
 	private static native JsArrayString getFileBasePathsNative() /*-{
-		return new $wnd.navigator.fileMgr.getFileBasePathsNative();
+		return $wnd.navigator.fileMgr.getFileBasePathsNative();
 	}-*/;
 
 	public static native void testFileExists(String fileName, FileMgrCallback callback) /*-{
