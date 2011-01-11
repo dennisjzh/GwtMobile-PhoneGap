@@ -23,6 +23,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
+import com.touchonmobile.gwtmobile.phonegap.client.Device;
 import com.touchonmobile.gwtmobile.phonegap.client.PhoneGap;
 import com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback;
 
@@ -42,6 +43,8 @@ public class EventUi extends Composite {
 	@Override
 	protected void onLoad() {
 		super.onLoad();
+		
+		Device.overrideBackButton();
 		
 		PhoneGap.onDeviceReady(new Callback() {			
 			@Override
@@ -63,6 +66,34 @@ public class EventUi extends Composite {
 				text.setText((new Date()).toString() + ": onResume\n" + text.getText());
 			}
 		});
+
+		PhoneGap.onBackKeyDown(new Callback() {			
+			@Override
+			public void onEventFired() {
+				text.setText((new Date()).toString() + ": onBackKeyDown\n" + text.getText());
+			}
+		});
+
+		PhoneGap.onMenuKeyDown(new Callback() {			
+			@Override
+			public void onEventFired() {
+				text.setText((new Date()).toString() + ": onMenuKeyDown\n" + text.getText());
+			}
+		});
+		
+		PhoneGap.onSearchKeyDown(new Callback() {			
+			@Override
+			public void onEventFired() {
+				text.setText((new Date()).toString() + ": onSearchKeyDown\n" + text.getText());
+			}
+		});
+		
+	}
+	
+	@Override
+	protected void onUnload() {
+		super.onUnload();
+		Device.resetBackButton();
 	}
 
 }

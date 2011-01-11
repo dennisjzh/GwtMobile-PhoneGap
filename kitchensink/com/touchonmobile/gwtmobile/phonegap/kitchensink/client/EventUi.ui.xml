@@ -6,7 +6,7 @@
 	</ui:style>
 	<g:VerticalPanel>
 	<m:Header title="Event"></m:Header>
-	<g:Label>Note: onPause and onResume events only work on an Android device.</g:Label>
+	<g:Label>Note: onPause, onResume, onBackKeyDown, onMenuKeyDown and onSearchKeyDown events only work on an Android device.</g:Label>
 	<g:TextArea ui:field="text" />
 	</g:VerticalPanel> 
 </ui:UiBinder> 

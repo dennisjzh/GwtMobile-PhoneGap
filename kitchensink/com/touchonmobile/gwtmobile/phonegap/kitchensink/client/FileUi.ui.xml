@@ -27,6 +27,6 @@
 				<g:Button ui:field="abort">Abort</g:Button>
 			</g:VerticalPanel>
 		</g:HorizontalPanel> 
-		<g:TextArea ui:field="text" visibleLines="5" />
+		<g:TextArea ui:field="text" />
 	</g:VerticalPanel>
 </ui:UiBinder> 
