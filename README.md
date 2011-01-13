@@ -31,8 +31,8 @@ The java code below showcases how to call PhoneGap functions in an GWT mobile ap
 			@Override
 			public void onSuccess(Acceleration accel) {
 				text.setText("Watch Acceleration" 
-					+ "\nX: " + accel.getX() 
-					+ "\nY: " + accel.getY() 
+					+ "\nX: " + accel.getX()
+					+ "\nY: " + accel.getY()
 					+ "\nZ: " + accel.getZ());				
 			}			
 			@Override
