@@ -30,6 +30,16 @@
     <!-- be added before this line.                -->
     <!--                                           -->
     <script type="text/javascript" language="javascript" src="GwtMobilePhoneGapKitchenSink/GwtMobilePhoneGapKitchenSink.nocache.js"></script>
+
+	<script type="text/javascript">
+		// Use to get around with PhoneGap using "instanceof Function"
+		function callbackproxy(cb) {
+			this.callback = function(){
+				cb();
+			}
+		}	
+	</script>  
+
   </head>
 
   <!--                                           -->
@@ -37,16 +47,7 @@
   <!-- you can leave the body empty if you want  -->
   <!-- to create a completely dynamic UI.        -->
   <!--                                           -->
-<script type="text/javascript">
-	// Use to get around with PhoneGap using "instanceof Function"
-	function callbackproxy(cb) {
-		this.callback = function(){
-			cb();
-		}
-	}
 
-	
-</script>
   <body style="overflow:hidden;width=100%;height=100%;margin=0px;padding=0px;">
 
   </body>

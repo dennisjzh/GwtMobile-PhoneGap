@@ -18,12 +18,12 @@ package com.touchonmobile.gwtmobile.phonegap.client;
 
 
 
-public class PhoneGap {
+public class Event {
     
 	public native static void onDeviceReady(Callback callback) /*-{
 		//PhoneGap uses "instanceof Function". Have to use callbackproxy to get around.
 	    $doc.addEventListener("deviceready", new $wnd.callbackproxy(function() {
-	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback::onEventFired()();
+	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }).callback, false);
 	}-*/;
 	
@@ -31,31 +31,31 @@ public class PhoneGap {
 	
 	public native static void onPause(Callback callback) /*-{
 	    $doc.addEventListener("pause", new $wnd.callbackproxy(function() {
-	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback::onEventFired()();
+	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }).callback, false);
 	}-*/;
 
 	public native static void onResume(Callback callback) /*-{
 	    $doc.addEventListener("resume", new $wnd.callbackproxy(function() {
-	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback::onEventFired()();
+	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }).callback, false);
 	}-*/;
 
 	public native static void onBackKeyDown(Callback callback) /*-{
 	    $doc.addEventListener("backKeyDown", new $wnd.callbackproxy(function() {
-	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback::onEventFired()();
+	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }).callback, false);
 	}-*/;
 
 	public native static void onMenuKeyDown(Callback callback) /*-{
 	    $doc.addEventListener("menuKeyDown", new $wnd.callbackproxy(function() {
-	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback::onEventFired()();
+	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }).callback, false);
 	}-*/;
 
 	public native static void onSearchKeyDown(Callback callback) /*-{
 	    $doc.addEventListener("searchKeyDown", new $wnd.callbackproxy(function() {
-	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.PhoneGap.Callback::onEventFired()();
+	    	callback.@com.touchonmobile.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }).callback, false);
 	}-*/;
 
