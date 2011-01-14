@@ -41,19 +41,19 @@ public class Device {
 	// below are Android specific APIs.
 	
 	public native static void overrideBackButton() /*-{
-		if (typeof $wnd.device.overrideBackButton == "function") {
+		if ($wnd.device && typeof $wnd.device.overrideBackButton == "function") {
 			$wnd.device.overrideBackButton();
 		}
 	}-*/;
 	
 	public native static void resetBackButton() /*-{
-		if (typeof $wnd.device.resetBackButton == "function") {
+		if ($wnd.device && typeof $wnd.device.resetBackButton == "function") {
 			$wnd.device.resetBackButton();
 		}
 	}-*/;
 
 	public native static void exitApp() /*-{
-		if (typeof $wnd.device.exitApp == "function") {
+		if ($wnd.device && typeof $wnd.device.exitApp == "function") {
 			$wnd.device.exitApp();
 		}
 	}-*/;
