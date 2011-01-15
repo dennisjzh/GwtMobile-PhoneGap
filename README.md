@@ -1,7 +1,7 @@
 gwtmobile-phonegap
 ==================
 
-gwtmobile-phonegap is a GWT wrapper of the [PhoneGap](http://github.com/phonegap/phonegap) Javascript library. PhoneGap is a cross-platform development framework that provides core mobile device features to web-based mobile apps. GWT by Google <http://code.google.com/webtoolkit/> is a new way of developing web applications -- write apps in Java then compile into javascript. This GWT wrapper enables an GWT mobile application to use PhoneGap functions.
+gwtmobile-phonegap is a GWT wrapper of the [PhoneGap](http://github.com/phonegap/phonegap) Javascript library. PhoneGap is a cross-platform development framework that provides core mobile device features to web-based mobile apps. GwtMobile-PhoneGap enables GWT mobile applications to use PhoneGap functions.
 
 gwtmobile-phonegap is part of [GwtMobile](http://github.com/dennisjzh/GwtMobile), a GWT mobile development platform.
 
@@ -27,7 +27,7 @@ Note: the storage function is not currently wrapped, as webkit browsers all supp
 Sample Code
 -----------
 
-The java code below showcases how to call PhoneGap functions in an GWT mobile application using gwtmobile-phonegap. For more code samples, check out the `kitchensink` source code folder.
+The java code below showcases how to call PhoneGap functions in an GWT mobile application using gwtmobile-phonegap. For more code samples, check out the `kitchensink` folder.
 
 		String watchId = Accelerometer.watchAcceleration(new Callback() {			
 			@Override
