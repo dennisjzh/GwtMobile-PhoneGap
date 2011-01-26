@@ -1,10 +1,27 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
-		
+		 
 	</ui:style>
-	<g:VerticalPanel>
+	<g:HTMLPanel>
+		<m:HeaderPanel><g:Label>GWT Mobile PhoneGap</g:Label></m:HeaderPanel>
+		<m:Scroller>
+			<m:ListPanel ui:field="list" showArrow="true">
+				<g:Label>Accelerometer</g:Label>			
+				<g:Label>Camera</g:Label>			
+				<g:Label>Compass</g:Label>			
+				<g:Label>Contacts</g:Label>			
+				<g:Label>Device</g:Label>			
+				<g:Label>Event</g:Label>			
+				<g:Label>File</g:Label>			
+				<g:Label>Geolocation</g:Label>			
+				<g:Label>Media</g:Label>			
+				<g:Label>Network</g:Label>			
+				<g:Label>Notification</g:Label>			
+			</m:ListPanel>
+		</m:Scroller>
 		<g:Button ui:field="accelerometer">Accelerometer</g:Button>
 		<g:Button ui:field="camera">Camera</g:Button>
 		<g:Button ui:field="compass">Compass</g:Button>
@@ -16,5 +33,5 @@
 		<g:Button ui:field="media">Media</g:Button>		
 		<g:Button ui:field="network">Network</g:Button>
 		<g:Button ui:field="notification">Notification</g:Button>
-	</g:VerticalPanel>
+	</g:HTMLPanel>
 </ui:UiBinder> 

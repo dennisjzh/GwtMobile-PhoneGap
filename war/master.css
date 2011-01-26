@@ -1,29 +1,182 @@
-body {
-	font-size: 100%;
+/** Add css rules here for your application. */
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
 }
-table,textarea {
-	height:100%;
+
+body {
+	font-size: 62.5%;	/* 1em = 10px */
+	background: black;
+}
+
+html {
+	color: white;
+	font: normal 2.4em Helvetica, Arial, sans-serif; /* desktop:1.6em; androidwvga:2.4em */
+}
+
+/********************* Page ****************/
+.Page {
+	position:relative;
+	z-index: 0;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	height: 100%;
+	width: 100%;
+	overflow:hidden;
+	background: #333;
+}
+
+/********************* Header ****************/
+
+.Header {
+	position:relative;
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-align: center;
+	-webkit-box-pack: justify;
+	padding: 0.3em 0.3em;
+	margin-bottom: 0.5em;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1e1f21), color-stop(0.98, #272729), color-stop(0.98, black), to(black));
+	-webkit-box-shadow: 0px 0px 12px black;
+	text-shadow: black 0.1em 0.1em 0.1em;
+	z-index: 1;	
+}
+
+/* needed this to get around the android browser bug when scroll, causing controls to disapear.*/
+.Header * {
+	z-index: 1;
+}
+
+/* TODO: fix me! */
+.Header > div > div.gwt-Label {
+	font-weight: bold;
+}
+
+.Header > div:first-child, .Header > div:last-child {
+	min-width:3em;
+}
+
+/************** Button **************/
+.Button {
+	color: #fff;
+	text-decoration: none;
+	display: inline-block;
+	padding: 0.3em 0.5em 0.5em 0.5em;
+	-webkit-border-radius: 0.4em;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#838383), color-stop(0.5, #444), color-stop(0.5, #303030), to(#333));
+	border: solid 1px rgba(79, 79, 79, 0.75);
+	height:1em;	
+	text-shadow: rgba(0, 0, 0, 1) 0 -0.1em 0.1em;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0.1em 0.1em 0.1em;
+}
+
+.Button.Pressed, .BackButton.Pressed > span.Button {
+	text-shadow: darkgreen 0 -0.1em 0.1em;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, 
+		from(lightgreen), color-stop(0.5, #298C08), color-stop(0.5, darkgreen), to(darkgreen));
+}
+
+.BackButton {
+	position: relative;
+	margin-left: 0.8em;
+}
+
+.BackButton > span.Button {
+	padding-left: 0;
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-left: 0 !important;
+}
+
+.BackButton > span.Pointer {
+	position: absolute;
+	display: block;
+	height: 1.3em;
+	width: 1.3em;
+	left: -0.7em;
+	top: 0.28em;
+	border-top: 0;
+	border-right: 0;
+	background-image: -webkit-gradient(linear, left top, right bottom, from(#838383), color-stop(0.5, #444), color-stop(0.5, #303030), to(#333));
+	border-left: solid 1px rgba(79, 79, 79, 0.75);
+	border-bottom: solid 1px rgba(79, 79, 79, 0.75);
+	-webkit-transform: rotate(45deg);
+	z-index: -1;
+}
+
+.BackButton.Pressed > span.Pointer {
+	background: -webkit-gradient(linear, left top, right bottom, 
+		from(lightgreen), color-stop(0.5, #298C08), color-stop(0.5, darkgreen), to(darkgreen));
+}
+
+.Button.Disabled {
+	color: gray;
+}
+
+/********** Scroller **********/
+.Scroller {
+	-webkit-transition-property: -webkit-transform;
+    -webkit-transition-timing-function: cubic-bezier(0,0,0.25,1);
+	-webkit-box-flex: 10;
+}
+
+/********** List Panel **********/
+.List {
+	position:relative;
+	display: -webkit-box;
+	-webkit-box-orient: vertical; 
 	width:100%;
 }
 
-td {
-	text-align:center;
+.List > div {
+	border-bottom:1px solid #333333;
+	border-top:1px solid #666666;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	vertical-align:middle !important;
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-pack: justify;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4c4d4e), to(#404142));
+} 
+
+.List > div:first-child {
+	border-top:0px;
+	border-radius: 0.6em 0.6em 0 0;
+	-webkit-box-shadow: rgba(0, 0, 0, 1) 0em 0em 0.5em;
+} 
+
+.List > div:last-child {
+	border-bottom:0px;
+	border-radius: 0 0 0.6em 0.6em;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.5) 0em 0.2em 0.2em;
+} 
+
+.List > div.Pressed {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, 
+		from(lightgreen), color-stop(0.5, #298C08), color-stop(0.5, darkgreen), to(darkgreen));
 }
 
-.gwt-Button {
-	font-size: 1em;
-	padding: 0.5em;
-	width: 80%;
+/********** Chevron (arrow) **********/
+.Chevron {
+	position: relative;
+	margin-right: 0.5em;
 }
 
-.WVGA {
-	font-size: 150%;
+.Chevron > span {
+	position: absolute;
+	width: 0.3em;
+	height: 0.8em;
+	background: gray;	
 }
 
-.HVGA {
-	font-size: 100%;
+.Chevron > span:first-child {
+	-webkit-transform: rotate(-45deg);
 }
 
-.QVGA {
-	font-size: 75%;
+.Chevron > span:last-child {
+	-webkit-transform: rotate(45deg);
+	top: 0.4em;	
 }
