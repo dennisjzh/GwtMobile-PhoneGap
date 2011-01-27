@@ -18,6 +18,7 @@ package com.gwtmobile.phonegap.kitchensink.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.gwtmobile.ui.client.page.PageHistory;
 
 public class KitchenSink implements EntryPoint {
 
@@ -30,7 +31,8 @@ public class KitchenSink implements EntryPoint {
 //		PhoneGap.onDeviceReady(new Callback() {			
 //			@Override
 //			public void onEventFired() {
-				RootLayoutPanel.get().add(mainUi);				
+				RootLayoutPanel.get().add(mainUi);
+		        PageHistory.add(mainUi);
 //			}
 //		});
 		

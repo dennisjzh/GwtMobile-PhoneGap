@@ -21,7 +21,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Contacts;
@@ -32,8 +31,9 @@ import com.gwtmobile.phonegap.client.Contacts.ContactFields;
 import com.gwtmobile.phonegap.client.Contacts.ContactFindCallback;
 import com.gwtmobile.phonegap.client.Contacts.ContactFindOptions;
 import com.gwtmobile.phonegap.client.Contacts.ContactName;
+import com.gwtmobile.ui.client.page.Page;
 
-public class ContactsUi extends Composite {
+public class ContactsUi extends Page {
 
 	@UiField TextArea text;
 	String watchId;

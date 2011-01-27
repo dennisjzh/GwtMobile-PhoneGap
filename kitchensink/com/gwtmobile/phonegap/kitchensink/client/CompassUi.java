@@ -20,14 +20,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Compass;
 import com.gwtmobile.phonegap.client.Compass.Callback;
 import com.gwtmobile.phonegap.client.Compass.Options;
+import com.gwtmobile.ui.client.page.Page;
 
-public class CompassUi extends Composite {
+public class CompassUi extends Page {
 
 	@UiField TextArea text;
 	String watchId;

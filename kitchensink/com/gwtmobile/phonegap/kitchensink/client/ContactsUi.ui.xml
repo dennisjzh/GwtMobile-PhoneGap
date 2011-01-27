@@ -1,19 +1,19 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:m="urn:import:com.gwtmobile.phonegap.kitchensink.client">
+	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
 		table > tbody > tr:last-child {
 			height: 50%;
 		}
 	</ui:style>
-	<g:VerticalPanel>
-		<m:Header title="Contacts"></m:Header>
+	<g:HTMLPanel>
+		<m:HeaderPanel caption="Contacts" leftButton="Back"></m:HeaderPanel>
 		<g:Label>PhoneGap contact creation function is not working as of version 0.9.3. Only find function is tested at this point.</g:Label>
 		<g:Button ui:field="create">Create New Contact</g:Button>
 		<g:Button ui:field="find">Find Contacts</g:Button>
 		<g:Button ui:field="clone">Clone Contact</g:Button>
 		<g:Button ui:field="delete">Delete Contact</g:Button>
 		<g:TextArea ui:field="text"/>
-	</g:VerticalPanel>
+	</g:HTMLPanel>
 </ui:UiBinder> 

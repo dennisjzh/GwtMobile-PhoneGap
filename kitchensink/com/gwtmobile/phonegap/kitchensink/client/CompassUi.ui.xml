@@ -1,14 +1,14 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:m="urn:import:com.gwtmobile.phonegap.kitchensink.client">
+	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
 	</ui:style>
-	<g:VerticalPanel>
-		<m:Header title="Compass"></m:Header>
+	<g:HTMLPanel>
+		<m:HeaderPanel caption="Compass" leftButton="Back"></m:HeaderPanel>
 		<g:Button ui:field="current">Get Current Heading</g:Button>
 		<g:Button ui:field="watch">Watch Heading</g:Button>
 		<g:Button ui:field="clear">Clear Watch</g:Button>
 		<g:TextArea ui:field="text"/>
-	</g:VerticalPanel>
+	</g:HTMLPanel>
 </ui:UiBinder> 

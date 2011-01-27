@@ -20,14 +20,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Network;
 import com.gwtmobile.phonegap.client.Network.Callback;
 import com.gwtmobile.phonegap.client.Network.NetworkStatus;
 import com.gwtmobile.phonegap.client.Network.Options;
+import com.gwtmobile.ui.client.page.Page;
 
-public class NetworkUi extends Composite {
+public class NetworkUi extends Page {
 
 	private static NetworkUiUiBinder uiBinder = GWT.create(NetworkUiUiBinder.class);
 	

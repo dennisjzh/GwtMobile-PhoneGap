@@ -20,15 +20,15 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Accelerometer;
 import com.gwtmobile.phonegap.client.Accelerometer.Acceleration;
 import com.gwtmobile.phonegap.client.Accelerometer.Callback;
 import com.gwtmobile.phonegap.client.Accelerometer.Options;
+import com.gwtmobile.ui.client.page.Page;
 
-public class AccelerometerUi extends Composite {
+public class AccelerometerUi extends Page {
 
 	@UiField TextArea text;
 	String watchId;

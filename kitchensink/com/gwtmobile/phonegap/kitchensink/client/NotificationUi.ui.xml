@@ -1,11 +1,11 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:m="urn:import:com.gwtmobile.phonegap.kitchensink.client">
+	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
 	</ui:style>
-	<g:VerticalPanel styleName="fill" >
-		<m:Header title="Notification"></m:Header>
+	<g:HTMLPanel>
+		<m:HeaderPanel caption="Notification" leftButton="Back"></m:HeaderPanel>
 	
 		<g:Button ui:field="alert">Alert</g:Button>
 		<g:Button ui:field="confirm">Confirm</g:Button>
@@ -15,5 +15,5 @@
 		<g:Button ui:field="blink">Blink</g:Button>
 		<g:Button ui:field="activity">Activity</g:Button>
 		<g:Button ui:field="progress">Progress</g:Button>
-	</g:VerticalPanel>
+	</g:HTMLPanel>
 </ui:UiBinder> 

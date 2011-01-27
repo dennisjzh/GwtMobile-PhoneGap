@@ -20,14 +20,14 @@ import java.util.Date;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
 import com.gwtmobile.phonegap.client.Event.Callback;
+import com.gwtmobile.ui.client.page.Page;
 
-public class EventUi extends Composite {
+public class EventUi extends Page {
 
 	private static EventUiUiBinder uiBinder = GWT.create(EventUiUiBinder.class);
 	
@@ -41,7 +41,7 @@ public class EventUi extends Composite {
 	}
 	
 	@Override
-	protected void onLoad() {
+	public void onLoad() {
 		super.onLoad();
 		
 		Device.overrideBackButton();

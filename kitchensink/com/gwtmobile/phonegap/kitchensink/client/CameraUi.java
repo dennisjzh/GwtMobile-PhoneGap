@@ -20,15 +20,15 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Camera;
 import com.gwtmobile.phonegap.client.Camera.Callback;
 import com.gwtmobile.phonegap.client.Camera.DestinationType;
 import com.gwtmobile.phonegap.client.Camera.Options;
 import com.gwtmobile.phonegap.client.Camera.SourceType;
+import com.gwtmobile.ui.client.page.Page;
 
-public class CameraUi extends Composite {
+public class CameraUi extends Page {
 
 	private static CameraUiUiBinder uiBinder = GWT.create(CameraUiUiBinder.class);
 	

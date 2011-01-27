@@ -16,14 +16,14 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
+import com.gwtmobile.ui.client.page.Page;
+import com.gwtmobile.ui.client.page.Transition;
 
-public class MainUi extends Composite {
+public class MainUi extends Page {
 
 	private static MainUiUiBinder uiBinder = GWT.create(MainUiUiBinder.class);
 
@@ -34,63 +34,43 @@ public class MainUi extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-    @UiHandler("accelerometer")
-    public void handleAccelerometerClick(ClickEvent e) {
-    	goTo(new AccelerometerUi());
-    }   
-
-    @UiHandler("camera")
-    public void handleCameraClick(ClickEvent e) {
-    	goTo(new CameraUi());
-    }   
-
-    @UiHandler("compass")
-    public void handleCompassClick(ClickEvent e) {
-    	goTo(new CompassUi());
-    }   
-
-    @UiHandler("contacts")
-    public void handleContactsClick(ClickEvent e) {
-    	goTo(new ContactsUi());
-    }   
-
-    @UiHandler("device")
-    public void handleDeviceClick(ClickEvent e) {
-    	goTo(new DeviceUi());
-    }   
-
-    @UiHandler("file")
-    public void handleFileClick(ClickEvent e) {
-    	goTo(new FileUi());
-    }   
-
-    @UiHandler("geolocation")
-    public void handleGeolocationClick(ClickEvent e) {
-    	goTo(new GeolocationUi());
-    }   
-
-    @UiHandler("media")
-    public void handleMediaClick(ClickEvent e) {
-    	goTo(new MediaUi());
-    }   
-
-    @UiHandler("network")
-    public void handleNetworkClick(ClickEvent e) {
-    	goTo(new NetworkUi());
-    }   
-
-    @UiHandler("notification")
-    public void handleNotificationClick(ClickEvent e) {
-    	goTo(new NotificationUi());
-    }   
-
-    @UiHandler("event")
-    public void handleEventClick(ClickEvent e) {
-    	goTo(new EventUi());
-    }   
-
-    private void goTo(Composite page) {
-    	RootLayoutPanel.get().remove(this);
-    	RootLayoutPanel.get().add(page);				
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		goTo(new AccelerometerUi(), Transition.SLIDE);
+    		break;
+    	case 1:
+    		goTo(new CameraUi(), Transition.SLIDE);
+    		break;
+    	case 2:
+    		goTo(new CompassUi(), Transition.SLIDE);
+    		break;
+    	case 3:
+    		goTo(new ContactsUi(), Transition.SLIDE);
+    		break;
+    	case 4:
+    		goTo(new DeviceUi(), Transition.SLIDE);
+    		break;
+    	case 5:
+    		goTo(new EventUi(), Transition.SLIDE);
+    		break;
+    	case 6:
+    		goTo(new FileUi(), Transition.SLIDE);
+    		break;
+    	case 7:
+    		goTo(new GeolocationUi(), Transition.SLIDE);
+    		break;
+    	case 8:
+    		goTo(new MediaUi(), Transition.SLIDE);
+    		break;
+    	case 9:
+    		goTo(new NetworkUi(), Transition.SLIDE);
+    		break;
+    	case 10:
+    		goTo(new NotificationUi(), Transition.SLIDE);
+    		break;
+    	}
     }
+
 }

@@ -22,14 +22,14 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Notification;
 import com.gwtmobile.phonegap.client.Notification.Callback;
 import com.gwtmobile.phonegap.client.Notification.ConfirmCallback;
+import com.gwtmobile.ui.client.page.Page;
 
-public class NotificationUi extends Composite {
+public class NotificationUi extends Page {
 
 	private static NotificationUiBinder uiBinder = GWT
 			.create(NotificationUiBinder.class);

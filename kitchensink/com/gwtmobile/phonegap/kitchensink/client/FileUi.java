@@ -20,7 +20,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.File;
@@ -31,8 +30,9 @@ import com.gwtmobile.phonegap.client.File.FileMgrCallback;
 import com.gwtmobile.phonegap.client.File.FileReader;
 import com.gwtmobile.phonegap.client.File.FileWriter;
 import com.gwtmobile.phonegap.client.File.FreeDiskSpaceCallback;
+import com.gwtmobile.ui.client.page.Page;
 
-public class FileUi extends Composite {
+public class FileUi extends Page {
 
 	private static FileUiUiBinder uiBinder = GWT.create(FileUiUiBinder.class);
 	
@@ -50,7 +50,7 @@ public class FileUi extends Composite {
 	}
 	
 	@Override
-	protected void onLoad() {
+	public void onLoad() {
 		super.onLoad();
 
 		dirName = File.getRootPaths()[0] + "/gwtmobile-phonegap/";

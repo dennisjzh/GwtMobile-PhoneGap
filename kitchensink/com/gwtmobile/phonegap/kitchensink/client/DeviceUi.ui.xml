@@ -1,11 +1,11 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:m="urn:import:com.gwtmobile.phonegap.kitchensink.client">
+	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
 	</ui:style>
-	<g:VerticalPanel>
-	<m:Header title="Device"></m:Header>
-	<g:TextArea ui:field="text" />
-	</g:VerticalPanel> 
+	<g:HTMLPanel>
+		<m:HeaderPanel caption="Device" leftButton="Back"></m:HeaderPanel>
+		<g:TextArea ui:field="text" />
+	</g:HTMLPanel>
 </ui:UiBinder> 
