@@ -53,6 +53,10 @@ public class FileUi extends Page {
 	public void onLoad() {
 		super.onLoad();
 
+//		init();
+	}
+
+	private void init() {
 		dirName = File.getRootPaths()[0] + "/gwtmobile-phonegap/";
 		fileName = dirName + "kitchensink-file.txt";
 		writer = File.newWriterInstance(fileName, true);

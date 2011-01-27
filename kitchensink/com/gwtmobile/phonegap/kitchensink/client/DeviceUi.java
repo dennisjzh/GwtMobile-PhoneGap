@@ -36,10 +36,7 @@ public class DeviceUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	@Override
-	public void onLoad() {
-		super.onLoad();
-		
+	private void getDeviceInfo() {
 		text.setText("Device Name: " + Device.getName());
 		text.setText(text.getText() + "\nDevice PhongGap: " + Device.getPhoneGap());
 		text.setText(text.getText() + "\nDevice Platform: " + Device.getPlatform());
