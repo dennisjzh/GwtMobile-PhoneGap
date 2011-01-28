@@ -16,21 +16,21 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Accelerometer;
 import com.gwtmobile.phonegap.client.Accelerometer.Acceleration;
 import com.gwtmobile.phonegap.client.Accelerometer.Callback;
 import com.gwtmobile.phonegap.client.Accelerometer.Options;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class AccelerometerUi extends Page {
 
-	@UiField TextArea text;
+	@UiField HTML text;
 	String watchId;
 
 	private static AccelerometerUiUiBinder uiBinder = GWT
@@ -43,37 +43,55 @@ public class AccelerometerUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("current")
-    public void handleCurrentClick(ClickEvent e) {
+	@Override
+	protected void onUnload() {
+		clearWatch();
+		super.onUnload();		
+	}
+	
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		getCurrentAcceleration();
+    		break;
+    	case 1:
+    		watchAcceleration();
+    		break;
+    	case 2:
+    		clearWatch();
+    		break;
+    	}
+    }
+    
+    void getCurrentAcceleration() {
 		Accelerometer.getCurrentAcceleration(new Callback() {			
 			@Override
 			public void onSuccess(Acceleration accel) {
-				text.setText("Current Acceleration\nX: " + accel.getX() + "\nY: " + accel.getY() + "\nZ: " + accel.getZ());				
+				text.setHTML("Current Acceleration:<br/>X: " + accel.getX() + "<br/>Y: " + accel.getY() + "<br/>Z: " + accel.getZ());				
 			}			
 			@Override
 			public void onError() {
-				text.setText("Error");
+				text.setHTML("Error");
 			}
 		});
 	}
 
-	@UiHandler("watch")
-    public void handleWatchClick(ClickEvent e) {
+    void watchAcceleration() {
 		watchId = Accelerometer.watchAcceleration(new Callback() {			
 			@Override
 			public void onSuccess(Acceleration accel) {
-				text.setText("Watch Acceleration\nX: " + accel.getX() + "\nY: " + accel.getY() + "\nZ: " + accel.getZ());				
+				text.setHTML("Watch Acceleration:<br/>X: " + accel.getX() + "<br/>Y: " + accel.getY() + "<br/>Z: " + accel.getZ());				
 			}			
 			@Override
 			public void onError() {
-				text.setText("Error");
+				text.setHTML("Error");
 			}
 		}, new Options().frequency(100));
 	}
 
-	@UiHandler("clear")
-    public void handleClearClick(ClickEvent e) {
+    public void clearWatch() {
 		Accelerometer.clearWatch(watchId);
-		text.setText("");
+		text.setHTML("");
 	}
 }

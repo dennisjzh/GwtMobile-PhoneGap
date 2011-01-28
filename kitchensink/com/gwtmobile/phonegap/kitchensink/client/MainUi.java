@@ -21,7 +21,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
-import com.gwtmobile.ui.client.page.Transition;
 
 public class MainUi extends Page {
 
@@ -38,37 +37,37 @@ public class MainUi extends Page {
 	void onListSelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		goTo(new AccelerometerUi(), Transition.SLIDE);
+    		goTo(new AccelerometerUi());
     		break;
     	case 1:
-    		goTo(new CameraUi(), Transition.SLIDE);
+    		goTo(new CameraUi());
     		break;
     	case 2:
-    		goTo(new CompassUi(), Transition.SLIDE);
+    		goTo(new CompassUi());
     		break;
     	case 3:
-    		goTo(new ContactsUi(), Transition.SLIDE);
+    		goTo(new ContactsUi());
     		break;
     	case 4:
-    		goTo(new DeviceUi(), Transition.SLIDE);
+    		goTo(new DeviceUi());
     		break;
     	case 5:
-    		goTo(new EventUi(), Transition.SLIDE);
+    		goTo(new EventUi());
     		break;
     	case 6:
-    		goTo(new FileUi(), Transition.SLIDE);
+    		goTo(new FileUi());
     		break;
     	case 7:
-    		goTo(new GeolocationUi(), Transition.SLIDE);
+    		goTo(new GeolocationUi());
     		break;
     	case 8:
-    		goTo(new MediaUi(), Transition.SLIDE);
+    		goTo(new MediaUi());
     		break;
     	case 9:
-    		goTo(new NetworkUi(), Transition.SLIDE);
+    		goTo(new NetworkUi());
     		break;
     	case 10:
-    		goTo(new NotificationUi(), Transition.SLIDE);
+    		goTo(new NotificationUi());
     		break;
     	}
     }

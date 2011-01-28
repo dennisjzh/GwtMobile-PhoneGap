@@ -3,12 +3,36 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
+		.scroller {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+		}		
+		.container {
+			-webkit-box-flex: 1;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+		}
+		.area {			
+			margin: .5em 0 .5em 0;
+			padding: .2em;
+			color: gray;
+			background: white;
+			-webkit-box-flex: 1;
+			border-radius: 0.6em;
+			-webkit-box-shadow: rgba(0, 0, 0, 1) 0em 0em 0.5em;					
+		}
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Accelerometer" leftButton="Back"></m:HeaderPanel>
-		<g:Button ui:field="current">Get Current  Acceleration</g:Button>
-		<g:Button ui:field="watch">Watch Accelerometer</g:Button>
-		<g:Button ui:field="clear">Clear Watch</g:Button>
-		<g:TextArea ui:field="text"/>
+		<m:Scroller styleName="Scroller {style.scroller}">
+			<g:HTMLPanel styleName="{style.container}">
+				<m:ListPanel ui:field="list">
+					<g:Label>Get Current Acceleration</g:Label>
+					<g:Label>Watch Accelerometer</g:Label>
+					<g:Label>Clear Watch</g:Label>
+				</m:ListPanel>
+				<g:HTML ui:field="text" styleName="{style.area}">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 
