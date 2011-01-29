@@ -16,20 +16,22 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Camera;
 import com.gwtmobile.phonegap.client.Camera.Callback;
 import com.gwtmobile.phonegap.client.Camera.DestinationType;
 import com.gwtmobile.phonegap.client.Camera.Options;
 import com.gwtmobile.phonegap.client.Camera.SourceType;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class CameraUi extends Page {
 
+	@UiField HTML text;
 	private static CameraUiUiBinder uiBinder = GWT.create(CameraUiUiBinder.class);
 	
 	interface CameraUiUiBinder extends UiBinder<Widget, CameraUi> {
@@ -39,16 +41,24 @@ public class CameraUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("get")
-    public void handleGetPictureClick(ClickEvent e) {
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		getPicture();
+    		break;
+    	}
+    }
+
+    void getPicture() {
 		Camera.getPicture(new Callback() {			
 			@Override
 			public void onSuccess(String imageData) {
-				Window.alert("Success: " + imageData);
+				text.setHTML("Success: " + imageData);
 			}			
 			@Override
 			public void onError(String message) {
-				Window.alert("Error: " + message);
+				text.setHTML("Error: " + message);
 			}
 		}, new Options()
 			.quality(50)

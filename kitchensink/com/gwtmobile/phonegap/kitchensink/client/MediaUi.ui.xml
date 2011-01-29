@@ -6,9 +6,15 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Media" leftButton="Back"></m:HeaderPanel>
-		<g:Button ui:field="play">Play</g:Button>
-		<g:Button ui:field="pause">Pause</g:Button>
-		<g:Button ui:field="stop">Stop</g:Button>
-		<g:TextArea ui:field="text" />
+		<m:Scroller>
+			<g:HTMLPanel styleName="Container">
+				<m:ListPanel ui:field="list">
+					<g:Label>Play</g:Label>
+					<g:Label>Pause</g:Label>
+					<g:Label>Stop</g:Label>
+				</m:ListPanel>
+				<g:HTML ui:field="text" styleName="Output">Music will be loaded from www.freekidsmusic.com</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 

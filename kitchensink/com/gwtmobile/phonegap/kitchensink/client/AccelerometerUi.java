@@ -91,7 +91,10 @@ public class AccelerometerUi extends Page {
 	}
 
     public void clearWatch() {
-		Accelerometer.clearWatch(watchId);
-		text.setHTML("");
+    	if (watchId != null) {
+    		Accelerometer.clearWatch(watchId);
+    		text.setHTML("");
+    		watchId = null;
+    	}
 	}
 }

@@ -6,14 +6,19 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Notification" leftButton="Back"></m:HeaderPanel>
-	
-		<g:Button ui:field="alert">Alert</g:Button>
-		<g:Button ui:field="confirm">Confirm</g:Button>
-		<g:Button ui:field="beep">Beep</g:Button>
-		<g:Button ui:field="vibrate">Vibrate</g:Button>
-		<g:TextBox ui:field="text"></g:TextBox>
-		<g:Button ui:field="blink">Blink</g:Button>
-		<g:Button ui:field="activity">Activity</g:Button>
-		<g:Button ui:field="progress">Progress</g:Button>
+		<m:Scroller>
+			<g:HTMLPanel styleName="Container">
+				<m:ListPanel ui:field="list">
+					<g:Label>Alert</g:Label>
+					<g:Label>Confirm</g:Label>
+					<g:Label>Beep</g:Label>
+					<g:Label>Vibrate</g:Label>
+					<g:Label>Blink</g:Label>
+					<g:Label>Activity</g:Label>
+					<g:Label>Progress</g:Label>
+				</m:ListPanel>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 

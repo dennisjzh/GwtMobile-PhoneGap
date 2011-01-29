@@ -16,17 +16,17 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Media;
 import com.gwtmobile.phonegap.client.Media.Callback;
 import com.gwtmobile.phonegap.client.Media.MediaError;
 import com.gwtmobile.phonegap.client.Media.PositionCallback;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class MediaUi extends Page {
@@ -34,7 +34,7 @@ public class MediaUi extends Page {
 	private static MediaUiUiBinder uiBinder = GWT.create(MediaUiUiBinder.class);
 	
 	Media media;
-	@UiField TextArea text;
+	@UiField HTML text;
 	Timer timer;
 	
 	interface MediaUiUiBinder extends UiBinder<Widget, MediaUi> {
@@ -51,20 +51,40 @@ public class MediaUi extends Page {
 		media = Media.newInstance("http://freekidsmusic.com/traditional-songs-for-children/AlphabetSong.mp3", new Callback() {			
 			@Override
 			public void onSuccess() {
-				text.setText("Media Success");
+				text.setHTML("Media Success");
 			}
 			
 			@Override
 			public void onError(MediaError error) {
-				text.setText("Media Error\n" +
-						"Code: " + error.getCode() + "\n" +
+				text.setHTML("Media Error<br/>" +
+						"Code: " + error.getCode() + "<br/>" +
 						"Message: " + error.getMessage());
 			}
 		});		
 	}
 
-	@UiHandler("play")
-    public void handlePlayClick(ClickEvent e) {
+	@Override
+	protected void onUnload() {
+		super.onUnload();
+	}
+	
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		play();
+    		break;
+    	case 1:
+    		pause();
+    		break;
+    	case 2:
+    		stop();
+    		break;
+    	}
+    }
+
+
+    public void play() {
 		media.play();
 		timer = new Timer() {
 			@Override
@@ -73,12 +93,12 @@ public class MediaUi extends Page {
 					@Override
 					public void onSuccess(int position) {
 						int duration = media.getDuration();
-						text.setText(position + " / " + duration);
+						text.setHTML(position + " / " + duration);
 					}				
 					@Override
 					public void onError(MediaError error) {
-						text.setText("Get Current Position Error\n" +
-								"Code: " + error.getCode() + "\n" +
+						text.setHTML("Get Current Position Error<br/>" +
+								"Code: " + error.getCode() + "<br/>" +
 								"Message: " + error.getMessage());
 					}
 				});
@@ -87,14 +107,12 @@ public class MediaUi extends Page {
 		timer.scheduleRepeating(1000);
 	}
 
-	@UiHandler("pause")
-    public void handlePauseClick(ClickEvent e) {
+    public void pause() {
 		media.pause();
 		timer.cancel();
 	}
 
-	@UiHandler("stop")
-    public void handleStopClick(ClickEvent e) {
+    public void stop() {
 		media.stop();
 		timer.cancel();
 	}

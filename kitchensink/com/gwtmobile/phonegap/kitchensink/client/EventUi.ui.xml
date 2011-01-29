@@ -6,7 +6,11 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Event" leftButton="Back"></m:HeaderPanel>
-		<g:Label>Note: onPause, onResume, onBackKeyDown, onMenuKeyDown and onSearchKeyDown events only work on an Android device.</g:Label>
-		<g:TextArea ui:field="text" />
+		<m:Scroller>
+			<g:HTMLPanel styleName="Container">
+				<g:Label>Note: onPause, onResume, onBackKeyDown, onMenuKeyDown and onSearchKeyDown events only work on an Android device.</g:Label>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 

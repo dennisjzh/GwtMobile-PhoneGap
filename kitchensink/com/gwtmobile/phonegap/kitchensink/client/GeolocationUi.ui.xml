@@ -3,15 +3,18 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
-		table > tbody > tr:last-child {
-			height: 50%;
-		}
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Geolocation" leftButton="Back"></m:HeaderPanel>
-		<g:Button ui:field="current">Get Current Position</g:Button>
-		<g:Button ui:field="watch">Watch Position</g:Button>
-		<g:Button ui:field="clear">Clear Watch</g:Button>
-		<g:TextArea ui:field="text"/>
+		<m:Scroller>
+			<g:HTMLPanel styleName="Container">
+				<m:ListPanel ui:field="list">
+					<g:Label>Get Current Position</g:Label>
+					<g:Label>Watch Position</g:Label>
+					<g:Label>Clear Watch</g:Label>
+				</m:ListPanel>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 

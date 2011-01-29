@@ -18,16 +18,18 @@ package com.gwtmobile.phonegap.kitchensink.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Device;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class DeviceUi extends Page {
 
 	private static DeviceUiUiBinder uiBinder = GWT.create(DeviceUiUiBinder.class);
 	
-	@UiField TextArea text;
+	@UiField HTML text;
 
 	interface DeviceUiUiBinder extends UiBinder<Widget, DeviceUi> {
 	}
@@ -36,11 +38,20 @@ public class DeviceUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		getDeviceInfo();
+    		break;
+    	}
+    }
+
 	private void getDeviceInfo() {
-		text.setText("Device Name: " + Device.getName());
-		text.setText(text.getText() + "\nDevice PhongGap: " + Device.getPhoneGap());
-		text.setText(text.getText() + "\nDevice Platform: " + Device.getPlatform());
-		text.setText(text.getText() + "\nDevice UUID: " + Device.getUUID());
-		text.setText(text.getText() + "\nDevice Version: " + Device.getVersion());
+		text.setHTML("Device Name: " + Device.getName());
+		text.setHTML(text.getHTML() + "<br/>Device PhongGap: " + Device.getPhoneGap());
+		text.setHTML(text.getHTML() + "<br/>Device Platform: " + Device.getPlatform());
+		text.setHTML(text.getHTML() + "<br/>Device UUID: " + Device.getUUID());
+		text.setHTML(text.getHTML() + "<br/>Device Version: " + Device.getVersion());
 	}
 }

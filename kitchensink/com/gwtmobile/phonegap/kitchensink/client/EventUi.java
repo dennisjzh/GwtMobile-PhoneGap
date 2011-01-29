@@ -20,7 +20,7 @@ import java.util.Date;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
@@ -31,7 +31,7 @@ public class EventUi extends Page {
 
 	private static EventUiUiBinder uiBinder = GWT.create(EventUiUiBinder.class);
 	
-	@UiField TextArea text;
+	@UiField HTML text;
 
 	interface EventUiUiBinder extends UiBinder<Widget, EventUi> {
 	}
@@ -49,42 +49,42 @@ public class EventUi extends Page {
 		Event.onDeviceReady(new Callback() {			
 			@Override
 			public void onEventFired() {
-				text.setText((new Date()).toString() + ": onDeviceReady\n" + text.getText());
+				text.setHTML((new Date()).toString() + ": onDeviceReady<br/>" + text.getHTML());
 			}
 		});
 		
 		Event.onPause(new Callback() {			
 			@Override
 			public void onEventFired() {
-				text.setText((new Date()).toString() + ": onPause\n" + text.getText());
+				text.setHTML((new Date()).toString() + ": onPause<br/>" + text.getHTML());
 			}
 		});
 
 		Event.onResume(new Callback() {			
 			@Override
 			public void onEventFired() {
-				text.setText((new Date()).toString() + ": onResume\n" + text.getText());
+				text.setHTML((new Date()).toString() + ": onResume<br/>" + text.getHTML());
 			}
 		});
 
 		Event.onBackKeyDown(new Callback() {			
 			@Override
 			public void onEventFired() {
-				text.setText((new Date()).toString() + ": onBackKeyDown\n" + text.getText());
+				text.setHTML((new Date()).toString() + ": onBackKeyDown<br/>" + text.getHTML());
 			}
 		});
 
 		Event.onMenuKeyDown(new Callback() {			
 			@Override
 			public void onEventFired() {
-				text.setText((new Date()).toString() + ": onMenuKeyDown\n" + text.getText());
+				text.setHTML((new Date()).toString() + ": onMenuKeyDown<br/>" + text.getHTML());
 			}
 		});
 		
 		Event.onSearchKeyDown(new Callback() {			
 			@Override
 			public void onEventFired() {
-				text.setText((new Date()).toString() + ": onSearchKeyDown\n" + text.getText());
+				text.setHTML((new Date()).toString() + ": onSearchKeyDown<br/>" + text.getHTML());
 			}
 		});
 		
@@ -92,8 +92,8 @@ public class EventUi extends Page {
 	
 	@Override
 	protected void onUnload() {
-		super.onUnload();
 		Device.resetBackButton();
+		super.onUnload();
 	}
 
 }

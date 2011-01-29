@@ -16,20 +16,21 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Notification;
 import com.gwtmobile.phonegap.client.Notification.Callback;
 import com.gwtmobile.phonegap.client.Notification.ConfirmCallback;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class NotificationUi extends Page {
+
+	@UiField HTML text;
 
 	private static NotificationUiBinder uiBinder = GWT
 			.create(NotificationUiBinder.class);
@@ -37,53 +38,72 @@ public class NotificationUi extends Page {
 	interface NotificationUiBinder extends UiBinder<Widget, NotificationUi> {
 	}
 
-	@UiField TextBox text;
-	
 	public NotificationUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	@UiHandler("alert")
-    public void handleAlertClick(ClickEvent e) {
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		alert();
+    		break;
+    	case 1:
+    		confirm();
+    		break;
+    	case 2:
+    		beep();
+    		break;
+    	case 3:
+    		vibrate();
+    		break;
+    	case 4:
+    		blink();
+    		break;
+    	case 5:
+    		activity();
+    		break;
+    	case 6:
+    		progress();
+    		break;
+    	}
+    }
+
+    public void alert() {
     	Notification.alert("This is an alert message", new Callback() {
 			@Override
 			public void onComplete() {
-				Window.alert("Callback from alert!");
+				text.setHTML("Received callback from alert.");
 			}
 		}, "Alert", "Okey-Dokey");
     	
     }   
 
-    @UiHandler("confirm")
-    public void handleConfirmClick(ClickEvent e) {
+    public void confirm() {
     	Notification.confirm("This is a confirmation message", new ConfirmCallback() {
 			@Override
 			public void onComplete(int result) {
-				Window.alert("You selected " + (result == 1 ? "Yes" : "No"));
+				text.setHTML("You selected " + (result == 1 ? "Yes" : "No"));
 			}
 		}, "Confirm", "Yes,No");
     }   
 
-    @UiHandler("beep")
-    public void handleBeepClick(ClickEvent e) {
+    public void beep() {
     	Notification.beep(1);
-    	Window.alert("heard the beep?");
+    	text.setHTML("heard the beep?");
     }   
 
-    @UiHandler("vibrate")
-    public void handleVibrateClick(ClickEvent e) {
+    public void vibrate() {
     	Notification.vibrate(100);
-    	Window.alert("felt the vibration?");
+    	text.setHTML("felt the vibration?");
     }   
 
-    @UiHandler("blink")
-    public void handleBlinkClick(ClickEvent e) {
+    public void blink() {
     	Notification.blink(3, "red");
-    	Window.alert("saw the light blinking?");
+    	text.setHTML("saw the light blinking?");
     }   
 
-    @UiHandler("activity")
-    public void handleActivityClick(ClickEvent e) {
+    public void activity() {
     	Notification.activityStart();
     	new Timer(){
 			@Override
@@ -93,8 +113,7 @@ public class NotificationUi extends Page {
 		}.schedule(3000);
     }   
 
-    @UiHandler("progress")
-    public void handleProgressClick(ClickEvent e) {
+    public void progress() {
     	Notification.progressStart("Downloading", "Please be patient...");
     	new Timer(){
     		int value = 0;

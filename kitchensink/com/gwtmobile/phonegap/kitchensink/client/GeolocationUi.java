@@ -16,22 +16,22 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Geolocation;
 import com.gwtmobile.phonegap.client.Geolocation.Callback;
 import com.gwtmobile.phonegap.client.Geolocation.Options;
 import com.gwtmobile.phonegap.client.Geolocation.Position;
 import com.gwtmobile.phonegap.client.Geolocation.PositionError;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class GeolocationUi extends Page {
 
-	@UiField TextArea text;
+	@UiField HTML text;
 	String watchId;
 
 	private static GeolocationUiUiBinder uiBinder = GWT
@@ -44,53 +44,74 @@ public class GeolocationUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("current")
-    public void handleCurrentClick(ClickEvent e) {
+	@Override
+	protected void onUnload() {
+		clearWatch();
+		super.onUnload();
+	}
+	
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		getCurrentPosition();
+    		break;
+    	case 1:
+    		watchPosition();
+    		break;
+    	case 2:
+    		clearWatch();
+    		break;
+    	}
+    }
+
+    public void getCurrentPosition() {
 		Geolocation.getCurrentPosition(new Callback() {			
 			@Override
 			public void onSuccess(Position position) {
-				text.setText("Current Position\nLatitude: " + position.getCoords().getLatitude() + "\n" + 
-						"Longitude: " + position.getCoords().getLongitude() + "\n" +
-						"Altitude: " + position.getCoords().getAltitude() + "\n" +
-						"Accuracy: " + position.getCoords().getAccuracy() + "\n" +
-						"Altitude Accuracy: " + position.getCoords().getAltitudeAccuracy() + "\n" +
-						"Heading: " + position.getCoords().getHeading() + "\n" +
-						"Speed: " + position.getCoords().getSpeed() + "\n" +
-						"Timestamp: " + position.getTimestamp() + "\n"
+				text.setHTML("Current Position<br/>Latitude: " + position.getCoords().getLatitude() + "<br/>" + 
+						"Longitude: " + position.getCoords().getLongitude() + "<br/>" +
+						"Altitude: " + position.getCoords().getAltitude() + "<br/>" +
+						"Accuracy: " + position.getCoords().getAccuracy() + "<br/>" +
+						"Altitude Accuracy: " + position.getCoords().getAltitudeAccuracy() + "<br/>" +
+						"Heading: " + position.getCoords().getHeading() + "<br/>" +
+						"Speed: " + position.getCoords().getSpeed() + "<br/>" +
+						"Timestamp: " + position.getTimestamp() + "<br/>"
 						);				
 			}			
 			@Override
 			public void onError(PositionError error) {
-				text.setText("Error\ncode:" + error.getCode() + "\nmessage: " + error.getMessage());
+				text.setHTML("Error<br/>code:" + error.getCode() + "<br/>message: " + error.getMessage());
 			}
 		});
 	}
 
-	@UiHandler("watch")
-    public void handleWatchClick(ClickEvent e) {
+    public void watchPosition() {
 		watchId = Geolocation.watchPosition(new Callback() {			
 			@Override
 			public void onSuccess(Position position) {
-				text.setText("Watch Position\nLatitude: " + position.getCoords().getLatitude() + "\n" + 
-						"Longitude: " + position.getCoords().getLongitude() + "\n" +
-						"Altitude: " + position.getCoords().getAltitude() + "\n" +
-						"Accuracy: " + position.getCoords().getAccuracy() + "\n" +
-						"Altitude Accuracy: " + position.getCoords().getAltitudeAccuracy() + "\n" +
-						"Heading: " + position.getCoords().getHeading() + "\n" +
-						"Speed: " + position.getCoords().getSpeed() + "\n" +
-						"Timestamp: " + position.getTimestamp() + "\n"
+				text.setHTML("Watch Position<br/>Latitude: " + position.getCoords().getLatitude() + "<br/>" + 
+						"Longitude: " + position.getCoords().getLongitude() + "<br/>" +
+						"Altitude: " + position.getCoords().getAltitude() + "<br/>" +
+						"Accuracy: " + position.getCoords().getAccuracy() + "<br/>" +
+						"Altitude Accuracy: " + position.getCoords().getAltitudeAccuracy() + "<br/>" +
+						"Heading: " + position.getCoords().getHeading() + "<br/>" +
+						"Speed: " + position.getCoords().getSpeed() + "<br/>" +
+						"Timestamp: " + position.getTimestamp() + "<br/>"
 						);				
 			}			
 			@Override
 			public void onError(PositionError error) {
-				text.setText("Error\ncode:" + error.getCode() + "\nmessage: " + error.getMessage());
+				text.setHTML("Error<br/>code:" + error.getCode() + "<br/>message: " + error.getMessage());
 			}
 		}, new Options().frequency(100).enableHighAccuracy(true).timeout(1000).maximumAge(1000));
 	}
 
-	@UiHandler("clear")
-    public void handleClearClick(ClickEvent e) {
-		Geolocation.clearWatch(watchId);
-		text.setText("");
+    public void clearWatch() {
+    	if (watchId != null) {
+    		Geolocation.clearWatch(watchId);
+    		text.setHTML("");
+    		watchId = null;
+    	}
 	}
 }

@@ -16,19 +16,22 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Network;
 import com.gwtmobile.phonegap.client.Network.Callback;
 import com.gwtmobile.phonegap.client.Network.NetworkStatus;
 import com.gwtmobile.phonegap.client.Network.Options;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class NetworkUi extends Page {
 
+	@UiField HTML text;
+	
 	private static NetworkUiUiBinder uiBinder = GWT.create(NetworkUiUiBinder.class);
 	
 	interface NetworkUiUiBinder extends UiBinder<Widget, NetworkUi> {
@@ -38,12 +41,20 @@ public class NetworkUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("reachable")
-    public void handleReachableClick(ClickEvent e) {
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		isReachable();
+    		break;
+    	}
+    }
+
+    public void isReachable() {
 		Network.isReachable("google.com", new Callback() {			
 			@Override
 			public void onNetworkStatus(int reachability) {
-				Window.alert("Network Status: " +
+				text.setHTML("Network Status:<br/>" +
 						(reachability == NetworkStatus.NOT_REACHABLE ? "NOT_REACHABLE" : 
 						 reachability == NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK ? "REACHABLE_VIA_CARRIER_DATA_NETWORK" : 
 						 reachability == NetworkStatus.REACHABLE_VIA_WIFI_NETWORK ? "REACHABLE_VIA_WIFI_NETWORK" : 

@@ -6,6 +6,13 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Network" leftButton="Back"></m:HeaderPanel>
-		<g:Button ui:field="reachable">IsReachable</g:Button>
+		<m:Scroller>
+			<g:HTMLPanel styleName="Container">
+				<m:ListPanel ui:field="list">
+					<g:Label>Is Reachable</g:Label>
+				</m:ListPanel>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 
