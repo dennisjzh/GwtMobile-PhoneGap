@@ -3,30 +3,61 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
 	<ui:style>
-		table > tbody > tr:last-child {
-			height: 100%;
-		}	
+		.container {
+			-webkit-box-orient: horizontal !important;
+			-webkit-box-flex: 0 !important;
+		}
+		.left > div:first-child{
+			border-top-right-radius: 0 0;
+			-webkit-box-shadow: rgba(0, 0, 0, 1) 0em 0em 0.5em;
+		}		
+		.left > div:last-child {
+			border-bottom-right-radius: 0 0;
+			-webkit-box-shadow: rgba(0, 0, 0, 0.5) 0em 0.2em 0.2em;
+		}
+		.left > div {
+			border-right: 1px solid #333333;
+		}
+		.right > div:first-child {
+			border-top-left-radius: 0 0;
+			-webkit-box-shadow: rgba(0, 0, 0, .35) 0em -0.2em 0.1em;
+		}
+		
+		.right > div:last-child {
+			border-bottom-left-radius: 0 0;
+			-webkit-box-shadow: rgba(0, 0, 0, .35) 0em 0.2em 0.1em;
+		}
+		.right > div {
+			border-left: 1px solid #666666;
+		}
+		.left, .right {
+			-webkit-box-flex: 1;
+		}
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="File" leftButton="Back"></m:HeaderPanel>
-		<g:HorizontalPanel>
-			<g:VerticalPanel>
-				<g:Button ui:field="create">Create Dir</g:Button>
-				<g:Button ui:field="file">Test File Exists</g:Button>
-				<g:Button ui:field="dir">Test Dir Exists</g:Button>
-				<g:Button ui:field="deldir">Delete Dir</g:Button>
-				<g:Button ui:field="delfile">Delete File</g:Button>
-				<g:Button ui:field="diskspace">Free Disk Space</g:Button>
-			</g:VerticalPanel>
-			<g:VerticalPanel>
-				<g:Button ui:field="write">Write</g:Button>
-				<g:Button ui:field="truncate">Truncate</g:Button>
-				<g:Button ui:field="seek">Seek</g:Button>
-				<g:Button ui:field="readdata">Read As Data URL</g:Button>
-				<g:Button ui:field="readtext">Read As Text</g:Button>
-				<g:Button ui:field="abort">Abort</g:Button>
-			</g:VerticalPanel>
-		</g:HorizontalPanel> 
-		<g:TextArea ui:field="text" />
+		<m:Scroller styleName="Scroller">
+			<g:HTMLPanel styleName="Container">
+				<g:HTMLPanel styleName="Container {style.container}">
+					<m:ListPanel ui:field="list0" styleName="List {style.left}">
+						<g:Label>Create Dir</g:Label>
+						<g:Label>Test Dir Exists</g:Label>
+						<g:Label>Test File Exists</g:Label>
+						<g:Label>Delete Dir</g:Label>
+						<g:Label>Delete File</g:Label>
+						<g:Label>Free Disk Space</g:Label>
+					</m:ListPanel>
+					<m:ListPanel ui:field="list1" styleName="List {style.right}">
+						<g:Label>Write</g:Label>
+						<g:Label>Truncate</g:Label>
+						<g:Label>Seek</g:Label>
+						<g:Label>Read As Data URL</g:Label>
+						<g:Label>Read As Text</g:Label>
+						<g:Label>Abort</g:Label>
+					</m:ListPanel>
+				</g:HTMLPanel>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 

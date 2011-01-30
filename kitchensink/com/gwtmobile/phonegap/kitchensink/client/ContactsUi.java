@@ -21,6 +21,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Contacts;
@@ -31,11 +32,12 @@ import com.gwtmobile.phonegap.client.Contacts.ContactFields;
 import com.gwtmobile.phonegap.client.Contacts.ContactFindCallback;
 import com.gwtmobile.phonegap.client.Contacts.ContactFindOptions;
 import com.gwtmobile.phonegap.client.Contacts.ContactName;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class ContactsUi extends Page {
 
-	@UiField TextArea text;
+	@UiField HTML text;
 	String watchId;
 
 	private static ContactsUiUiBinder uiBinder = GWT
@@ -48,8 +50,23 @@ public class ContactsUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("create")
-    public void handleCreateClick(ClickEvent e) {
+    @UiHandler("list")
+	void onListSelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		create();
+    		break;
+    	case 1:
+    		find();
+    		break;
+    	case 2:
+    		break;
+    	case 3:
+    		break;
+    	}
+    }
+
+    public void create() {
 		Contact contact = Contacts.newInstance();
 		contact.setDisplayName("Plumber");
 		contact.setNickname("Plumber");
@@ -62,36 +79,35 @@ public class ContactsUi extends Page {
 		contact.save(new Callback() {			
 			@Override
 			public void onSuccess() {
-				text.setText("Contact created.");
+				text.setHTML("Contact created.");
 			}			
 			@Override
 			public void onError(ContactError error) {
-				text.setText("Contact creation failed.\n" + error);
+				text.setHTML("Contact creation failed.<br/>" + error);
 			}
 		});
 	}
 
-	@UiHandler("find")
-    public void handleFindClick(ClickEvent e) {
+    public void find() {
 		try {
 			
 			Contacts.find(new ContactFields("nickname"), new ContactFindCallback() {
 				@Override
 				public void onSuccess(JsArray<Contact> contacts) {
-					text.setText("Find contact " + contacts.length());
+					text.setHTML("Find contact " + contacts.length());
 					if (contacts.length() > 0) {
-						text.setText(text.getText() + "\nNickname: " + contacts.get(0).getNickname());
+						text.setHTML(text.getHTML() + "<br/>Nickname: " + contacts.get(0).getNickname());
 					}
 				}
 				@Override
 				public void onError(ContactError error) {
-					text.setText("Contact find failed.\n" + error);
+					text.setHTML("Contact find failed.<br/>" + error);
 				}
 			}, new ContactFindOptions().filter("Plumber"));
 		
 		} catch (Exception exception) {
 			
-			text.setText(exception.getCause().toString());
+			text.setHTML(exception.getCause().toString());
 			
 		}
 		

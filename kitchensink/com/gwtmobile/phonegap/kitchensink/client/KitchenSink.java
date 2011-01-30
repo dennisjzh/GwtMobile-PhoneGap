@@ -39,13 +39,13 @@ public class KitchenSink implements EntryPoint {
 	private void setCSS() {
 		String ratio = getDevicePixelRatio();
 		if (ratio.equals("1.5")) {
-	    	Document.get().getBody().setClassName("WVGA");
+	    	Document.get().getDocumentElement().setClassName("WVGA");
 		}
 		else if (ratio.equals("0.75")) {
-	    	Document.get().getBody().setClassName("QVGA");
+	    	Document.get().getDocumentElement().setClassName("QVGA");
 		}
 		else {
-	    	Document.get().getBody().setClassName("HVGA");
+	    	Document.get().getDocumentElement().setClassName("HVGA");
 		}
 	}
 	

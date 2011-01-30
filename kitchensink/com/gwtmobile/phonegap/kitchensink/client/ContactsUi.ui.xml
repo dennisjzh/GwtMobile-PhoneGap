@@ -9,11 +9,17 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<m:HeaderPanel caption="Contacts" leftButton="Back"></m:HeaderPanel>
-		<g:Label>PhoneGap contact creation function is not working as of version 0.9.3. Only find function is tested at this point.</g:Label>
-		<g:Button ui:field="create">Create New Contact</g:Button>
-		<g:Button ui:field="find">Find Contacts</g:Button>
-		<g:Button ui:field="clone">Clone Contact</g:Button>
-		<g:Button ui:field="delete">Delete Contact</g:Button>
-		<g:TextArea ui:field="text"/>
+		<m:Scroller>
+			<g:HTMLPanel styleName="Container">
+				<m:ListPanel ui:field="list">
+					<g:Label>Create New Contact</g:Label>
+					<g:Label>Find Contacts</g:Label>
+					<g:Label>Clone Contact</g:Label>
+					<g:Label>Delete Contact</g:Label>
+				</m:ListPanel>
+				<g:Label>PhoneGap contact creation function is not working as of version 0.9.3. Only find function is tested at this point.</g:Label>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+			</g:HTMLPanel>
+		</m:Scroller>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -16,11 +16,12 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.File;
 import com.gwtmobile.phonegap.client.File.Callback;
@@ -30,13 +31,14 @@ import com.gwtmobile.phonegap.client.File.FileMgrCallback;
 import com.gwtmobile.phonegap.client.File.FileReader;
 import com.gwtmobile.phonegap.client.File.FileWriter;
 import com.gwtmobile.phonegap.client.File.FreeDiskSpaceCallback;
+import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
 public class FileUi extends Page {
 
 	private static FileUiUiBinder uiBinder = GWT.create(FileUiUiBinder.class);
 	
-	@UiField TextArea text;
+	@UiField HTML text;
 	FileWriter writer;
 	FileReader reader;
 	String dirName;
@@ -52,8 +54,12 @@ public class FileUi extends Page {
 	@Override
 	public void onLoad() {
 		super.onLoad();
-
-//		init();
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				init();
+			}
+		});
 	}
 
 	private void init() {
@@ -65,10 +71,10 @@ public class FileUi extends Page {
 		Callback callback = new Callback() {			
 			@Override
 			public void onEvent(Event evt) {
-				text.setText("Event Type: " + evt.getType() + "\n" + 
-						"FileName: " + evt.getTarget().getFileName() + "\n" +  
-						"Result: " + evt.getTarget().getResult() + "\n" +  
-						(evt.getType().equals("error") ? ("Error: " + evt.getTarget().getError().getCode() + "\n") : "") +  
+				text.setHTML("Event Type: " + evt.getType() + "<br/>" + 
+						"FileName: " + evt.getTarget().getFileName() + "<br/>" +  
+						"Result: " + evt.getTarget().getResult() + "<br/>" +  
+						(evt.getType().equals("error") ? ("Error: " + evt.getTarget().getError().getCode() + "<br/>") : "") +  
 						text.getText());
 			}
 		};
@@ -88,116 +94,152 @@ public class FileUi extends Page {
 		writer.onError(callback);
 	}
 	
-	@UiHandler("write")
-    public void handleWriteClick(ClickEvent e) {
-		writer.write("Hello from gwtmobile-phonegap\n");
+    @UiHandler("list0")
+	void onList0SelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		createDirectory();
+    		break;
+    	case 1:
+    		testDirectoryExists();
+    		break;
+    	case 2:
+    		testFileExists();
+    		break;
+    	case 3:
+    		deleteDirectory();
+    		break;
+    	case 4:
+    		deleteFile();
+    		break;
+    	case 5:
+    		getFreeDiskSpace();
+    		break;
+    	}
+    }
+
+    @UiHandler("list1")
+	void onList1SelectionChanged(SelectionChangedEvent e) {
+    	switch (e.getSelection()) {
+    	case 0:
+    		write();
+    		break;
+    	case 1:
+    		truncate();
+    		break;
+    	case 2:
+    		seek();
+    		break;
+    	case 3:
+    		readAsDataURL();
+    		break;
+    	case 4:
+    		readAsText();
+    		break;
+    	case 5:
+    		abort();
+    		break;
+    	}
+    }
+
+    public void write() {
+		writer.write("Hello from gwtmobile-phonegap<br/>");
 	}
 
-	@UiHandler("truncate")
-    public void handleTruncateClick(ClickEvent e) {
+    public void truncate() {
 		writer.truncate(20);
 	}
 
-	@UiHandler("seek")
-    public void handleSeekClick(ClickEvent e) {
+    public void seek() {
 		writer.seek(10);
 	}
 
-	@UiHandler("readdata")
-    public void handleReadDataClick(ClickEvent e) {
+    public void readAsDataURL() {
 		reader.readAsDataURL(fileName);
 	}
 
-	@UiHandler("readtext")
-    public void handleReadTextClick(ClickEvent e) {
+    public void readAsText() {
 		reader.readAsText(fileName);
 	}
 
-	@UiHandler("abort")
-    public void handleAbortClick(ClickEvent e) {
+    public void abort() {
 		writer.abort();
 	}
 
-	@UiHandler("file")
-    public void handleFileExistsClick(ClickEvent e) {
+    public void testFileExists() {
 		File.testFileExists(fileName, new FileMgrCallback() {			
 			@Override
 			public void onSuccess(boolean success) {
-				text.setText("File: " + fileName + "\nFileExists: " + success);
+				text.setHTML("File: " + fileName + "<br/>FileExists: " + success);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setText(error + "");
+				text.setHTML(error + "");
 			}
 		});
 	}
 
-	@UiHandler("dir")
-    public void handleDirExistsClick(ClickEvent e) {
+    public void testDirectoryExists() {
 		File.testDirectoryExists(dirName, new FileMgrCallback() {			
 			@Override
 			public void onSuccess(boolean success) {
-				text.setText("Dir: " + dirName + "\nDirExists: " + success);
+				text.setHTML("Dir: " + dirName + "<br/>DirExists: " + success);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setText(error + "");
+				text.setHTML(error + "");
 			}
 		});
 	}
 
-	@UiHandler("create")
-    public void handleCreateClick(ClickEvent e) {
+    public void createDirectory() {
 		File.createDirectory(dirName, new FileMgrCallback() {			
 			@Override
 			public void onSuccess(boolean success) {
-				text.setText("Dir: " + dirName + "\nCreate Dir: " + success);
+				text.setHTML("Dir: " + dirName + "<br/>Create Dir: " + success);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setText(error + "");
+				text.setHTML(error + "");
 			}
 		});
 	}
 
-	@UiHandler("deldir")
-    public void handleDeleteDirClick(ClickEvent e) {
+    public void deleteDirectory() {
 		File.deleteDirectory(dirName, new FileMgrCallback() {			
 			@Override
 			public void onSuccess(boolean success) {
-				text.setText("Dir: " + dirName + "\nDelete Dir: " + success);
+				text.setHTML("Dir: " + dirName + "<br/>Delete Dir: " + success);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setText(error + "");
+				text.setHTML(error + "");
 			}
 		});
 	}
 
-	@UiHandler("delfile")
-    public void handleDeleteFileClick(ClickEvent e) {
+    public void deleteFile() {
 		File.deleteFile(fileName, new FileMgrCallback() {			
 			@Override
 			public void onSuccess(boolean success) {
-				text.setText("File: " + fileName + "\nDelete file: " + success);
+				text.setHTML("File: " + fileName + "<br/>Delete file: " + success);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setText(error + "");
+				text.setHTML(error + "");
 			}
 		});
 	}
 
-	@UiHandler("diskspace")
-    public void handleFreeDiskSpaceClick(ClickEvent e) {
+    public void getFreeDiskSpace() {
 		File.getFreeDiskSpace(new FreeDiskSpaceCallback() {			
 			@Override
 			public void onSuccess(double freeDiskSpace) {
-				text.setText("Free Disk Space: " + freeDiskSpace);
+				text.setHTML("Free Disk Space: " + freeDiskSpace);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setText(error + "");
+				text.setHTML(error + "");
 			}
 		});
 	}
