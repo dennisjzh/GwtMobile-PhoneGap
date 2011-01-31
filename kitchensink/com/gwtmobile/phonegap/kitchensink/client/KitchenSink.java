@@ -16,7 +16,10 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.gwtmobile.phonegap.client.Device;
+import com.gwtmobile.phonegap.client.Event;
 import com.gwtmobile.ui.client.page.Page;
+import com.gwtmobile.ui.client.page.PageHistory;
 
 public class KitchenSink implements EntryPoint {
 
@@ -24,6 +27,14 @@ public class KitchenSink implements EntryPoint {
 	
 	@Override
 	public void onModuleLoad() {
+
+		Device.overrideBackButton();
+		Event.onBackKeyDown(new Event.Callback() {			
+			@Override
+			public void onEventFired() {
+				goBack();
+			}
+		});
 
 //		PhoneGap.onDeviceReady(new Callback() {			
 //			@Override
@@ -33,5 +44,9 @@ public class KitchenSink implements EntryPoint {
 //		});
 		
 	}
+	
+    public void goBack() {
+        PageHistory.current().goBack(null);
+    }
 
 }

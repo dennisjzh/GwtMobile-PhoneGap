@@ -5,7 +5,7 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<m:HeaderPanel caption="Event" leftButton="Back"></m:HeaderPanel>
+		<m:HeaderPanel ui:field="header" caption="Event" leftButton="Back"></m:HeaderPanel>
 		<m:Scroller>
 			<g:HTMLPanel styleName="Container">
 				<g:Label>Note: onPause, onResume, onBackKeyDown, onMenuKeyDown and onSearchKeyDown events only work on an Android device.</g:Label>

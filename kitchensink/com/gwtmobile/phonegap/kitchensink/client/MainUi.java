@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
@@ -70,6 +71,11 @@ public class MainUi extends Page {
     		goTo(new NotificationUi());
     		break;
     	}
+    }
+    
+    @Override
+    public void goBack(Object parameter) {
+		Device.exitApp();
     }
 
 }

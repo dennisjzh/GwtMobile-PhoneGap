@@ -26,12 +26,15 @@ import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
 import com.gwtmobile.phonegap.client.Event.Callback;
 import com.gwtmobile.ui.client.page.Page;
+import com.gwtmobile.ui.client.widgets.BackButton;
+import com.gwtmobile.ui.client.widgets.HeaderPanel;
 
 public class EventUi extends Page {
 
 	private static EventUiUiBinder uiBinder = GWT.create(EventUiUiBinder.class);
 	
 	@UiField HTML text;
+	@UiField HeaderPanel header;
 
 	interface EventUiUiBinder extends UiBinder<Widget, EventUi> {
 	}
@@ -40,11 +43,13 @@ public class EventUi extends Page {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
+	
 	@Override
 	public void onLoad() {
 		super.onLoad();
 		
-		Device.overrideBackButton();
+		BackButton back = (BackButton) header.getLeftButton();
+		back.setReturnParameter("Back");
 		
 		Event.onDeviceReady(new Callback() {			
 			@Override
@@ -91,9 +96,10 @@ public class EventUi extends Page {
 	}
 	
 	@Override
-	protected void onUnload() {
-		Device.resetBackButton();
-		super.onUnload();
+	public void goBack(Object returnValue) {
+		if (returnValue != null) {
+			super.goBack(returnValue);
+		}
 	}
-
+	
 }
