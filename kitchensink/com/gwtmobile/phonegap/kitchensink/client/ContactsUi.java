@@ -52,7 +52,7 @@ public class ContactsUi extends Page {
 	void onListSelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		create();
+    		//create();
     		break;
     	case 1:
     		find();
