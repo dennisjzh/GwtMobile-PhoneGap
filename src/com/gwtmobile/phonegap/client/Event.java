@@ -34,7 +34,7 @@ public class Event {
 	// below are Android specific events.
 	
 	public native static void onPause(Callback callback) /*-{
-	    $doc.addEventListener("pause", new function() {
+	    $doc.addEventListener("pause", function() {
 	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }, false);
 	}-*/;
