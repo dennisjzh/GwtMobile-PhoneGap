@@ -22,7 +22,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
 import com.gwtmobile.phonegap.client.Event.Callback;
 import com.gwtmobile.ui.client.page.Page;
@@ -97,7 +96,7 @@ public class EventUi extends Page {
 	
 	@Override
 	public void goBack(Object returnValue) {
-		if (returnValue != null) {
+		if (returnValue == "Back") {
 			super.goBack(returnValue);
 		}
 	}
