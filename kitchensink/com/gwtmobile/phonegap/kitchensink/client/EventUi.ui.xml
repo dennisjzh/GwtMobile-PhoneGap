@@ -1,11 +1,12 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets">
+	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets"
+	xmlns:p="urn:import:com.gwtmobile.phonegap.kitchensink.client">
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<m:HeaderPanel ui:field="header" caption="Event" leftButton="Back"></m:HeaderPanel>
+		<p:PhoneGapHeaderPanel ui:field="header" caption="Events"></p:PhoneGapHeaderPanel>
 		<m:Scroller>
 			<g:HTMLPanel styleName="Container">
 				<g:Label>Note: onPause, onResume, onBackKeyDown, onMenuKeyDown and onSearchKeyDown events only work on an Android device.</g:Label>
