@@ -43,3 +43,9 @@ The java code below showcases how to call PhoneGap functions in an GWT mobile ap
 			}
 		}, new Options().frequency(100));
 
+
+Demo App
+--------
+
+[GWT Mobile PhoneGap](http://market.android.com/details?id=com.gwtmobile.phonegap), a demo app created from the kitchen sink source code, is now on Android Market.
+
