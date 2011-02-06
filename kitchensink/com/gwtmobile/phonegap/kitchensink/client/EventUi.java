@@ -96,9 +96,8 @@ public class EventUi extends Page {
 	
 	@Override
 	public void goBack(Object returnValue) {
-		if (returnValue == "Back") {
+		if (returnValue != null && returnValue.equals("Back")) {
 			super.goBack(returnValue);
 		}
 	}
-	
 }

@@ -16,10 +16,14 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
 import com.gwtmobile.ui.client.page.Page;
 import com.gwtmobile.ui.client.page.PageHistory;
+import com.gwtmobile.ui.client.widgets.Button;
 
 public class KitchenSink implements EntryPoint {
 
@@ -32,7 +36,7 @@ public class KitchenSink implements EntryPoint {
 		Event.onBackKeyDown(new Event.Callback() {			
 			@Override
 			public void onEventFired() {
-				goBack();
+				onBackKeyDown();
 			}
 		});
 
@@ -45,8 +49,32 @@ public class KitchenSink implements EntryPoint {
 		
 	}
 	
-    public void goBack() {
-        PageHistory.current().goBack(null);
+    public void onBackKeyDown() {
+    	if (PageHistory.from() == null) {
+    		Device.exitApp();    		
+    	}
+    	else {
+    		if (!PageHistory.current().getClass().toString().endsWith(".EventUi")) {
+    			// emulate click on the header back button for page transition to show.
+            	emulateClickOnBackButton();    	
+    		}
+    	}    		
     }
+
+	protected void emulateClickOnBackButton() {
+		HTMLPanel current = (HTMLPanel) PageHistory.current().getWidget();
+		PhoneGapHeaderPanel header = (PhoneGapHeaderPanel) current.getWidget(0);
+		Button left = header.getLeftButton();
+		NativeEvent event = Document.get().createClickEvent(1, 1, 1, 1, 1, false, false, false, false);
+		left.getElement().dispatchEvent(event);
+	}
+    
+//    private native void doToast(String msg) /*-{
+//	    $wnd.PhoneGap.exec(null, null, "GwtMobile", "toast", [msg]);
+//	}-*/; 
+//
+//    private native void requestFocus() /*-{
+//	    $wnd.PhoneGap.exec(null, null, "GwtMobile", "requestFocus", []);
+//	}-*/; 
 
 }
