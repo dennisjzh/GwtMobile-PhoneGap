@@ -68,7 +68,11 @@ public class Event {
 	}
 	
 	// The patch replaces instanceof Function with typeof 'function'
-	private native static void patch() /*-{
+	private native static void patch() /*-{	
+		if ($wnd.PhoneGap == null || $wnd.PhoneGap.Channel == null) {
+			return;
+		}
+		s
 		$wnd.PhoneGap.Channel.prototype.subscribe = function(f, c, g) {
 		    // need a function to call
 		    if (f == null) { return; }
