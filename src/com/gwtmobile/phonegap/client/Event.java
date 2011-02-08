@@ -72,7 +72,7 @@ public class Event {
 		if ($wnd.PhoneGap == null || $wnd.PhoneGap.Channel == null) {
 			return;
 		}
-		s
+
 		$wnd.PhoneGap.Channel.prototype.subscribe = function(f, c, g) {
 		    // need a function to call
 		    if (f == null) { return; }
