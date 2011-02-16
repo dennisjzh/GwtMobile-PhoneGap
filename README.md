@@ -44,8 +44,12 @@ The java code below showcases how to call PhoneGap functions in an GWT mobile ap
 		}, new Options().frequency(100));
 
 
-Demo App
---------
+Apps that use GWT Mobile PhoneGap
+---------------------------------
 
-[GWT Mobile PhoneGap](http://market.android.com/details?id=com.gwtmobile.phonegap), a demo app created from the kitchen sink source code, is now on Android Market.
+GWT Mobile PhoneGap: A PhoneGap showcase app, demonstrate all PhoneGap functions!
+[Android Market](http://market.android.com/details?id=com.gwtmobile.phonegap), [iTunes App Store](http://itunes.apple.com/us/app/gwt-mobile-phonegap-showcase/id419032500?mt=8&ls=1) 
+
+[Fantasy Predictor](http://www.touchonmobile.com): Manage all you Fantasy Football teams with the help of the Fantasy Predictor. 
+[Android Market](http://market.android.com/details?id=com.TouchOnMobile.FantasyPredictor), [iTunes App Store](http://itunes.apple.com/us/app/fantasy-predictor/id405605997)
 
