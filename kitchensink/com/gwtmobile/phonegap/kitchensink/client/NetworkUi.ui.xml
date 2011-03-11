@@ -7,13 +7,13 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel caption="Network"></p:PhoneGapHeaderPanel>
-		<m:Scroller>
+		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<m:ListPanel ui:field="list">
 					<g:Label>Is Reachable</g:Label>
 				</m:ListPanel>
 				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
 			</g:HTMLPanel>
-		</m:Scroller>
+		</m:ScrollPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

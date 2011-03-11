@@ -7,11 +7,11 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel ui:field="header" caption="Events"></p:PhoneGapHeaderPanel>
-		<m:Scroller>
+		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<g:Label>Note: onPause, onResume, onBackKeyDown, onMenuKeyDown and onSearchKeyDown events only work on an Android device.</g:Label>
 				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
 			</g:HTMLPanel>
-		</m:Scroller>
+		</m:ScrollPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

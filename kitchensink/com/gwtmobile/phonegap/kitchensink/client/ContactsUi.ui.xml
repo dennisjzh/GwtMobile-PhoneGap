@@ -7,7 +7,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel caption="Contacts"></p:PhoneGapHeaderPanel>
-		<m:Scroller>
+		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<m:ListPanel ui:field="list">
 					<g:Label>Create New Contact</g:Label>
@@ -18,6 +18,6 @@
 				<g:Label>PhoneGap contact creation function is not working as of version 0.9.3. Only find function is tested at this point.</g:Label>
 				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
 			</g:HTMLPanel>
-		</m:Scroller>
+		</m:ScrollPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

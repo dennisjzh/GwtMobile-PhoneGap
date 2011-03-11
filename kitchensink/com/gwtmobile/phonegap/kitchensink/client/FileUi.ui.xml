@@ -37,7 +37,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel caption="File"></p:PhoneGapHeaderPanel>
-		<m:Scroller styleName="Scroller">
+		<m:ScrollPanel styleName="Scroller">
 			<g:HTMLPanel styleName="Container">
 				<g:HTMLPanel styleName="Container {style.container}">
 					<m:ListPanel ui:field="list0" styleName="List {style.left}">
@@ -59,6 +59,6 @@
 				</g:HTMLPanel>
 				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
 			</g:HTMLPanel>
-		</m:Scroller>
+		</m:ScrollPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 
