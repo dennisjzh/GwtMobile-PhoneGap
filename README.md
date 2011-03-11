@@ -1,9 +1,9 @@
-gwtmobile-phonegap
-==================
+GWT Mobile Phonegap
+===================
 
 gwtmobile-phonegap is a GWT wrapper of the [PhoneGap](http://github.com/phonegap/phonegap) Javascript library. PhoneGap is a cross-platform development framework that provides core mobile device features to web-based mobile apps. GwtMobile-PhoneGap enables GWT mobile applications to use PhoneGap functions.
 
-gwtmobile-phonegap is part of [GwtMobile](http://github.com/dennisjzh/GwtMobile), a GWT mobile development platform.
+gwtmobile-phonegap is part of [GWT Mobile](http://github.com/dennisjzh/GwtMobile), a GWT mobile development platform.
 
 Wrapped PhoneGap Functions
 --------------------------
@@ -53,3 +53,8 @@ GWT Mobile PhoneGap: A PhoneGap showcase app, demonstrate all PhoneGap functions
 [Fantasy Predictor](http://www.touchonmobile.com): Manage all you Fantasy Football teams with the help of the Fantasy Predictor. 
 [Android Market](http://market.android.com/details?id=com.TouchOnMobile.FantasyPredictor), [iTunes App Store](http://itunes.apple.com/us/app/fantasy-predictor/id405605997)
 
+
+GWT Mobile Google Group
+-----------------------
+
+Have questions? Post it on the [GWT Mobile Google Group](http://groups.google.com/group/gwtmobile) 
