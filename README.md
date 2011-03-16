@@ -57,4 +57,4 @@ GWT Mobile PhoneGap: A PhoneGap showcase app, demonstrate all PhoneGap functions
 GWT Mobile Google Group
 -----------------------
 
-Have questions? Post it on the [GWT Mobile Google Group](http://groups.google.com/group/gwtmobile) 
+Have a question? Post it on the [GWT Mobile Google Group](http://groups.google.com/group/gwtmobile) 
