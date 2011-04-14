@@ -136,8 +136,14 @@ PhoneGap.Channel.join = function(h, c) {
     var f = function() {
         if (!(--i)) h();
     }
-    for (var j=0; j<i; j++) {
-        (!c[j].fired?c[j].subscribeOnce(f):i--);
+    var len = i;
+    for (var j=0; j<len; j++) {
+        if (!c[j].fired) {
+            c[j].subscribeOnce(f);
+        }
+        else {
+            i--;
+        }
     }
     if (!i) h();
 };
@@ -238,6 +244,39 @@ if (typeof _nativeReady !== 'undefined') { PhoneGap.onNativeReady.fire(); }
 PhoneGap.onDeviceReady = new PhoneGap.Channel('onDeviceReady');
 
 
+// Array of channels that must fire before "deviceready" is fired
+PhoneGap.deviceReadyChannelsArray = [ PhoneGap.onPhoneGapReady, PhoneGap.onPhoneGapInfoReady];
+
+// Hashtable of user defined channels that must also fire before "deviceready" is fired
+PhoneGap.deviceReadyChannelsMap = {};
+
+/**
+ * Indicate that a feature needs to be initialized before it is ready to be used.
+ * This holds up PhoneGap's "deviceready" event until the feature has been initialized
+ * and PhoneGap.initComplete(feature) is called.
+ *
+ * @param feature {String}     The unique feature name
+ */
+PhoneGap.waitForInitialization = function(feature) {
+    if (feature) {
+        var channel = new PhoneGap.Channel(feature);
+        PhoneGap.deviceReadyChannelsMap[feature] = channel;
+        PhoneGap.deviceReadyChannelsArray.push(channel);
+    }
+};
+
+/**
+ * Indicate that initialization code has completed and the feature is ready to be used.
+ *
+ * @param feature {String}     The unique feature name
+ */ 
+PhoneGap.initializationComplete = function(feature) {
+    var channel = PhoneGap.deviceReadyChannelsMap[feature];
+    if (channel) {
+        channel.fire();
+    }
+};
+
 /**
  * Create all PhoneGap objects once page has fully loaded and native side is ready.
  */
@@ -259,12 +298,24 @@ PhoneGap.Channel.join(function() {
     // Fire event to notify that all objects are created
     PhoneGap.onPhoneGapReady.fire();
 
+    PhoneGap.Channel.join(function() {
+    
+        // Turn off app loading dialog
+        navigator.notification.activityStop();
+
+        PhoneGap.onDeviceReady.fire();
+
+        // Fire the onresume event, since first one happens before JavaScript is loaded
+        PhoneGap.onResume.fire();
+    }, PhoneGap.deviceReadyChannelsArray);
+
 }, [ PhoneGap.onDOMContentLoaded, PhoneGap.onNativeReady ]);
 
 /**
  * Fire onDeviceReady event once all constructors have run and PhoneGap info has been
  * received from native side.
  */
+ /*
 PhoneGap.Channel.join(function() {
     // Turn off app loading dialog
     navigator.notification.activityStop();
@@ -274,6 +325,7 @@ PhoneGap.Channel.join(function() {
     // Fire the onresume event, since first one happens before JavaScript is loaded
     PhoneGap.onResume.fire();
 }, [ PhoneGap.onPhoneGapReady, PhoneGap.onPhoneGapInfoReady]);
+*/
 
 // Listen for DOMContentLoaded and notify our channel subscribers
 document.addEventListener('DOMContentLoaded', function() {
@@ -289,6 +341,9 @@ document.addEventListener = function(evt, handler, capture) {
         PhoneGap.onDeviceReady.subscribeOnce(handler);
     } else if (e == 'resume') {
         PhoneGap.onResume.subscribe(handler);
+        if (PhoneGap.onDeviceReady.fired) {
+            PhoneGap.onResume.fire();
+        }
     } else if (e == 'pause') {
         PhoneGap.onPause.subscribe(handler);
     } else {
@@ -385,7 +440,11 @@ PhoneGap.clone = function(obj) {
 	if(!(obj instanceof Object)){
 		return obj;
 	}
-
+	
+    if (obj instanceof Date) {
+        return obj;
+    }
+    
 	retVal = new Object();
 	for(i in obj){
 		if(!(i in retVal) || retVal[i] != obj[i]) {
@@ -872,8 +931,6 @@ Accelerometer.prototype.clearWatch = function(id) {
 PhoneGap.addConstructor(function() {
     if (typeof navigator.accelerometer == "undefined") navigator.accelerometer = new Accelerometer();
 });
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -940,8 +997,6 @@ App.prototype.clearHistory = function() {
 App.prototype.addService = function(serviceType, className) {
 	PhoneGap.exec(null, null, "App", "addService", [serviceType, className]);
 };
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -1033,8 +1088,6 @@ Camera.prototype.getPicture = function(successCallback, errorCallback, options) 
 PhoneGap.addConstructor(function() {
     if (typeof navigator.camera == "undefined") navigator.camera = new Camera();
 });
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -1148,8 +1201,6 @@ Compass.prototype.clearWatch = function(id) {
 PhoneGap.addConstructor(function() {
     if (typeof navigator.compass == "undefined") navigator.compass = new Compass();
 });
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -1169,24 +1220,17 @@ PhoneGap.addConstructor(function() {
 * @param {ContactAddress[]} addresses array of addresses
 * @param {ContactField[]} ims instant messaging user ids
 * @param {ContactOrganization[]} organizations
-* @param {DOMString} published date contact was first created
-* @param {DOMString} updated date contact was last updated
+* @param {DOMString} revision date contact was last updated
 * @param {DOMString} birthday contact's birthday
-* @param (DOMString} anniversary contact's anniversary
 * @param {DOMString} gender contact's gender
 * @param {DOMString} note user notes about contact
-* @param {DOMString} preferredUsername
 * @param {ContactField[]} photos
-* @param {ContactField[]} tags
-* @param {ContactField[]} relationships
+* @param {ContactField[]} categories
 * @param {ContactField[]} urls contact's web sites
-* @param {ContactAccounts[]} accounts contact's online accounts
-* @param {DOMString} utcOffset UTC time zone offset
-* @param {DOMString} connected
+* @param {DOMString} timezone the contacts time zone
 */
 var Contact = function(id, displayName, name, nickname, phoneNumbers, emails, addresses,
-    ims, organizations, published, updated, birthday, anniversary, gender, note,
-    preferredUsername, photos, tags, relationships, urls, accounts, utcOffset, connected) {
+    ims, organizations, revision, birthday, gender, note, photos, categories, urls, timezone) {
     this.id = id || null;
     this.rawId = null;
     this.displayName = displayName || null;
@@ -1197,20 +1241,14 @@ var Contact = function(id, displayName, name, nickname, phoneNumbers, emails, ad
     this.addresses = addresses || null; // ContactAddress[]
     this.ims = ims || null; // ContactField[]
     this.organizations = organizations || null; // ContactOrganization[]
-    this.published = published || null;
-    this.updated = updated || null;
+    this.revision = revision || null;
     this.birthday = birthday || null;
-    this.anniversary = anniversary || null;
     this.gender = gender || null;
     this.note = note || null;
-    this.preferredUsername = preferredUsername || null;
     this.photos = photos || null; // ContactField[]
-    this.tags = tags || null; // ContactField[]
-    this.relationships = relationships || null; // ContactField[]
+    this.categories = categories || null; // ContactField[]
     this.urls = urls || null; // ContactField[]
-    this.accounts = accounts || null; // ContactAccount[]
-    this.utcOffset = utcOffset || null;
-    this.connected = connected || null;
+    this.timezone = timezone || null;
 };
 
 /**
@@ -1269,9 +1307,9 @@ Contact.prototype.clone = function() {
     		clonedContact.tags[i].id = null;
     	}
     }
-    if (clonedContact.relationships) {
-    	for (i=0; i<clonedContact.relationships.length; i++) {
-    		clonedContact.relationships[i].id = null;
+    if (clonedContact.photos) {
+    	for (i=0; i<clonedContact.photos.length; i++) {
+    		clonedContact.photos[i].id = null;
     	}
     }
     if (clonedContact.urls) {
@@ -1314,13 +1352,13 @@ var ContactName = function(formatted, familyName, givenName, middle, prefix, suf
 * @param {DOMString} id unique identifier, should only be set by native code
 * @param type
 * @param value
-* @param primary
+* @param pref
 */
-var ContactField = function(type, value, primary) {
+var ContactField = function(type, value, pref) {
 	this.id = null;
     this.type = type || null;
     this.value = value || null;
-    this.primary = primary || null;
+    this.pref = pref || null;
 };
 
 /**
@@ -1354,30 +1392,12 @@ var ContactAddress = function(formatted, streetAddress, locality, region, postal
 * @param location
 * @param desc
 */
-var ContactOrganization = function(name, dept, title, startDate, endDate, location, desc) {
+var ContactOrganization = function(name, dept, title) {
 	this.id = null;
     this.name = name || null;
     this.department = dept || null;
     this.title = title || null;
-    this.startDate = startDate || null;
-    this.endDate = endDate || null;
-    this.location = location || null;
-    this.description = desc || null;
 };
-
-/**
-* Contact account.
-* @param {DOMString} id unique identifier, should only be set by native code
-* @param domain
-* @param username
-* @param userid
-*/
-var ContactAccount = function(domain, username, userid) {
-	this.id = null;
-    this.domain = domain || null;
-    this.username = username || null;
-    this.userid = userid || null;
-}
 
 /**
 * Represents a group of Contacts.
@@ -1436,13 +1456,11 @@ Contacts.prototype.cast = function(pluginResult) {
  * ContactFindOptions.
  * @param filter used to match contacts against
  * @param multiple boolean used to determine if more than one contact should be returned
- * @param limit maximum number of results to return from the contacts search
  * @param updatedSince return only contact records that have been updated on or after the given time
  */
-var ContactFindOptions = function(filter, multiple, limit, updatedSince) {
+var ContactFindOptions = function(filter, multiple, updatedSince) {
     this.filter = filter || '';
-    this.multiple = multiple || false;
-    this.limit = limit || 1;
+    this.multiple = multiple || true;
     this.updatedSince = updatedSince || '';
 };
 
@@ -1473,8 +1491,6 @@ PhoneGap.addConstructor(function() {
     if(typeof navigator.service == "undefined") navigator.service = new Object();
     if(typeof navigator.service.contacts == "undefined") navigator.service.contacts = new Contacts();
 });
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -1509,8 +1525,6 @@ Crypto.prototype.getPlainString = function(string) {
 PhoneGap.addConstructor(function() {
     if (typeof navigator.Crypto == "undefined") navigator.Crypto = new Crypto();
 });
-
-
 
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
@@ -1605,8 +1619,6 @@ Device.prototype.exitApp = function() {
 PhoneGap.addConstructor(function() {
     navigator.device = window.device = new Device();
 });
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -2034,6 +2046,11 @@ FileWriter.DONE = 2;
  * Abort writing file.
  */
 FileWriter.prototype.abort = function() {
+    // check for invalid state
+	if (this.readyState === FileWriter.DONE || this.readyState === FileWriter.INIT) {
+		throw FileError.INVALID_STATE_ERR;
+	} 
+
     // set error
     var error = new FileError();
     error.code = error.ABORT_ERR;
@@ -2052,10 +2069,10 @@ FileWriter.prototype.abort = function() {
     
     this.readyState = FileWriter.DONE;
 
-    // If load end callback
-    if (typeof this.onloadend == "function") {
+    // If write end callback
+    if (typeof this.onwriteend == "function") {
         var evt = File._createEvent("writeend", this);
-        this.onloadend(evt);
+        this.onwriteend(evt);
     }
 };
 
@@ -2350,8 +2367,83 @@ FileWriter.prototype.truncate = function(size) {
         );
 };
 
+/*
+ * PhoneGap is available under *either* the terms of the modified BSD license *or* the
+ * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
+ *  
+ * Copyright (c) 2005-2010, Nitobi Software Inc.
+ * Copyright (c) 2010, IBM Corporation
+ */
 
+/**
+ * FileTransfer uploads a file to a remote server.
+ */
+function FileTransfer() {};
 
+/**
+ * FileUploadResult
+ */
+function FileUploadResult() {
+    this.bytesSent = 0;
+    this.responseCode = null;
+    this.response = null;
+};
+
+/**
+ * FileTransferError
+ */
+function FileTransferError() {
+    this.code = null;
+};
+
+FileTransferError.FILE_NOT_FOUND_ERR = 1;
+FileTransferError.INVALID_URL_ERR = 2;
+FileTransferError.CONNECTION_ERR = 3;
+
+/**
+* Given an absolute file path, uploads a file on the device to a remote server 
+* using a multipart HTTP request.
+* @param filePath {String}           Full path of the file on the device
+* @param server {String}             URL of the server to receive the file
+* @param successCallback (Function}  Callback to be invoked when upload has completed
+* @param errorCallback {Function}    Callback to be invoked upon error
+* @param options {FileUploadOptions} Optional parameters such as file name and mimetype           
+*/
+FileTransfer.prototype.upload = function(filePath, server, successCallback, errorCallback, options, debug) {
+
+    // check for options
+    var fileKey = null;
+    var fileName = null;
+    var mimeType = null;
+    var params = null;
+    if (options) {
+        fileKey = options.fileKey;
+        fileName = options.fileName;
+        mimeType = options.mimeType;
+        if (options.params) {
+            params = options.params;
+        }
+        else {
+            params = {};
+        }
+    }
+    
+    PhoneGap.exec(successCallback, errorCallback, 'FileTransfer', 'upload', [filePath, server, fileKey, fileName, mimeType, params, debug]);
+};
+
+/**
+ * Options to customize the HTTP request used to upload files.
+ * @param fileKey {String}   Name of file request parameter.
+ * @param fileName {String}  Filename to be used by the server. Defaults to image.jpg.
+ * @param mimeType {String}  Mimetype of the uploaded file. Defaults to image/jpeg.
+ * @param params {Object}    Object with key: value params to send to the server.
+ */
+function FileUploadOptions(fileKey, fileName, mimeType, params) {
+    this.fileKey = fileKey || null;
+    this.fileName = fileName || null;
+    this.mimeType = mimeType || null;
+    this.params = params || null;
+};
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -2546,17 +2638,6 @@ PhoneGap.addConstructor(function() {
     }
 });
 
-
-
-/*
- * PhoneGap is available under *either* the terms of the modified BSD license *or* the
- * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
- *
- * Copyright (c) 2005-2010, Nitobi Software Inc.
- * Copyright (c) 2010, IBM Corporation
- */
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -2589,8 +2670,6 @@ KeyEvent.prototype.searchTrigger = function() {
 if (document.keyEvent == null || typeof document.keyEvent == 'undefined') {
     window.keyEvent = document.keyEvent = new KeyEvent();
 }
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -2792,8 +2871,6 @@ Media.prototype.release = function() {
     PhoneGap.exec(null, null, "Media", "release", [this.id]);
 };
 
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -2855,8 +2932,6 @@ Network.prototype.isReachable = function(uri, callback, options) {
 PhoneGap.addConstructor(function() {
     if (typeof navigator.network == "undefined") navigator.network = new Network();
 });
-
-
 
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
@@ -2974,8 +3049,6 @@ PhoneGap.addConstructor(function() {
     if (typeof navigator.notification == "undefined") navigator.notification = new Notification();
 });
 
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -3060,8 +3133,6 @@ PositionError.UNKNOWN_ERROR = 0;
 PositionError.PERMISSION_DENIED = 1;
 PositionError.POSITION_UNAVAILABLE = 2;
 PositionError.TIMEOUT = 3;
-
-
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -3373,6 +3444,7 @@ var CupcakeLocalStorage = function() {
 	                    for(var i = 0; i < result.rows.length; i++) {
 							storage[result.rows.item(i)['id']] =  result.rows.item(i)['body'];
 						}
+	                    PhoneGap.initializationComplete("cupcakeStorage");
 					});
 					
 				}, 
@@ -3420,8 +3492,7 @@ PhoneGap.addConstructor(function() {
     
     if (typeof window.localStorage == "undefined") {
         navigator.localStorage = window.localStorage = new CupcakeLocalStorage();
+        PhoneGap.waitForInitialization("cupcakeStorage");
     }
 });
-
-
 

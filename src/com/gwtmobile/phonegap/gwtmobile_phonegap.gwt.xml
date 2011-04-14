@@ -2,6 +2,6 @@
 <module>    
   <inherits name='com.google.gwt.user.User'/>
  
-  <script src="phonegap-0.9.3.js"/>
+  <script src="phonegap-0.9.4.js"/>
 	
 </module>
