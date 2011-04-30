@@ -58,6 +58,7 @@ public class ContactsUi extends Page {
     		find();
     		break;
     	case 2:
+    		cloneContact();
     		break;
     	case 3:
     		delete();
@@ -73,6 +74,7 @@ public class ContactsUi extends Page {
 		ContactName name = ContactName.newInstance();
 		name.setGivenName("Jane");
 		name.setFamilyName("Doe");
+		contact.setDisplayName(name.getGivenName() + " " + name.getFamilyName());
 		contact.setName(name);
 		
 		contact.save(new Callback() {			
@@ -117,20 +119,22 @@ public class ContactsUi extends Page {
 			@Override
 			public void onSuccess(JsArray<Contact> contacts) {
 				if (contacts.length() > 0) {
-					final Contact contact = contacts.get(0);
-					contact.remove(new Callback() {
-						@Override
-						public void onSuccess() {
-							text.setHTML(contact.getNickname() + 
-									" (" + contact.getName().getGivenName() +
-									" " + contact.getName().getFamilyName() + 
-									") removed.<br/>");
-						}
-						@Override
-						public void onError(ContactError error) {
-							text.setHTML(text.getHTML() + "<br/> Failed to remove contact. " + error);
-						}
-					});
+					for (int i = 0; i < contacts.length(); i++) {
+						final Contact contact = contacts.get(i);
+						contact.remove(new Callback() {
+							@Override
+							public void onSuccess() {
+								text.setHTML(contact.getNickname() + 
+										" (" + contact.getName().getGivenName() +
+										" " + contact.getName().getFamilyName() + 
+										") removed.<br/>" + text.getHTML());
+							}
+							@Override
+							public void onError(ContactError error) {
+								text.setHTML(text.getHTML() + "<br/> Failed to remove contact. " + error);
+							}
+						});					
+					}
 				}
 				else {
 					text.setHTML(text.getHTML() + "<br/> Contact to delete not found.<br/>");
@@ -142,4 +146,41 @@ public class ContactsUi extends Page {
 			}
 		}, new ContactFindOptions().filter("Plumber"));
     }
+    
+    private void cloneContact() {
+		Contacts.find(new ContactFields("nickname", "name"), new ContactFindCallback() {
+			@Override
+			public void onSuccess(JsArray<Contact> contacts) {
+				if (contacts.length() > 0) {
+					final Contact contact = contacts.get(0);
+					final Contact clone = contact.clone();
+					clone.getName().setGivenName(clone.getName().getGivenName() + "-Clone");
+					clone.getName().setFamilyName(clone.getName().getFamilyName() + "-Clone");
+					clone.setNickname(clone.getNickname() + "-Clone");
+					clone.setDisplayName(clone.getDisplayName() + "-Clone");
+					clone.save(new Callback() {
+						@Override
+						public void onSuccess() {
+							text.setHTML(clone.getNickname() + 
+									" (" + clone.getName().getGivenName() +
+									" " + clone.getName().getFamilyName() + 
+									") saved.<br/>");
+						}
+						@Override
+						public void onError(ContactError error) {
+							text.setHTML(text.getHTML() + "<br/> Failed to save cloned contact. " + error);
+						}
+					});
+				}
+				else {
+					text.setHTML(text.getHTML() + "<br/> Contact to clone not found.<br/>");
+				}
+			}
+			@Override
+			public void onError(ContactError error) {
+				text.setHTML(text.getHTML() + "<br/>" + error);
+			}
+		}, new ContactFindOptions().filter("Plumber"));
+    }
+
 }
