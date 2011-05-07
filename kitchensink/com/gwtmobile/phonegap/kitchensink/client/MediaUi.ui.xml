@@ -10,11 +10,14 @@
 		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<m:ListPanel ui:field="list">
-					<g:Label>Play</g:Label>
+					<g:Label>Start Recording</g:Label>
+					<g:Label>Stop Recording</g:Label>
+					<g:Label>Play Back</g:Label>
 					<g:Label>Pause</g:Label>
 					<g:Label>Stop</g:Label>
+					<g:Label>Release</g:Label>
 				</m:ListPanel>
-				<g:HTML ui:field="text" styleName="Output">Music will be loaded from www.freekidsmusic.com</g:HTML>
+				<g:HTML ui:field="text" styleName="Output"></g:HTML>
 			</g:HTMLPanel>
 		</m:ScrollPanel>
 	</g:HTMLPanel>

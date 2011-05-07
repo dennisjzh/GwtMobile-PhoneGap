@@ -48,10 +48,11 @@ public class MediaUi extends Page {
 	public void onLoad() {
 		super.onLoad();
 		
-		media = Media.newInstance("http://freekidsmusic.com/traditional-songs-for-children/AlphabetSong.mp3", new Callback() {			
+		media = Media.newInstance("myrecording.mp3", new Callback() {			
 			@Override
 			public void onSuccess() {
 				text.setHTML("Media Success");
+				timer.cancel();
 			}
 			
 			@Override
@@ -60,11 +61,13 @@ public class MediaUi extends Page {
 						"Code: " + error.getCode() + "<br/>" +
 						"Message: " + error.getMessage());
 			}
-		});		
+		});
+		
 	}
 
 	@Override
 	protected void onUnload() {
+		release();
 		super.onUnload();
 	}
 	
@@ -72,13 +75,22 @@ public class MediaUi extends Page {
 	void onListSelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		play();
+    		startRecord();
     		break;
     	case 1:
-    		pause();
+    		stopRecord();
     		break;
     	case 2:
+    		play();
+    		break;
+    	case 3:
+    		pause();
+    		break;
+    	case 4:
     		stop();
+    		break;
+    	case 5:
+    		release();
     		break;
     	}
     }
@@ -108,13 +120,33 @@ public class MediaUi extends Page {
 	}
 
     public void pause() {
-		media.pause();
 		timer.cancel();
+		media.pause();
 	}
 
     public void stop() {
-		media.stop();
 		timer.cancel();
+		media.stop();
 	}
+    
+    public void startRecord() {
+    	text.setHTML("Recording. Say or sing something.<br/>");    	
+    	media.startRecord();
+    	timer = new Timer() {
+			@Override
+			public void run() {
+				text.setHTML(text.getHTML() + ".");
+			}
+		};
+		timer.scheduleRepeating(1000);
+    }
 
+    public void stopRecord() {
+    	media.stopRecord();
+    	timer.cancel();
+    }
+    
+    public void release() {
+    	media.release();
+    }
 }
