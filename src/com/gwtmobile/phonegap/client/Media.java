@@ -42,6 +42,18 @@ public class Media extends JavaScriptObject {
 		this.stop();
 	}-*/;
 	
+	public native final void release() /*-{
+		this.release();
+	}-*/;
+
+	public native final void startRecord() /*-{
+		this.startRecord();
+	}-*/;
+
+	public native final void stopRecord() /*-{
+		this.stopRecord();
+	}-*/;
+
 	public native final void getCurrentPosition(PositionCallback callback) /*-{
 		this.getCurrentPosition(function(position) {
 			callback.@com.gwtmobile.phonegap.client.Media.PositionCallback::onSuccess(I)(position);
