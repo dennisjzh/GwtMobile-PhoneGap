@@ -2,6 +2,7 @@ package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.gwtmobile.phonegap.client.plugins.ChildBrowser;
 import com.gwtmobile.ui.client.utils.Utils;
 import com.gwtmobile.ui.client.widgets.HeaderPanel;
 
@@ -17,7 +18,8 @@ public class PhoneGapHeaderPanel extends HeaderPanel {
 				String caption = PhoneGapHeaderPanel.this.getCaption();
 				url = url + "phonegap_" + caption.toLowerCase() + "_" + caption.toLowerCase() + 
 					".md.html#" + caption;
-				Utils.loadUrl(url);
+				//Utils.loadUrl(url);
+				ChildBrowser.showWebPage(url, true);
 			}
 		});
 	}
