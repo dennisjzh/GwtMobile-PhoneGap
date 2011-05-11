@@ -21,8 +21,10 @@ import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
+import com.gwtmobile.phonegap.client.Event.Callback;
 import com.gwtmobile.ui.client.page.Page;
 import com.gwtmobile.ui.client.page.PageHistory;
+import com.gwtmobile.ui.client.utils.Utils;
 import com.gwtmobile.ui.client.widgets.Button;
 
 public class KitchenSink implements EntryPoint {
@@ -32,21 +34,21 @@ public class KitchenSink implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
-		Device.overrideBackButton();
-		Event.onBackKeyDown(new Event.Callback() {			
+		Event.onBackButton(new Event.Callback() {			
 			@Override
 			public void onEventFired() {
 				onBackKeyDown();
 			}
 		});
 
-//		PhoneGap.onDeviceReady(new Callback() {			
-//			@Override
-//			public void onEventFired() {
-				Page.load(mainUi);
-//			}
-//		});
-		
+		if (Utils.isAndroid() || Utils.isIOS()) {
+			Event.onDeviceReady(new Callback() {			
+				@Override
+				public void onEventFired() {
+					Page.load(mainUi);
+				}
+			});
+		}		
 	}
 	
     public void onBackKeyDown() {

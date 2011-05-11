@@ -25,13 +25,10 @@ public class Event {
 	}
     
 	public native static void onDeviceReady(Callback callback) /*-{
-		//PhoneGap uses "instanceof Function". Have to use callbackproxy to get around.
 	    $doc.addEventListener("deviceready", function() {
 	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }, false);
 	}-*/;
-	
-	// below are Android specific events.
 	
 	public native static void onPause(Callback callback) /*-{
 	    $doc.addEventListener("pause", function() {
@@ -45,20 +42,22 @@ public class Event {
 	    }, false);
 	}-*/;
 
-	public native static void onBackKeyDown(Callback callback) /*-{
-	    $doc.addEventListener("backKeyDown", function() {
+	// below are Android specific events.
+	
+	public native static void onBackButton(Callback callback) /*-{
+	    $doc.addEventListener("backbutton", function() {
 	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
-	public native static void onMenuKeyDown(Callback callback) /*-{
-	    $doc.addEventListener("menuKeyDown", function() {
+	public native static void onMenuButton(Callback callback) /*-{
+	    $doc.addEventListener("menubutton", function() {
 	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
-	public native static void onSearchKeyDown(Callback callback) /*-{
-	    $doc.addEventListener("searchKeyDown", function() {
+	public native static void onSearchButton(Callback callback) /*-{
+	    $doc.addEventListener("searchbutton", function() {
 	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
 	    }, false);
 	}-*/;
