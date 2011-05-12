@@ -8,9 +8,8 @@
 	<g:HTMLPanel>
 		<m:HeaderPanel leftButton="Back"><g:Label>Plugins</g:Label></m:HeaderPanel>
 		<m:ScrollPanel>
-			<m:ListPanel ui:field="list" showArrow="true">
+			<m:ListPanel ui:field="list" showArrow="false">
 				<g:Label>Child Browser</g:Label>			
-				<g:Label>Mapkit</g:Label>			
 			</m:ListPanel>
 		</m:ScrollPanel>
 	</g:HTMLPanel>
