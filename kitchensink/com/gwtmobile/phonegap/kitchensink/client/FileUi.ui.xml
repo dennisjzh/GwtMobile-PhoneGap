@@ -40,7 +40,7 @@
 		<m:ScrollPanel styleName="Scroller">
 			<g:HTMLPanel styleName="Container">
 				<g:HTMLPanel styleName="Container {style.container}">
-					<m:ListPanel ui:field="list0" styleName="List {style.left}">
+					<m:ListPanel ui:field="list0" secondaryStyle="{style.left}">
 						<g:Label>Create Dir</g:Label>
 						<g:Label>Test Dir Exists</g:Label>
 						<g:Label>Test File Exists</g:Label>
@@ -48,7 +48,7 @@
 						<g:Label>Delete File</g:Label>
 						<g:Label>Free Disk Space</g:Label>
 					</m:ListPanel>
-					<m:ListPanel ui:field="list1" styleName="List {style.right}">
+					<m:ListPanel ui:field="list1" secondaryStyle="{style.right}">
 						<g:Label>Write</g:Label>
 						<g:Label>Truncate</g:Label>
 						<g:Label>Seek</g:Label>
