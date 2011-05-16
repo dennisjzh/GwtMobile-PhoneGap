@@ -35,21 +35,24 @@ public class KitchenSink implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
-		Event.onBackButton(new Event.Callback() {			
-			@Override
-			public void onEventFired() {
-				onBackKeyDown();
-			}
-		});
-
 		if (Utils.isAndroid() || Utils.isIOS()) {
+			Event.onBackButton(new Event.Callback() {			
+				@Override
+				public void onEventFired() {
+					onBackKeyDown();
+				}
+			});
+
 			Event.onDeviceReady(new Callback() {			
 				@Override
 				public void onEventFired() {
 					Page.load(mainUi);
 				}
 			});
-		}		
+		}
+		else {
+			Page.load(mainUi);
+		}
 	}
 	
     public void onBackKeyDown() {
