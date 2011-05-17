@@ -30,11 +30,11 @@ public class File95 {
 
 		protected FileSystem() {};
 		
-		public native String getName() /*-{
+		public final native String getName() /*-{
 			return this.name;
 		}-*/;
 		
-		public native DirectoryEntry getRoot() /*-{
+		public final native DirectoryEntry getRoot() /*-{
 			return this.root;
 		}-*/;
 	}
@@ -58,23 +58,23 @@ public class File95 {
 
 		protected EntryBase() {};
 		
-		public native Boolean isFile() /*-{
+		public final native Boolean isFile() /*-{
 			return this.isFile;
 		}-*/;
 		
-		public native Boolean isDirectory() /*-{
+		public final native Boolean isDirectory() /*-{
 			return this.isDirectory;
 		}-*/;
 
-		public native String getName() /*-{
+		public final native String getName() /*-{
 			return this.name;
 		}-*/;
 		
-		public native String getFullPath() /*-{
+		public final native String getFullPath() /*-{
 			return this.fullPath;
 		}-*/;
 		
-		public native String getMetadata() /*-{
+		public final native String getMetadata() /*-{
 			return this.fullPath;
 		}-*/;
 
@@ -86,11 +86,11 @@ public class File95 {
 		protected Metadata() {};
 		
 		@SuppressWarnings("deprecation")
-		public Date getModificationTime() {
+		public final Date getModificationTime() {
 			return new Date(Date.parse(getModificationTimeNative()));
 		};
 	
-		public native String getModificationTimeNative() /*-{
+		public final native String getModificationTimeNative() /*-{
 			return this.modificationTime;
 		}-*/;
 	
