@@ -427,12 +427,12 @@ public class File95 {
 			};
 		}-*/;
 
-		public final native void readAsDataURL(String fileName) /*-{
-			this.readAsDataURL(fileName);
+		public final native void readAsDataURL(File file) /*-{
+			this.readAsDataURL(file);
 		}-*/;
 
-		public final native void readAsText(String fileName) /*-{
-			this.readAsText(fileName);
+		public final native void readAsText(File file) /*-{
+			this.readAsText(file);
 		}-*/;
 
 	}
