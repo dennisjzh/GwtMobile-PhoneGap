@@ -258,52 +258,19 @@ public class File95 {
 			return new Date(Date.parse(getModificationTimeNative()));
 		};
 	
-		public final native String getModificationTimeNative() /*-{
+		private final native String getModificationTimeNative() /*-{
 			return this.modificationTime;
 		}-*/;
 	
 	}
-	
+
+	// New instance creation
 	public static native FileReader newReaderInstance() /*-{
 		return new $wnd.FileReader();
 	}-*/;
 	
-	public static native FileWriter newWriterInstance(String filePath) /*-{
-		return new $wnd.FileWriter(filePath);
-	}-*/;
-
-	public static native FileWriter newWriterInstance(String filePath, boolean append) /*-{
-		return new $wnd.FileWriter(filePath, append);
-	}-*/;
+	// fileMgr methods are not in phonegap doc yet. Only selected APIs are wrapped.
 	
-	// fileMgr methods are not in phonegap doc yet.
-	
-	public static String[] getRootPaths() {
-		JsArrayString jsArray = getRootPathsNative();
-		String[] array = new String[jsArray.length()];
-		for (int i = 0; i < jsArray.length(); i++) {
-			array[i] = jsArray.get(i);
-		}
-		return array;
-	}
-	
-	private static native JsArrayString getRootPathsNative() /*-{
-		return $wnd.navigator.fileMgr.getRootPaths();
-	}-*/;
-
-	public static String[] getFileBasePaths() {
-		JsArrayString jsArray = getFileBasePathsNative();
-		String[] array = new String[jsArray.length()];
-		for (int i = 0; i < jsArray.length(); i++) {
-			array[i] = jsArray.get(i);
-		}
-		return array;
-	}
-
-	private static native JsArrayString getFileBasePathsNative() /*-{
-		return $wnd.navigator.fileMgr.getFileBasePathsNative();
-	}-*/;
-
 	public static native void testFileExists(String fileName, FileMgrCallback callback) /*-{
 		$wnd.navigator.fileMgr.testFileExists(fileName, function(success){
 			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onSuccess(Z)(success);
@@ -311,33 +278,9 @@ public class File95 {
 			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/File$FileError;)(error);
 		});
 	}-*/;
-
+	
 	public static native void testDirectoryExists(String dirName, FileMgrCallback callback) /*-{
 		$wnd.navigator.fileMgr.testDirectoryExists(dirName, function(success){
-			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onSuccess(Z)(success);
-		}, function(error){
-			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/File$FileError;)(error);
-		});
-	}-*/;
-
-	public static native void createDirectory(String dirName, FileMgrCallback callback) /*-{
-		$wnd.navigator.fileMgr.createDirectory(dirName, function(success){
-			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onSuccess(Z)(success);
-		}, function(error){
-			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/File$FileError;)(error);
-		});
-	}-*/;
-
-	public static native void deleteDirectory(String dirName, FileMgrCallback callback) /*-{
-		$wnd.navigator.fileMgr.deleteDirectory(dirName, function(success){
-			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onSuccess(Z)(success);
-		}, function(error){
-			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/File$FileError;)(error);
-		});
-	}-*/;
-
-	public static native void deleteFile(String fileName, FileMgrCallback callback) /*-{
-		$wnd.navigator.fileMgr.deleteFile(fileName, function(success){
 			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onSuccess(Z)(success);
 		}, function(error){
 			callback.@com.gwtmobile.phonegap.client.File.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/File$FileError;)(error);
@@ -352,7 +295,7 @@ public class File95 {
 		});
 	}-*/;
 
-
+	//FileBase
 	public static class FileBase extends JavaScriptObject {
 		
 		protected FileBase() {};
