@@ -20,7 +20,6 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.JsArrayString;
 
 public class File95 {
 	
@@ -111,13 +110,13 @@ public class File95 {
 		
 		public final native void readEntries(ReaderCallback callback) /*-{
 			this.readEntries(function(success){
-				self.@com.gwtmobile.phonegap.client.File95.DirectoryReader::processCallback(Lcom/google/gwt/core/client/JsArray;Lcom/gwtmobile/phonegap/client/File95$ReaderCallback;)(success, callback);
+				$entry(@com.gwtmobile.phonegap.client.File95.DirectoryReader::processCallback(Lcom/google/gwt/core/client/JsArray;Lcom/gwtmobile/phonegap/client/File95$ReaderCallback;)(success, callback));
 			}, function(error){
 				callback.@com.gwtmobile.phonegap.client.File95.MetadataCallback::onError(Lcom/gwtmobile/phonegap/client/File95$FileError;)(error);
 			});
 		}-*/;
 		
-		public void processCallback(JsArray<JavaScriptObject> results, ReaderCallback callback) {
+		public static final void processCallback(JsArray<JavaScriptObject> results, ReaderCallback callback) {
 			EntryBase[] entries = new EntryBase[results.length()];
 			for (int i = 0; i < results.length(); i++) {
 				entries[i] = (EntryBase) results.get(i);
@@ -151,6 +150,8 @@ public class File95 {
 	
 	// File
 	public static class File extends JavaScriptObject {
+		
+		protected File() {};
 
 		public final native String getName() /*-{
 			return this.name;
@@ -176,8 +177,6 @@ public class File95 {
 		private final native double getSizeNative() /*-{
 			return this.size;
 		}-*/;
-
-	
 	}
 
 	// Entry Base
