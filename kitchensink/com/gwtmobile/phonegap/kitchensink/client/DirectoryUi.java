@@ -109,22 +109,22 @@ public class DirectoryUi extends Page {
     	FileMgr.requestFileSystem(LocalFileSystem.PERSISTENT, new FileSystemCallback() {
 			@Override
 			public void onSuccess(FileSystem fs) {
-				fs.getRoot().getDirectory("gwtmobile-phonegap", null, new EntryCallback() {
+				fs.getRoot().getDirectory("gwtmobile-phonegap", new FileOptions().create(true), new EntryCallback() {
 					@Override
 					public void onSuccess(Entry entry) {
 						DirectoryEntry dir = (DirectoryEntry) entry;
-						text.setHTML(dir.getFullPath());
+						text.setHTML("succeed:" + dir.getFullPath());
 					}
 					
 					@Override
 					public void onError(FileError error) {
-						text.setHTML(error.toString());
+						text.setHTML("error:" + error.getCode());
 					}
 				});
 			}
 			@Override
 			public void onError(FileError error) {
-				text.setHTML(error.toString());
+				text.setHTML("error:" + error.getCode());
 			}
 		});
 	}

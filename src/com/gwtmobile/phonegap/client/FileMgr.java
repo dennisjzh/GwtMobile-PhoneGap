@@ -30,8 +30,12 @@ public class FileMgr {
 		return new $wnd.FileReader();
 	}-*/;
 	
-	public static native void requestFileSystem(LocalFileSystem localFileSystem, FileSystemCallback callback) /*-{
-		$wnd.requestFileSystem(localFileSystem, 0, function(success){
+	public static void requestFileSystem(LocalFileSystem localFileSystem, FileSystemCallback callback)  {
+		requestFileSystemNative(localFileSystem.ordinal(), callback);
+	}
+	
+	private static native void requestFileSystemNative(int type, FileSystemCallback callback) /*-{
+		$wnd.requestFileSystem(type, 0, function(success){
 			callback.@com.gwtmobile.phonegap.client.FileMgr.FileSystemCallback::onSuccess(Lcom/gwtmobile/phonegap/client/FileMgr$FileSystem;)(success);
 		}, function(error){
 			callback.@com.gwtmobile.phonegap.client.FileMgr.FileSystemCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
@@ -470,7 +474,11 @@ public class FileMgr {
 		ENCODING_ERR,
 		NO_MODIFICATION_ALLOWED_ERR,
 		INVALID_STATE_ERR,
-		SYNTAX_ERR
+		SYNTAX_ERR,
+		INVALID_MODIFICATION_ERR,
+		QUOTA_EXCEEDED_ERR,
+		TYPE_MISMATCH_ERR,
+		PATH_EXISTS_ERR
 	};
 	
 	public static class FileError extends JavaScriptObject {
