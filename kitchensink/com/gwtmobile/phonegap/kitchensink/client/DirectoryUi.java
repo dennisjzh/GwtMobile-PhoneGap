@@ -28,20 +28,16 @@ import com.gwtmobile.phonegap.client.FileMgr.*;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
-public class FileUi extends Page {
+public class DirectoryUi extends Page {
 
-	private static FileUiUiBinder uiBinder = GWT.create(FileUiUiBinder.class);
+	private static DirectoryUiUiBinder uiBinder = GWT.create(DirectoryUiUiBinder.class);
 	
 	@UiField HTML text;
-	FileWriter writer;
-	FileReader reader;
-	String dirName;
-	String fileName;
 	
-	interface FileUiUiBinder extends UiBinder<Widget, FileUi> {
+	interface DirectoryUiUiBinder extends UiBinder<Widget, DirectoryUi> {
 	}
 
-	public FileUi() {
+	public DirectoryUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
@@ -92,19 +88,15 @@ public class FileUi extends Page {
 	void onList0SelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		createDirectory();
+    		getDirectory();
     		break;
     	case 1:
-    		testDirectoryExists();
     		break;
     	case 2:
-    		testFileExists();
     		break;
     	case 3:
-    		deleteDirectory();
     		break;
     	case 4:
-    		deleteFile();
     		break;
     	case 5:
     		getFreeDiskSpace();
@@ -112,120 +104,32 @@ public class FileUi extends Page {
     	}
     }
 
-    @UiHandler("list1")
-	void onList1SelectionChanged(SelectionChangedEvent e) {
-    	switch (e.getSelection()) {
-    	case 0:
-    		write();
-    		break;
-    	case 1:
-    		truncate();
-    		break;
-    	case 2:
-    		seek();
-    		break;
-    	case 3:
-    		readAsDataURL();
-    		break;
-    	case 4:
-    		readAsText();
-    		break;
-    	case 5:
-    		abort();
-    		break;
-    	}
-    }
 
-    public void write() {
-		writer.write("Hello from gwtmobile-phonegap<br/>");
-	}
-
-    public void truncate() {
-		writer.truncate(20);
-	}
-
-    public void seek() {
-		writer.seek(10);
-	}
-
-    public void readAsDataURL() {
-//		reader.readAsDataURL(fileName);
-	}
-
-    public void readAsText() {
-//		reader.readAsText(fileName);
-	}
-
-    public void abort() {
-		writer.abort();
-	}
-
-    public void testFileExists() {
-		FileMgr.testFileExists(fileName, new FileMgrCallback() {			
+    private void getDirectory() {
+    	FileMgr.requestFileSystem(LocalFileSystem.PERSISTENT, new FileSystemCallback() {
 			@Override
-			public void onSuccess(boolean success) {
-				text.setHTML("File: " + fileName + "<br/>FileExists: " + success);
-			}			
+			public void onSuccess(FileSystem fs) {
+				fs.getRoot().getDirectory("gwtmobile-phonegap", null, new EntryCallback() {
+					@Override
+					public void onSuccess(Entry entry) {
+						DirectoryEntry dir = (DirectoryEntry) entry;
+						text.setHTML(dir.getFullPath());
+					}
+					
+					@Override
+					public void onError(FileError error) {
+						text.setHTML(error.toString());
+					}
+				});
+			}
 			@Override
 			public void onError(FileError error) {
-				text.setHTML(error + "");
+				text.setHTML(error.toString());
 			}
 		});
 	}
 
-    public void testDirectoryExists() {
-		FileMgr.testDirectoryExists(dirName, new FileMgrCallback() {			
-			@Override
-			public void onSuccess(boolean success) {
-				text.setHTML("Dir: " + dirName + "<br/>DirExists: " + success);
-			}			
-			@Override
-			public void onError(FileError error) {
-				text.setHTML(error + "");
-			}
-		});
-	}
-
-    public void createDirectory() {
-//		FileMgr.createDirectory(dirName, new FileMgrCallback() {			
-//			@Override
-//			public void onSuccess(boolean success) {
-//				text.setHTML("Dir: " + dirName + "<br/>Create Dir: " + success);
-//			}			
-//			@Override
-//			public void onError(FileError error) {
-//				text.setHTML(error + "");
-//			}
-//		});
-	}
-
-    public void deleteDirectory() {
-//		FileMgr.deleteDirectory(dirName, new FileMgrCallback() {			
-//			@Override
-//			public void onSuccess(boolean success) {
-//				text.setHTML("Dir: " + dirName + "<br/>Delete Dir: " + success);
-//			}			
-//			@Override
-//			public void onError(FileError error) {
-//				text.setHTML(error + "");
-//			}
-//		});
-	}
-
-    public void deleteFile() {
-//		FileMgr.deleteFile(fileName, new FileMgrCallback() {			
-//			@Override
-//			public void onSuccess(boolean success) {
-//				text.setHTML("File: " + fileName + "<br/>Delete file: " + success);
-//			}			
-//			@Override
-//			public void onError(FileError error) {
-//				text.setHTML(error + "");
-//			}
-//		});
-	}
-
-    public void getFreeDiskSpace() {
+	public void getFreeDiskSpace() {
 		FileMgr.getFreeDiskSpace(new FreeDiskSpaceCallback() {			
 			@Override
 			public void onSuccess(double freeDiskSpace) {
