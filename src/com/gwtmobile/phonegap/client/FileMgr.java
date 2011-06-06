@@ -275,12 +275,12 @@ public class FileMgr {
 			});
 		}-*/;
 
-		public final native String toUrl() /*-{
-			return this.toUrl();
+		public final native String toURI() /*-{
+			return this.toURI();
 		}-*/;
 
 		public final native void remove(EventCallback callback) /*-{
-			this.remove(entry, newName, function(){
+			this.remove(function(){
 				callback.@com.gwtmobile.phonegap.client.FileMgr.FileMgrCallback::onSuccess(Z)(true);
 			}, function(error){
 				callback.@com.gwtmobile.phonegap.client.FileMgr.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
@@ -289,17 +289,17 @@ public class FileMgr {
 
 		
 		public final native void getParent(EntryCallback callback) /*-{
-		this.getParent(entry, newName, function(success){
-			callback.@com.gwtmobile.phonegap.client.FileMgr.EntryCallback::onSuccess(Lcom/gwtmobile/phonegap/client/FileMgr$Entry;)(success);
-		}, function(error){
-			callback.@com.gwtmobile.phonegap.client.FileMgr.EntryCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
-		});
-	}-*/;
+			this.getParent(function(success){
+				callback.@com.gwtmobile.phonegap.client.FileMgr.EntryCallback::onSuccess(Lcom/gwtmobile/phonegap/client/FileMgr$Entry;)(success);
+			}, function(error){
+				callback.@com.gwtmobile.phonegap.client.FileMgr.EntryCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
+			});
+		}-*/;
 
 	}
 	
 	// Metadata
-	protected static class Metadata extends JavaScriptObject {
+	public static class Metadata extends JavaScriptObject {
 
 		protected Metadata() {};
 		
