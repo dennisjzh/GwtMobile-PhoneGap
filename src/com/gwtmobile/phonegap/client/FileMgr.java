@@ -94,7 +94,7 @@ public class FileMgr {
 		protected DirectoryEntry() {};
 		
 		public final native DirectoryReader createReader() /*-{
-			return this.createReader;
+			return this.createReader();
 		}-*/;
 
 		public final void getDirectory(String path, FileOptions options, EntryCallback callback) {
@@ -121,11 +121,11 @@ public class FileMgr {
 			});
 		}-*/;	
 	
-		public final native void removeRecursively(EntryCallback callback) /*-{
+		public final native void removeRecursively(FileMgrCallback callback) /*-{
 			this.removeRecursively(function(success){
-				callback.@com.gwtmobile.phonegap.client.FileMgr.EntryCallback::onSuccess(Lcom/gwtmobile/phonegap/client/FileMgr$Entry;)(success);
+				callback.@com.gwtmobile.phonegap.client.FileMgr.FileMgrCallback::onSuccess(Z)(true);
 			}, function(error){
-				callback.@com.gwtmobile.phonegap.client.FileMgr.EntryCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
+				callback.@com.gwtmobile.phonegap.client.FileMgr.FileMgrCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
 			});
 		}-*/;	
 		
@@ -161,7 +161,7 @@ public class FileMgr {
 			this.readEntries(function(success){
 				$entry(@com.gwtmobile.phonegap.client.FileMgr.DirectoryReader::processCallback(Lcom/google/gwt/core/client/JsArray;Lcom/gwtmobile/phonegap/client/FileMgr$ReaderCallback;)(success, callback));
 			}, function(error){
-				callback.@com.gwtmobile.phonegap.client.FileMgr.MetadataCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
+				callback.@com.gwtmobile.phonegap.client.FileMgr.ReaderCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
 			});
 		}-*/;
 		
@@ -188,7 +188,7 @@ public class FileMgr {
 		}-*/;	
 	
 		public final native File file(FileCallback callback) /*-{
-			this.createWriter(function(success){
+			this.file(function(success){
 				callback.@com.gwtmobile.phonegap.client.FileMgr.FileCallback::onSuccess(Lcom/gwtmobile/phonegap/client/FileMgr$File;)(success);
 			}, function(error){
 				callback.@com.gwtmobile.phonegap.client.FileMgr.FileCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileError;)(error);
@@ -279,7 +279,7 @@ public class FileMgr {
 			return this.toURI();
 		}-*/;
 
-		public final native void remove(EventCallback callback) /*-{
+		public final native void remove(FileMgrCallback callback) /*-{
 			this.remove(function(){
 				callback.@com.gwtmobile.phonegap.client.FileMgr.FileMgrCallback::onSuccess(Z)(true);
 			}, function(error){
