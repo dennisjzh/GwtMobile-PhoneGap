@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.FileMgr;
 import com.gwtmobile.phonegap.client.FileMgr.*;
+import com.gwtmobile.phonegap.kitchensink.client.DirectoryUi.DemoCallback;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
@@ -92,22 +93,31 @@ public class FileUi extends Page {
 	void onList0SelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		createDirectory();
+    		getFile();
     		break;
     	case 1:
-    		testDirectoryExists();
+    		getMetadata();
     		break;
     	case 2:
-    		testFileExists();
+    		isFile();
     		break;
     	case 3:
-    		deleteDirectory();
+    		isDirectory();
     		break;
     	case 4:
-    		deleteFile();
+    		getFile();
     		break;
     	case 5:
-    		getFreeDiskSpace();
+    		getFileInfo();
+    		break;
+    	case 6:
+    		moveTo();
+    		break;
+    	case 7:
+    		copyTo();
+    		break;
+    	case 8:
+    		toURI();
     		break;
     	}
     }
@@ -116,7 +126,8 @@ public class FileUi extends Page {
 	void onList1SelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		write();
+    		getFileParent();
+//    		write();
     		break;
     	case 1:
     		truncate();
@@ -132,6 +143,9 @@ public class FileUi extends Page {
     		break;
     	case 5:
     		abort();
+    		break;
+    	case 8:
+    		remove();
     		break;
     	}
     }
@@ -225,17 +239,217 @@ public class FileUi extends Page {
 //		});
 	}
 
-    public void getFreeDiskSpace() {
-		FileMgr.getFreeDiskSpace(new FreeDiskSpaceCallback() {			
+    private void getFile() {
+    	getDemoFile(new DemoCallback() {
 			@Override
-			public void onSuccess(double freeDiskSpace) {
-				text.setHTML("Free Disk Space: " + freeDiskSpace);
-			}			
-			@Override
-			public void onError(FileError error) {
-				text.setHTML(error + "");
+			public void onSuccess(final FileEntry file) {
+					text.setHTML("success: get file --" + file.getFullPath());
 			}
 		});
 	}
+    
+    private void getMetadata() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(FileEntry file) {
+				file.getMetadata(new MetadataCallback() {
+					@Override
+					public void onSuccess(Metadata metadata) {
+						text.setHTML("succeed: last modification time -- " + metadata.getModificationTime().toString());
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+		});
+	}
+
+    private void isFile() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(FileEntry file) {
+				text.setHTML("is file -- " + file.isFile());
+			}
+		});
+	}
+
+    private void isDirectory() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(FileEntry file) {
+				text.setHTML("is directory -- " + file.isDirectory());
+			}
+		});
+	}
+
+    private void getFileInfo() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(FileEntry file) {
+				file.file(new FileCallback() {
+					@Override
+					public void onSuccess(File file) {
+						text.setHTML( 
+								"Name -- " + file.getName() + "<br/>" + 
+								"Full Path -- " + file.getFullPath() + "<br/>" + 
+//TODO: bug in phonegap. uncomment code below in 0.9.6.
+//								"Last Modified -- " + file.getLastModifiedDate().toString() + "<br/>" + 
+								"Size -- " + file.getSize() + "<br/>"
+								);
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+		});
+	}
+
+    private void moveTo() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(final FileEntry file) {
+				file.getParent(new EntryCallback() {
+					@Override
+					public void onSuccess(Entry entry) {
+						file.moveTo(entry, "backup-kitchensink.txt", new EntryCallback() {
+							@Override
+							public void onSuccess(Entry entry) {
+								text.setHTML("success: move to -- " + entry.getFullPath());
+							}
+							@Override
+							public void onError(FileError error) {
+								text.setHTML("error:" + error.getCode());
+							}
+						});
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+		});
+	}
+
+    private void copyTo() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(final FileEntry file) {
+				file.getParent(new EntryCallback() {
+					@Override
+					public void onSuccess(Entry entry) {
+						file.copyTo(entry, "backup-kitchensink.txt", new EntryCallback() {
+							@Override
+							public void onSuccess(Entry entry) {
+								text.setHTML("success: copy to -- " + entry.getFullPath());
+							}
+							@Override
+							public void onError(FileError error) {
+								text.setHTML("error:" + error.getCode());
+							}
+						});
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+		});
+	}
+
+    private void toURI() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(final FileEntry file) {
+				text.setHTML("URI --" + file.toURI());
+			}
+		});
+	}
+
+    private void getFileParent() {
+    	getDemoFile(new DemoCallback() {
+			@Override
+			public void onSuccess(final FileEntry file) {
+				file.getParent(new EntryCallback() {
+					@Override
+					public void onSuccess(Entry entry) {
+						text.setHTML("success: get parent -- " + entry.getFullPath());
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+		});
+	}
+    
+    private void remove() {
+    	text.setHTML("");
+    	DemoCallback callback = new DemoCallback() {
+			@Override
+			public void onSuccess(final FileEntry file) {
+				file.remove(new FileMgrCallback() {
+					@Override
+					public void onSuccess(boolean success) {
+						text.setHTML(text.getHTML() + "remove " + file.getFullPath() + " -- " + success + "<br/>");
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+		};
+    	getDemoFile("kitchensink.txt", callback);
+    	getDemoFile("backup-kitchensink.txt", callback);
+    }
+
+
+    private void getDemoFile(final DemoCallback callback) {
+    	getDemoFile("kitchensink.txt", callback);
+    }
+  
+    private void getDemoFile(final String fileName, final DemoCallback callback) {
+    	FileMgr.requestFileSystem(LocalFileSystem.PERSISTENT, new FileSystemCallback() {
+			@Override
+			public void onSuccess(FileSystem fs) {
+				fs.getRoot().getDirectory("gwtmobile-phonegap", new FileOptions().create(true), new EntryCallback() {
+					@Override
+					public void onSuccess(Entry entry) {
+						DirectoryEntry dir = (DirectoryEntry) entry;
+						dir.getFile(fileName, new FileOptions().create(true), new EntryCallback() {
+							@Override
+							public void onSuccess(Entry entry) {
+								FileEntry file = (FileEntry) entry;
+								callback.onSuccess(file);
+							}
+							@Override
+							public void onError(FileError error) {
+								text.setHTML("error:" + error.getCode());
+							}
+						});
+					}
+					@Override
+					public void onError(FileError error) {
+						text.setHTML("error:" + error.getCode());
+					}
+				});
+			}
+			@Override
+			public void onError(FileError error) {
+				text.setHTML("error:" + error.getCode());
+			}
+		});
+	}
+    
+    interface DemoCallback {
+    	void onSuccess(FileEntry file);
+    }
 
 }

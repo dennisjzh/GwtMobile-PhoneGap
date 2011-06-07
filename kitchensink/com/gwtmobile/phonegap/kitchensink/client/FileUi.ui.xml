@@ -50,17 +50,17 @@
 						<g:Label>Move To</g:Label>
 						<g:Label>Copy To</g:Label>
 						<g:Label>To URI</g:Label>
-						<g:Label>Remove</g:Label>
-						<g:Label>Get Parent</g:Label>
-						<g:Label>Create Writer</g:Label>
 					</m:ListPanel>
 					<m:ListPanel ui:field="list1" secondaryStyle="{style.right}">
+						<g:Label>Get Parent</g:Label>
+						<g:Label>Create Writer</g:Label>
 						<g:Label>Write</g:Label>
 						<g:Label>Truncate</g:Label>
 						<g:Label>Seek</g:Label>
 						<g:Label>Read As Data URL</g:Label>
 						<g:Label>Read As Text</g:Label>
 						<g:Label>Abort</g:Label>
+						<g:Label>Remove</g:Label>
 					</m:ListPanel>
 				</g:HTMLPanel>
 				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
