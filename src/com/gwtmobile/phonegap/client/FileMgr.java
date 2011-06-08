@@ -389,11 +389,11 @@ public class FileMgr {
 			};
 		}-*/;
 
-		public final native void readAsDataURL(FileMgr file) /*-{
+		public final native void readAsDataURL(File file) /*-{
 			this.readAsDataURL(file);
 		}-*/;
 
-		public final native void readAsText(FileMgr file) /*-{
+		public final native void readAsText(File file) /*-{
 			this.readAsText(file);
 		}-*/;
 
