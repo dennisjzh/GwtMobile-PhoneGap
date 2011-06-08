@@ -37,7 +37,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel caption="File"></p:PhoneGapHeaderPanel>
-		<m:ScrollPanel>
+<!-- 		<m:ScrollPanel> -->
 			<g:HTMLPanel styleName="Container">
 				<g:HTMLPanel styleName="Container {style.container}">
 					<m:ListPanel ui:field="list0" secondaryStyle="{style.left}">
@@ -57,14 +57,16 @@
 						<g:Label>Write</g:Label>
 						<g:Label>Truncate</g:Label>
 						<g:Label>Seek</g:Label>
+						<g:Label>Abort</g:Label>
 						<g:Label>Read As Data URL</g:Label>
 						<g:Label>Read As Text</g:Label>
-						<g:Label>Abort</g:Label>
 						<g:Label>Remove</g:Label>
 					</m:ListPanel>
 				</g:HTMLPanel>
-				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+				<m:ScrollPanel secondaryStyle="Output">
+					<g:HTML ui:field="text" styleName="O1utput">Console</g:HTML>
+				</m:ScrollPanel>
 			</g:HTMLPanel>
-		</m:ScrollPanel>
+<!-- 		</m:ScrollPanel> -->
 	</g:HTMLPanel>
 </ui:UiBinder> 

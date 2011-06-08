@@ -172,7 +172,7 @@ html {
 	overflow: hidden;
 	margin-top: -.3em;	/* same value as header panel */
 	padding-top: .5em;
-	padding-bottom: .5em;
+	padding-bottom: .2em;
 }
 
 .ScrollPanel > * {
