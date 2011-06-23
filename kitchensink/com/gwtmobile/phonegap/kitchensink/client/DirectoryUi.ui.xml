@@ -37,7 +37,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel caption="Directory" document="file"></p:PhoneGapHeaderPanel>
-		<m:ScrollPanel>
+<!-- 		<m:ScrollPanel> -->
 			<g:HTMLPanel styleName="Container">
 				<g:HTMLPanel styleName="Container {style.container}">
 					<m:ListPanel ui:field="list0" secondaryStyle="{style.left}">
@@ -59,8 +59,10 @@
 						<g:Label>Get Free Space</g:Label>
 					</m:ListPanel>
 				</g:HTMLPanel>
-				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
+				<m:ScrollPanel ui:field="scroller" secondaryStyle="Output">
+					<g:HTML ui:field="text">Console</g:HTML>
+				</m:ScrollPanel>
 			</g:HTMLPanel>
-		</m:ScrollPanel>
+<!-- 		</m:ScrollPanel> -->
 	</g:HTMLPanel>
 </ui:UiBinder> 

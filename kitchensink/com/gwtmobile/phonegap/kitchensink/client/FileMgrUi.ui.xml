@@ -6,7 +6,7 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<p:PhoneGapHeaderPanel caption="FileMgr"></p:PhoneGapHeaderPanel>
+		<p:PhoneGapHeaderPanel caption="FileMgr" document="file"></p:PhoneGapHeaderPanel>
 		<m:ScrollPanel styleName="Scroller">
 			<g:HTMLPanel styleName="Container">
 				<g:HTMLPanel styleName="Container">

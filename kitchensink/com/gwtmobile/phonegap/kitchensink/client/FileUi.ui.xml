@@ -63,7 +63,7 @@
 						<g:Label>Remove</g:Label>
 					</m:ListPanel>
 				</g:HTMLPanel>
-				<m:ScrollPanel secondaryStyle="Output">
+				<m:ScrollPanel ui:field="scroller" secondaryStyle="Output">
 					<g:HTML ui:field="text" styleName="O1utput">Console</g:HTML>
 				</m:ScrollPanel>
 			</g:HTMLPanel>

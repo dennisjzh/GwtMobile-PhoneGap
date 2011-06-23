@@ -18,6 +18,7 @@ package com.gwtmobile.phonegap.kitchensink.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.gwtmobile.phonegap.client.Device;
 import com.gwtmobile.phonegap.client.Event;
@@ -30,27 +31,43 @@ import com.gwtmobile.ui.client.widgets.HeaderPanel;
 
 public class KitchenSink implements EntryPoint {
 
-	public static MainUi mainUi = new MainUi();
+	public static MainUi mainUi;
 	
 	@Override
 	public void onModuleLoad() {
 
 		if (Utils.isAndroid() || Utils.isIOS()) {
-			Event.onBackButton(new Event.Callback() {			
-				@Override
-				public void onEventFired() {
-					onBackKeyDown();
-				}
-			});
+			
+			if (Utils.isAndroid()) {
+				Event.onBackButton(new Event.Callback() {			
+					@Override
+					public void onEventFired() {
+						onBackKeyDown();
+					}
+				});
+			}
 
 			Event.onDeviceReady(new Callback() {			
 				@Override
 				public void onEventFired() {
-					Page.load(mainUi);
+					new Timer() {
+						@Override
+						public void run() {
+							if (mainUi == null) {
+								Utils.Console("Loading main ui...");
+								mainUi = new MainUi();
+								Page.load(mainUi);
+							}
+							else {
+								this.cancel();
+							}
+						}
+					}.scheduleRepeating(50);
 				}
 			});
 		}
 		else {
+			mainUi = new MainUi();
 			Page.load(mainUi);
 		}
 	}

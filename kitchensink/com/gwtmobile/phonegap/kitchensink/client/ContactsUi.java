@@ -85,7 +85,7 @@ public class ContactsUi extends Page {
 			}			
 			@Override
 			public void onError(ContactError error) {
-				text.setHTML("Contact creation failed.<br/>" + error);
+				text.setHTML("Contact creation failed.<br/>" + error.getCode());
 			}
 		});
 	}
@@ -104,7 +104,7 @@ public class ContactsUi extends Page {
 				}
 				@Override
 				public void onError(ContactError error) {
-					text.setHTML("Contact find failed.<br/>" + error);
+					text.setHTML("Contact find failed.<br/>" + error.getCode());
 				}
 			}, new ContactFindOptions().filter("Plumber"));
 		
@@ -131,18 +131,18 @@ public class ContactsUi extends Page {
 							}
 							@Override
 							public void onError(ContactError error) {
-								text.setHTML(text.getHTML() + "<br/> Failed to remove contact. " + error);
+								text.setHTML(text.getHTML() + "<br/> Failed to remove contact. " + error.getCode());
 							}
 						});					
 					}
 				}
 				else {
-					text.setHTML(text.getHTML() + "<br/> Contact to delete not found.<br/>");
+					text.setHTML("Contact to delete not found.<br/>");
 				}
 			}
 			@Override
 			public void onError(ContactError error) {
-				text.setHTML(text.getHTML() + "<br/>" + error);
+				text.setHTML("Failed to find contact to delete.<br/>" + error.getCode());
 			}
 		}, new ContactFindOptions().filter("Plumber"));
     }
@@ -168,7 +168,7 @@ public class ContactsUi extends Page {
 						}
 						@Override
 						public void onError(ContactError error) {
-							text.setHTML(text.getHTML() + "<br/> Failed to save cloned contact. " + error);
+							text.setHTML(text.getHTML() + "<br/> Failed to save cloned contact. " + error.getCode());
 						}
 					});
 				}
@@ -178,7 +178,7 @@ public class ContactsUi extends Page {
 			}
 			@Override
 			public void onError(ContactError error) {
-				text.setHTML(text.getHTML() + "<br/>" + error);
+				text.setHTML("Failed to find contact to clone.<br/>" + error.getCode());
 			}
 		}, new ContactFindOptions().filter("Plumber"));
     }

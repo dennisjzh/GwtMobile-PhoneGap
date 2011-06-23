@@ -38,12 +38,14 @@ import com.gwtmobile.phonegap.client.FileMgr.MetadataCallback;
 import com.gwtmobile.phonegap.client.FileMgr.ReaderCallback;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
+import com.gwtmobile.ui.client.widgets.ScrollPanel;
 
 public class DirectoryUi extends Page {
 
 	private static DirectoryUiUiBinder uiBinder = GWT.create(DirectoryUiUiBinder.class);
 	
 	@UiField HTML text;
+	@UiField ScrollPanel scroller;
 	
 	interface DirectoryUiUiBinder extends UiBinder<Widget, DirectoryUi> {
 	}
@@ -110,7 +112,7 @@ public class DirectoryUi extends Page {
     	getDemoDirectory(new DemoCallback() {
 			@Override
 			public void onSuccess(DirectoryEntry dir) {
-				text.setHTML("succeed: directory full path -- " + dir.getFullPath());
+				console("succeed: directory full path -- " + dir.getFullPath());
 			}
 		});
 	}
@@ -122,11 +124,11 @@ public class DirectoryUi extends Page {
 				dir.getMetadata(new MetadataCallback() {
 					@Override
 					public void onSuccess(Metadata metadata) {
-						text.setHTML("succeed: last modification time -- " + metadata.getModificationTime().toString());
+						console("succeed: last modification time -- " + metadata.getModificationTime().toString());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -137,7 +139,7 @@ public class DirectoryUi extends Page {
     	getDemoDirectory(new DemoCallback() {
 			@Override
 			public void onSuccess(DirectoryEntry dir) {
-				text.setHTML("is file -- " + dir.isFile());
+				console("is file -- " + dir.isFile());
 			}
 		});
 	}
@@ -146,7 +148,7 @@ public class DirectoryUi extends Page {
     	getDemoDirectory(new DemoCallback() {
 			@Override
 			public void onSuccess(DirectoryEntry dir) {
-				text.setHTML("is directory -- " + dir.isDirectory());
+				console("is directory -- " + dir.isDirectory());
 			}
 		});
 	}
@@ -162,17 +164,17 @@ public class DirectoryUi extends Page {
 						dir.moveTo(parent, "backup-gwtmobile-phonegap", new EntryCallback() {
 							@Override
 							public void onSuccess(Entry entry) {
-								text.setHTML("succeed: moved to --" + entry.getFullPath());
+								console("succeed: moved to --" + entry.getFullPath());
 							}							
 							@Override
 							public void onError(FileError error) {
-								text.setHTML("error:" + error.getCode());
+								console("error:" + error.getCode());
 							}
 						});
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -190,17 +192,17 @@ public class DirectoryUi extends Page {
 						dir.copyTo(parent, "backup-gwtmobile-phonegap", new EntryCallback() {
 							@Override
 							public void onSuccess(Entry entry) {
-								text.setHTML("succeed: copied to --" + entry.getFullPath());
+								console("succeed: copied to --" + entry.getFullPath());
 							}							
 							@Override
 							public void onError(FileError error) {
-								text.setHTML("error:" + error.getCode());
+								console("error:" + error.getCode());
 							}
 						});
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -211,7 +213,7 @@ public class DirectoryUi extends Page {
     	getDemoDirectory(new DemoCallback() {
 			@Override
 			public void onSuccess(final DirectoryEntry dir) {
-				text.setHTML("URI --" + dir.toURI());
+				console("URI --" + dir.toURI());
 			}
 		});
 	}
@@ -223,11 +225,11 @@ public class DirectoryUi extends Page {
 				dir.getParent(new EntryCallback() {
 					@Override
 					public void onSuccess(Entry entry) {
-						text.setHTML("succeed: parent --" + entry.getFullPath());
+						console("succeed: parent --" + entry.getFullPath());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -242,15 +244,15 @@ public class DirectoryUi extends Page {
 				reader.readEntries(new ReaderCallback() {
 					@Override
 					public void onSuccess(Entry[] entries) {
-						text.setHTML("Directories reader: <br/>");
+						console("Directories reader: <br/>");
 						for (int i = 0; i < entries.length; i++) {
 							Entry entry = entries[i];
-							text.setHTML(text.getHTML() + entry.getFullPath() + "<br/>");
+							console(text.getHTML() + entry.getFullPath() + "<br/>");
 						}
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -258,18 +260,18 @@ public class DirectoryUi extends Page {
     }
 
     private void remove() {
-    	text.setHTML("");
+    	console("");
     	DemoCallback callback = new DemoCallback() {
 			@Override
 			public void onSuccess(final DirectoryEntry dir) {
 				dir.remove(new FileMgrCallback() {
 					@Override
 					public void onSuccess(boolean success) {
-						text.setHTML(text.getHTML() + "remove " + dir.getFullPath() + " -- " + success + "<br/>");
+						console(text.getHTML() + "remove " + dir.getFullPath() + " -- " + success + "<br/>");
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -279,18 +281,18 @@ public class DirectoryUi extends Page {
     }
 
     private void removeRecursively() {
-    	text.setHTML("");
+    	console("");
     	DemoCallback callback = new DemoCallback() {
 			@Override
 			public void onSuccess(final DirectoryEntry dir) {
 				dir.removeRecursively(new FileMgrCallback() {
 					@Override
 					public void onSuccess(boolean success) {
-						text.setHTML(text.getHTML() + "remove " + dir.getFullPath() + " -- " + success + "<br/>");
+						console(text.getHTML() + "remove " + dir.getFullPath() + " -- " + success + "<br/>");
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -306,11 +308,11 @@ public class DirectoryUi extends Page {
 				dir.getFile("kitchensink.txt", new FileOptions().create(true), new EntryCallback() {
 					@Override
 					public void onSuccess(Entry entry) {
-						text.setHTML("success: get file --" + entry.getFullPath());
+						console("success: get file --" + entry.getFullPath());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -321,11 +323,11 @@ public class DirectoryUi extends Page {
 		FileMgr.getFreeDiskSpace(new FreeDiskSpaceCallback() {			
 			@Override
 			public void onSuccess(double freeDiskSpace) {
-				text.setHTML("Free Disk Space: " + freeDiskSpace);
+				console("Free Disk Space: " + freeDiskSpace);
 			}			
 			@Override
 			public void onError(FileError error) {
-				text.setHTML(error + "");
+				console(error + "");
 			}
 		});
 	}
@@ -345,16 +347,21 @@ public class DirectoryUi extends Page {
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
 			@Override
 			public void onError(FileError error) {
-				text.setHTML("error:" + error.getCode());
+				console("error:" + error.getCode());
 			}
 		});
 	}
+
+    private void console(String html) {
+		scroller.setPostionToTop();
+		text.setHTML(html);
+    }
 
     interface DemoCallback {
     	void onSuccess(DirectoryEntry dir);

@@ -43,12 +43,14 @@ import com.gwtmobile.phonegap.client.FileMgr.Metadata;
 import com.gwtmobile.phonegap.client.FileMgr.MetadataCallback;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
+import com.gwtmobile.ui.client.widgets.ScrollPanel;
 
 public class FileUi extends Page {
 
 	private static FileUiUiBinder uiBinder = GWT.create(FileUiUiBinder.class);
 	
 	@UiField HTML text;
+	@UiField ScrollPanel scroller;
 	
 	interface FileUiUiBinder extends UiBinder<Widget, FileUi> {
 	}
@@ -127,7 +129,7 @@ public class FileUi extends Page {
     	getDemoFile(new DemoCallback() {
 			@Override
 			public void onSuccess(final FileEntry file) {
-					text.setHTML("success: get file --" + file.getFullPath());
+					console("success: get file --" + file.getFullPath());
 			}
 		});
 	}
@@ -139,11 +141,11 @@ public class FileUi extends Page {
 				file.getMetadata(new MetadataCallback() {
 					@Override
 					public void onSuccess(Metadata metadata) {
-						text.setHTML("succeed: last modification time -- " + metadata.getModificationTime().toString());
+						console("succeed: last modification time -- " + metadata.getModificationTime().toString());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -154,7 +156,7 @@ public class FileUi extends Page {
     	getDemoFile(new DemoCallback() {
 			@Override
 			public void onSuccess(FileEntry file) {
-				text.setHTML("is file -- " + file.isFile());
+				console("is file -- " + file.isFile());
 			}
 		});
 	}
@@ -163,7 +165,7 @@ public class FileUi extends Page {
     	getDemoFile(new DemoCallback() {
 			@Override
 			public void onSuccess(FileEntry file) {
-				text.setHTML("is directory -- " + file.isDirectory());
+				console("is directory -- " + file.isDirectory());
 			}
 		});
 	}
@@ -175,7 +177,7 @@ public class FileUi extends Page {
 				file.file(new FileCallback() {
 					@Override
 					public void onSuccess(File file) {
-						text.setHTML( 
+						console( 
 								"Name -- " + file.getName() + "<br/>" + 
 								"Full Path -- " + file.getFullPath() + "<br/>" + 
 //TODO: bug in phonegap. uncomment code below on 0.9.6.
@@ -185,7 +187,7 @@ public class FileUi extends Page {
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -202,17 +204,17 @@ public class FileUi extends Page {
 						file.moveTo(entry, "backup-kitchensink.txt", new EntryCallback() {
 							@Override
 							public void onSuccess(Entry entry) {
-								text.setHTML("success: move to -- " + entry.getFullPath());
+								console("success: move to -- " + entry.getFullPath());
 							}
 							@Override
 							public void onError(FileError error) {
-								text.setHTML("error:" + error.getCode());
+								console("error:" + error.getCode());
 							}
 						});
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -229,17 +231,17 @@ public class FileUi extends Page {
 						file.copyTo(entry, "backup-kitchensink.txt", new EntryCallback() {
 							@Override
 							public void onSuccess(Entry entry) {
-								text.setHTML("success: copy to -- " + entry.getFullPath());
+								console("success: copy to -- " + entry.getFullPath());
 							}
 							@Override
 							public void onError(FileError error) {
-								text.setHTML("error:" + error.getCode());
+								console("error:" + error.getCode());
 							}
 						});
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -250,7 +252,7 @@ public class FileUi extends Page {
     	getDemoFile(new DemoCallback() {
 			@Override
 			public void onSuccess(final FileEntry file) {
-				text.setHTML("URI --" + file.toURI());
+				console("URI --" + file.toURI());
 			}
 		});
 	}
@@ -262,11 +264,11 @@ public class FileUi extends Page {
 				file.getParent(new EntryCallback() {
 					@Override
 					public void onSuccess(Entry entry) {
-						text.setHTML("success: get parent -- " + entry.getFullPath());
+						console("success: get parent -- " + entry.getFullPath());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -280,11 +282,11 @@ public class FileUi extends Page {
 				file.createWriter(new FileWriterCallback() {
 					@Override
 					public void onSuccess(FileWriter writer) {
-						text.setHTML("success: writer created -- " + writer.getFileName());
+						console("success: writer created -- " + writer.getFileName());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -299,11 +301,11 @@ public class FileUi extends Page {
 					@Override
 					public void onSuccess(FileWriter writer) {
 						writer.write("gwtmobile phonegap kitchen sink");
-						text.setHTML("success: content writen to file-- " + writer.getReadyState());
+						console("success: content writen to file-- " + writer.getReadyState());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -318,11 +320,11 @@ public class FileUi extends Page {
 					@Override
 					public void onSuccess(FileWriter writer) {
 						writer.truncate(10);
-						text.setHTML("success: file truncated to -- " + writer.getLength());
+						console("success: file truncated to -- " + writer.getLength());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -337,11 +339,11 @@ public class FileUi extends Page {
 					@Override
 					public void onSuccess(FileWriter writer) {
 						writer.seek(10);
-						text.setHTML("success: file positioned to -- " + writer.getPosition());
+						console("success: file positioned to -- " + writer.getPosition());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -357,11 +359,11 @@ public class FileUi extends Page {
 					public void onSuccess(FileWriter writer) {
 						writer.write("some sample text");
 						writer.abort();
-						text.setHTML("success:  -- " + writer.getReadyState());
+						console("success:  -- " + writer.getReadyState());
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -378,7 +380,7 @@ public class FileUi extends Page {
 						EventCallback callback = new EventCallback() {			
 							@Override
 							public void onEvent(Event evt) {
-								text.setHTML("Event Type: " + evt.getType() + "<br/>" + 
+								console("Event Type: " + evt.getType() + "<br/>" + 
 										"FileName: " + evt.getTarget().getFileName() + "<br/>" +  
 										"Result: " + evt.getTarget().getResult() + "<br/>" +  
 										(evt.getType().equals("error") ? ("Error: " + evt.getTarget().getError().getCode() + "<br/>") : "") +  
@@ -397,7 +399,7 @@ public class FileUi extends Page {
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -414,7 +416,7 @@ public class FileUi extends Page {
 						EventCallback callback = new EventCallback() {			
 							@Override
 							public void onEvent(Event evt) {
-								text.setHTML("Event Type: " + evt.getType() + "<br/>" + 
+								console("Event Type: " + evt.getType() + "<br/>" + 
 										"FileName: " + evt.getTarget().getFileName() + "<br/>" +  
 										"Result: " + evt.getTarget().getResult() + "<br/>" +  
 										(evt.getType().equals("error") ? ("Error: " + evt.getTarget().getError().getCode() + "<br/>") : "") +  
@@ -433,7 +435,7 @@ public class FileUi extends Page {
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -442,18 +444,18 @@ public class FileUi extends Page {
 
 
     private void remove() {
-    	text.setHTML("");
+    	console("");
     	DemoCallback callback = new DemoCallback() {
 			@Override
 			public void onSuccess(final FileEntry file) {
 				file.remove(new FileMgrCallback() {
 					@Override
 					public void onSuccess(boolean success) {
-						text.setHTML(text.getHTML() + "remove " + file.getFullPath() + " -- " + success + "<br/>");
+						console(text.getHTML() + "remove " + file.getFullPath() + " -- " + success + "<br/>");
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
@@ -483,22 +485,27 @@ public class FileUi extends Page {
 							}
 							@Override
 							public void onError(FileError error) {
-								text.setHTML("error:" + error.getCode());
+								console("error:" + error.getCode());
 							}
 						});
 					}
 					@Override
 					public void onError(FileError error) {
-						text.setHTML("error:" + error.getCode());
+						console("error:" + error.getCode());
 					}
 				});
 			}
 			@Override
 			public void onError(FileError error) {
-				text.setHTML("error:" + error.getCode());
+				console("error:" + error.getCode());
 			}
 		});
 	}
+    
+    private void console(String html) {
+		scroller.setPostionToTop();
+		text.setHTML(html);
+    }
     
     interface DemoCallback {
     	void onSuccess(FileEntry file);
