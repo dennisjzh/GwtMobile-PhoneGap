@@ -16,10 +16,22 @@
 
 package com.gwtmobile.phonegap.client.plugins;
 
+import com.gwtmobile.ui.client.utils.Utils;
+
 public class ChildBrowser {
+	
+	static {
+		if (Utils.isIOS()) {
+			install();
+		}
+	}
 
 	public native static String showWebPage(String url, boolean usePhoneGap) /*-{
 		return $wnd.plugins.childBrowser.showWebPage(url, usePhoneGap);
+	}-*/;
+	
+	private native static void install() /*-{
+		return $wnd.ChildBrowser.install();
 	}-*/;
 
 }

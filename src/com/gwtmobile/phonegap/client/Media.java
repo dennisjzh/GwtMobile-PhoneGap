@@ -43,15 +43,27 @@ public class Media extends JavaScriptObject {
 	}-*/;
 	
 	public native final void release() /*-{
-		this.release();
+		if ($wnd.navigator.userAgent.indexOf("Android") != -1) {
+			this.release();
+		} 
 	}-*/;
 
 	public native final void startRecord() /*-{
-		this.startRecord();
+		if (typeof this.startRecord == 'function') {
+			this.startRecord();
+		}
+		else {
+			this.startAudioRecord();
+		}
 	}-*/;
 
 	public native final void stopRecord() /*-{
-		this.stopRecord();
+		if (typeof this.stopRecord == 'function') {
+			this.stopRecord();
+		}
+		else {
+			this.stopAudioRecord();
+		}
 	}-*/;
 
 	public native final void getCurrentPosition(PositionCallback callback) /*-{

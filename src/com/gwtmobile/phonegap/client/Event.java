@@ -16,18 +16,30 @@
 
 package com.gwtmobile.phonegap.client;
 
+import com.gwtmobile.ui.client.utils.Utils;
+
 
 
 public class Event {
 	
 	static {
-		patch();
+		//TODO: remove patch with 0.9.6
+		if (Utils.isAndroid()) {
+			patch();
+		}
 	}
     
 	public native static void onDeviceReady(Callback callback) /*-{
-	    $doc.addEventListener("deviceready", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
-	    }, false);
+		//Have to manually fire the event for iOS if device is already initialized.
+		if ($wnd.navigator.userAgent.indexOf("Android") == -1 
+			&& $wnd.device != null && $wnd.device.uuid != null) {
+			callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+		}
+		else {
+		    $doc.addEventListener("deviceready", function() {
+		    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+		    }, false);
+		}
 	}-*/;
 	
 	public native static void onPause(Callback callback) /*-{
