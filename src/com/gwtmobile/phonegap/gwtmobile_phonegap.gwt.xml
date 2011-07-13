@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='com.gwtmobile.ui.gwtmobile_ui' />
+
+    <script src="phonegap.0.9.6.min.js"/>
+    <script src="ChildBrowser.js" />
+    <script src="NativeControls.js" />
+    <script src="MapKitPlug.js" />
+
+
+</module>
