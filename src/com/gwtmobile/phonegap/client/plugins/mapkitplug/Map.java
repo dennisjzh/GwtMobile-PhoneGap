@@ -38,7 +38,7 @@ public class Map {
     }-*/;
 
     private native void showNative(JavaScriptObject map)/*-{
-        map.show();
+        map.showMap();
     }-*/;
 
     public void addMapPins(List<Pin> pins){
@@ -52,6 +52,10 @@ public class Map {
     private native void addMapPinsNative(JavaScriptObject map, JavaScriptObject pins)/*-{
         map.addMapPins(pins);
     }-*/;
+
+    public void clearMapPins(){
+        clearMapPinsNative(mapKit);
+    }
 
     private native void clearMapPinsNative(JavaScriptObject map)/*-{
         map.clearMapPins();
@@ -88,10 +92,20 @@ public class Map {
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
         }-*/;
 
+         public native double getLatitude()/*-{
+            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lat;
+        }-*/;
+
         public native Pin longitude(double longitude)/*-{
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lon = longitude;
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
         }-*/;
+
+        public native double getLongitude()/*-{
+            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lon;
+        }-*/;
+
+
 
         public native Pin title(String t)/*-{
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.title = t;
