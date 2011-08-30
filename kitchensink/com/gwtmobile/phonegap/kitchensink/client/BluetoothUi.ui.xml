@@ -6,7 +6,7 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<m:HeaderPanel caption="Bluetooth"></m:HeaderPanel>
+		<m:HeaderPanel caption="Bluetooth" leftButton="Back"></m:HeaderPanel>
 		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<m:ListPanel ui:field="list">
