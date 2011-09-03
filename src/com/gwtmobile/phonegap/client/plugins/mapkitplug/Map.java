@@ -62,6 +62,7 @@ public class Map {
     }-*/;
 
     public void setMapData(Options options){
+        options = options.buttonCallback(this);
         setMapData(mapKit, options.getOptions());
     }
 
@@ -104,8 +105,6 @@ public class Map {
         public native double getLongitude()/*-{
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lon;
         }-*/;
-
-
 
         public native Pin title(String t)/*-{
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.title = t;
@@ -173,9 +172,8 @@ public class Map {
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
         }-*/;
 
-        public native Options buttonCallback(Map map, String v)/*-{
+        public native Options buttonCallback(Map map)/*-{
             var instance = map;
-
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.buttonCallback = function(v){
                 instance.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map::onMapClicked(Ljava/lang/String;)(v);
             };
