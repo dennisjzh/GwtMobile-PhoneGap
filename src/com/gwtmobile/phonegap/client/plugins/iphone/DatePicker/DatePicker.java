@@ -54,7 +54,7 @@ public class DatePicker {
         private JavaScriptObject options = JavaScriptObject.createObject();
 
         public native Options date(String d)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.iphone.DatePicker.DatePicker.Options::options.date = d;
+            this.@com.gwtmobile.phonegap.client.plugins.iphone.DatePicker.DatePicker.Options::options.date = new Date(d);
             return this.@com.gwtmobile.phonegap.client.plugins.iphone.DatePicker.DatePicker.Options::self;
         }-*/;
 

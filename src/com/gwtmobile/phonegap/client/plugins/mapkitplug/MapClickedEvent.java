@@ -12,10 +12,10 @@ import com.google.gwt.event.shared.GwtEvent;
 public class MapClickedEvent extends GwtEvent<MapClickedEventHandler> {
 
 	private static final Type<MapClickedEventHandler> TYPE = new Type<MapClickedEventHandler>();
-    private String var;
+    private String pinIndex;
 
-    public MapClickedEvent(String var){
-        this.var = var;
+    public MapClickedEvent(String pinIndex){
+        this.pinIndex = pinIndex;
     }
 
     public static Type<MapClickedEventHandler> getType() {
@@ -30,5 +30,9 @@ public class MapClickedEvent extends GwtEvent<MapClickedEventHandler> {
     @Override
     protected void dispatch(MapClickedEventHandler handler) {
         handler.onMapClicked(this);
+    }
+
+    public String getPinIndex() {
+        return pinIndex;
     }
 }

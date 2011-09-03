@@ -77,7 +77,7 @@ public class Map {
         handlerManager.fireEvent(new MapClickedEvent(var));
     }
 
-    public HandlerRegistration addTabBarItemSelectedHandler(MapClickedEventHandler handler){
+    public HandlerRegistration addPinClickedHandler(MapClickedEventHandler handler){
         return handlerManager.addHandler(MapClickedEvent.getType(), handler);
     }
 
@@ -112,6 +112,11 @@ public class Map {
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
         }-*/;
 
+        public native Pin subTitle(String t)/*-{
+            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.subTitle = t;
+            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+        }-*/;
+
         public native Pin pinColor(String color)/*-{
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.pinColor = color;
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
@@ -124,6 +129,11 @@ public class Map {
 
         public native Pin selected(int s)/*-{
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.selected = s;
+            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+        }-*/;
+
+        public native Pin image(String url)/*-{
+            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.imageURL = url;
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
         }-*/;
 
