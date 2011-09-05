@@ -23,9 +23,11 @@ public class Map {
 
     public Map(){
         mapKit = getMapKit();
+        onMapCallback(this);
     }
 
     public void show(){
+        onMapCallback(this);
         showNative(mapKit);
     }
 
@@ -62,7 +64,6 @@ public class Map {
     }-*/;
 
     public void setMapData(Options options){
-        options = options.buttonCallback(this);
         setMapData(mapKit, options.getOptions());
     }
 
@@ -72,6 +73,13 @@ public class Map {
 
     private native JavaScriptObject getMapKit()/*-{
         return $wnd.plugins.mapKit;
+    }-*/;
+
+    private native void onMapCallback(Map map)/*-{
+        var instance = map;
+        $wnd.plugins.mapKit.onMapCallback = function(v){
+            instance.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map::onMapClicked(Ljava/lang/String;)(v);
+        }
     }-*/;
 
     private void onMapClicked(String var) {
@@ -169,14 +177,6 @@ public class Map {
 
         public native Options offsetTop(double o)/*-{
             this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.offsetTop = o;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
-        }-*/;
-
-        public native Options buttonCallback(Map map)/*-{
-            var instance = map;
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.buttonCallback = function(v){
-                instance.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map::onMapClicked(Ljava/lang/String;)(v);
-            };
             return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
         }-*/;
 
