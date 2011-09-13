@@ -37,18 +37,152 @@ public class Capture {
 	
 	public static class ConfigurationData extends JavaScriptObject {
 			
-			protected ConfigurationData() {}
-			
-			public final native String getType() /*-{
-				return this.type;
-			}-*/;
+		protected ConfigurationData() {}
+		
+		public final native String getType() /*-{
+			return this.type;
+		}-*/;
 
-			public final native int getHeight() /*-{
-				return this.height;
-			}-*/;
+		public final native int getHeight() /*-{
+			return this.height;
+		}-*/;
 
-			public final native int getWidth() /*-{
-				return this.width;
-			}-*/;
+		public final native int getWidth() /*-{
+			return this.width;
+		}-*/;
 	}
+	
+	public native static void captureAudio(CaptureCallback callback, JavaScriptObject options) /*-{
+		this.captureAudio(function(mediaFiles) {
+	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
+	    }, function(message) {
+	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onError(Lcom/gwtmobile/phonegap/client/Capture$CaptureError;)(message);
+		}, options);
+	}-*/;
+
+	public native static void captureImage(CaptureCallback callback, JavaScriptObject options) /*-{
+		this.captureImage(function(mediaFiles) {
+	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
+	    }, function(message) {
+	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onError(Lcom/gwtmobile/phonegap/client/Capture$CaptureError;)(message);
+		}, options);
+	}-*/;
+
+	public native static void captureVideo(CaptureCallback callback, JavaScriptObject options) /*-{
+		this.captureVideo(function(mediaFiles) {
+	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
+	    }, function(message) {
+	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onError(Lcom/gwtmobile/phonegap/client/Capture$CaptureError;)(message);
+		}, options);
+	}-*/;
+
+	public interface CaptureCallback {
+		void onSuccess(JsArray<MediaFile> mediaFiles);
+		void onError(CaptureError error); 
+	}
+	
+	public static class CaptureError extends JavaScriptObject {
+		
+		protected CaptureError() {};
+		
+		public final CaptureErrorCode getCode() {
+			return CaptureErrorCode.values()[getCodeNative()];
+		}
+		
+		private final native int getCodeNative() /*-{
+			return this.code == 20 ? 4 : this.code;
+		}-*/;
+	}
+
+	public enum CaptureErrorCode {
+		CAPTURE_INTERNAL_ERR, 
+		CAPTURE_APPLICATION_BUSY, 
+		CAPTURE_INVALID_ARGUMENT, 
+		CAPTURE_NO_MEDIA_FILES, 
+		CAPTURE_NOT_SUPPORTED
+	}
+
+	public static class CaptureOptions {
+		CaptureOptions self = this;
+		JavaScriptObject options = JavaScriptObject.createObject();
+
+		public native CaptureOptions limit(int limit) /*-{
+			this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::options.limit = limit;
+			return this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::self;
+		}-*/;
+		
+		public native CaptureOptions duration(int duration) /*-{
+			this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::options.duration = duration;
+			return this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::self;
+		}-*/;
+
+		public native CaptureOptions mode(String mode) /*-{
+			this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::options.mode = mode;
+			return this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::self;
+		}-*/;
+
+		private JavaScriptObject getOptions() {
+			return options;
+		}
+	}
+
+	public static class MediaFile extends JavaScriptObject {
+		
+		protected MediaFile() {}
+		
+		public final native String getName() /*-{
+			return this.name;
+		}-*/;
+
+		public final native String getFullPath() /*-{
+			return this.fullPath;
+		}-*/;
+	
+		public final native String getType() /*-{
+			return this.type;
+		}-*/;
+	
+		public final native int getSize() /*-{
+			return this.size;
+		}-*/;
+
+		public final native void getFormatData(GetFormatDataCallback callback) /*-{
+			this.getFormatData(function(data) {
+		    	callback.@com.gwtmobile.phonegap.client.Capture.GetFormatDataCallback::onSuccess(Lcom/gwtmobile/phonegap/client/Capture$MediaFileData;)(data);
+		    }, function(message) {
+		    	callback.@com.gwtmobile.phonegap.client.Capture.GetFormatDataCallback::onError(Ljava/lang/String;)(message);
+			});
+		}-*/;
+	}
+	
+	public interface GetFormatDataCallback {
+		void onSuccess(MediaFileData data);
+		void onError(String message); 
+	}
+
+	public static class MediaFileData extends JavaScriptObject {
+		
+		protected MediaFileData() {}
+		
+		public final native String getCodecs() /*-{
+			return this.codecs;
+		}-*/;
+
+		public final native int getBitrate() /*-{
+			return this.bitrate;
+		}-*/;
+	
+		public final native int getHeight() /*-{
+			return this.height;
+		}-*/;
+	
+		public final native int getWidth() /*-{
+			return this.width;
+		}-*/;
+
+		public final native int getDuration() /*-{
+			return this.duration;
+		}-*/;
+	}
+	
 }
