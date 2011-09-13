@@ -16,22 +16,25 @@
 
 package com.gwtmobile.phonegap.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 
 public class Capture {
 
 	public native static JsArray<ConfigurationData> getSupportedAudioModes() /*-{
-		return this.supportedAudioModes;
+		return $wnd.navigator.device.capture.supportedAudioModes;
 	}-*/;
 	
 	public native static JsArray<ConfigurationData> getSupportedImageModes() /*-{
-		return this.supportedImageModes;
+		return $wnd.navigator.device.capture.supportedImageModes;
 	}-*/;
 	
 	public native static JsArray<ConfigurationData> getSupportedVideoModes() /*-{
-		return this.supportedVideoModes;
+		return $wnd.navigator.device.capture.supportedVideoModes;
 	}-*/;
 	
 	
@@ -52,24 +55,36 @@ public class Capture {
 		}-*/;
 	}
 	
-	public native static void captureAudio(CaptureCallback callback, JavaScriptObject options) /*-{
-		this.captureAudio(function(mediaFiles) {
+	public static void captureAudio(CaptureCallback callback, CaptureOptions options) {
+		captureAudio(callback, options.getOptions());
+	}
+	
+	private native static void captureAudio(CaptureCallback callback, JavaScriptObject options) /*-{
+		$wnd.navigator.device.capture.captureAudio(function(mediaFiles) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
 	    }, function(message) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onError(Lcom/gwtmobile/phonegap/client/Capture$CaptureError;)(message);
 		}, options);
 	}-*/;
 
-	public native static void captureImage(CaptureCallback callback, JavaScriptObject options) /*-{
-		this.captureImage(function(mediaFiles) {
+	public static void captureImage(CaptureCallback callback, CaptureOptions options) {
+		captureImage(callback, options.getOptions());
+	}
+	
+	private native static void captureImage(CaptureCallback callback, JavaScriptObject options) /*-{
+		$wnd.navigator.device.capture.captureImage(function(mediaFiles) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
 	    }, function(message) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onError(Lcom/gwtmobile/phonegap/client/Capture$CaptureError;)(message);
 		}, options);
 	}-*/;
 
-	public native static void captureVideo(CaptureCallback callback, JavaScriptObject options) /*-{
-		this.captureVideo(function(mediaFiles) {
+	public static void captureVideo(CaptureCallback callback, CaptureOptions options) {
+		captureVideo(callback, options.getOptions());
+	}
+	
+	private native static void captureVideo(CaptureCallback callback, JavaScriptObject options) /*-{
+		$wnd.navigator.device.capture.captureVideo(function(mediaFiles) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
 	    }, function(message) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onError(Lcom/gwtmobile/phonegap/client/Capture$CaptureError;)(message);
@@ -103,6 +118,7 @@ public class Capture {
 	}
 
 	public static class CaptureOptions {
+		
 		CaptureOptions self = this;
 		JavaScriptObject options = JavaScriptObject.createObject();
 
@@ -141,7 +157,15 @@ public class Capture {
 		public final native String getType() /*-{
 			return this.type;
 		}-*/;
-	
+
+		public final Date getLastModifiedDate() {
+			return DateTimeFormat.getFormat("MM/dd/yyyy").parse(getLastModifiedDateNative());
+		};
+
+		private final native String getLastModifiedDateNative() /*-{
+			return this.lastMOdifiedDate;
+		}-*/;
+
 		public final native int getSize() /*-{
 			return this.size;
 		}-*/;
