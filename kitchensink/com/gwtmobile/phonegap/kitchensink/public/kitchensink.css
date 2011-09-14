@@ -24,5 +24,5 @@
 	-webkit-box-flex: 1;
 	border-radius: 0.6em;
 	-webkit-box-shadow: rgba(0, 0, 0, 1) 0em 0em 0.5em;	
-	/*overflow: hidden;*/				
+	overflow: hidden;				
 }
