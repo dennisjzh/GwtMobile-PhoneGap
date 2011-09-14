@@ -20,7 +20,6 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.i18n.client.DateTimeFormat;
 
 
 public class Capture {
@@ -159,11 +158,11 @@ public class Capture {
 		}-*/;
 
 		public final Date getLastModifiedDate() {
-			return DateTimeFormat.getFormat("MM/dd/yyyy").parse(getLastModifiedDateNative());
+			return new Date(getLastModifiedDateNative() * 1000);
 		};
 
-		private final native String getLastModifiedDateNative() /*-{
-			return this.lastMOdifiedDate;
+		private final native int getLastModifiedDateNative() /*-{
+			return this.lastModifiedDate;
 		}-*/;
 
 		public final native int getSize() /*-{
