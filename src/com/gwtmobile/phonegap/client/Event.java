@@ -63,6 +63,18 @@ public class Event {
 	    }, false);
 	}-*/;
 
+	public native static void onOnline(Callback callback) /*-{
+	    $doc.addEventListener("online", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onOffline(Callback callback) /*-{
+	    $doc.addEventListener("offline", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
 	public interface Callback {
 		public void onEventFired();
 	}
