@@ -6,16 +6,13 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<p:PhoneGapHeaderPanel caption="FileMgr" document="file"></p:PhoneGapHeaderPanel>
-		<m:ScrollPanel styleName="Scroller">
+		<p:PhoneGapHeaderPanel caption="File Transfer" document="file"></p:PhoneGapHeaderPanel>
+		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
-				<g:HTMLPanel styleName="Container">
-					<m:ListPanel ui:field="list">
-						<g:Label>Directory</g:Label>
-						<g:Label>File</g:Label>
-						<g:Label>File Transfer</g:Label>
-					</m:ListPanel>
-				</g:HTMLPanel>
+				<m:ListPanel ui:field="list">
+					<g:Label>Transfer File</g:Label>
+				</m:ListPanel>
+				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
 			</g:HTMLPanel>
 		</m:ScrollPanel>
 	</g:HTMLPanel>
