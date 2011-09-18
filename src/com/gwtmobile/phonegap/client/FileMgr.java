@@ -26,11 +26,11 @@ public class FileMgr {
 	protected FileMgr() {}
 
 	// New instance creation
-	public static native FileReader newReaderInstance() /*-{
+	public static native FileReader newFileReader() /*-{
 		return new $wnd.FileReader();
 	}-*/;
 	
-	public static native FileReader newFileTransferInstance() /*-{
+	public static native FileTransfer newFileTransfer() /*-{
 		return new $wnd.FileTransfer();
 	}-*/;
 
@@ -562,7 +562,11 @@ public class FileMgr {
 		protected FileTransfer() {};
 		
 		public final native String upload(String filePath, String serverUrl, FileTransferCallback callback, FileTransferOptions options) /*-{
-			return this.type;
+			return this.upload(filePath, serverUrl, function(result) {
+					callback.@com.gwtmobile.phonegap.client.FileMgr.FileTransferCallback::onSuccess(Lcom/gwtmobile/phonegap/client/FileMgr$FileTransferResult;)(result);
+				}, function(error) {
+					callback.@com.gwtmobile.phonegap.client.FileMgr.FileTransferCallback::onError(Lcom/gwtmobile/phonegap/client/FileMgr$FileTransferError;)(error);
+				}, options);
 		}-*/;
 	
 	}
