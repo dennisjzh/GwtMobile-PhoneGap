@@ -47,37 +47,37 @@ public class Notification {
 
     // Android only methods below
     public static native void activityStart() /*-{
-    	if ($wnd.navigator.notification.activityStart) {
+    	if ($wnd.navigator.notification.activityStart !== undefined) {
 	    	$wnd.navigator.notification.activityStart();
     	}
 	}-*/;
 
 	public static native void activityStart(String title, String message) /*-{
-    	if ($wnd.navigator.notification.activityStart) {
+    	if ($wnd.navigator.notification.activityStart !== undefined) {
     		$wnd.PhoneGap.exec(null, null, "Notification", "activityStart", [title, message]);
     	}
 	}-*/;
 
     public static native void activityStop() /*-{
-    	if ($wnd.navigator.notification.activityStop) {
+    	if ($wnd.navigator.notification.activityStop !== undefined) {
 	    	$wnd.navigator.notification.activityStop();
     	}
 	}-*/;
 
     public static native void progressStart(String title, String message) /*-{
-    	if ($wnd.navigator.notification.progressStart) {
+    	if ($wnd.navigator.notification.progressStart !== undefined) {
 	    	$wnd.navigator.notification.progressStart(title, message);
     	}
 	}-*/;
 
     public static native void progressValue(int value) /*-{
-    	if ($wnd.navigator.notification.progressValue) {
+    	if ($wnd.navigator.notification.progressValue !== undefined) {
 	    	$wnd.navigator.notification.progressValue(value);
     	}
 	}-*/;
 
     public static native void progressStop() /*-{
-    	if ($wnd.navigator.notification.progressStop) {
+    	if ($wnd.navigator.notification.progressStop !== undefined) {
 	    	$wnd.navigator.notification.progressStop();
     	}
 	}-*/;
