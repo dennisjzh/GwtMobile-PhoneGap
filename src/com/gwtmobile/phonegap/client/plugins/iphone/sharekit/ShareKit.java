@@ -21,24 +21,33 @@ public class ShareKit {
     }
 
     public void share(String message, String url){
-
+        share(shareKit, message, url);
     }
 
     public void isLoggedToTwitter(ShareKitCallback callback){
+        isLoggedToTwitter(shareKit, callback);
 
     }
 
     public void isLoggedToFacebook(ShareKitCallback callback){
-
+        isLoggedToFacebook(shareKit, callback);
     }
 
-    public void logoutFromTwitter(){}
+    public void logoutFromTwitter(){
+        logoutFromTwitter(shareKit);
+    }
 
-    public void logoutFromFacebook(){}
+    public void logoutFromFacebook(){
+        logoutFromFacebook(shareKit);
+    }
 
-    public void facebookConnect(){}
+    public void facebookConnect(){
+        facebookConnect(shareKit);
+    }
 
-    public void shareToFacebook(String message, String url){}
+    public void shareToFacebook(String message, String url){
+        shareToFacebook(shareKit, message, url);
+    }
 
     private native void share(JavaScriptObject shareKit, String message, String url)/*-{
         shareKit.share(message, url);
