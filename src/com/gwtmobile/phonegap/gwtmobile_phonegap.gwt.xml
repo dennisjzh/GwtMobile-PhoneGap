@@ -3,12 +3,13 @@
     <inherits name='com.google.gwt.user.User'/>
     <inherits name='com.gwtmobile.ui.gwtmobile_ui' />
 
-    <script src="phonegap.0.9.6.min.js"/>
+    <script src="phonegap-1.0.0.js"/>
     <script src="ChildBrowser.js" />
     <script src="NativeControls.js" />
     <script src="MapKitPlug.js" />
     <script src="DatePicker.js" />
     <script src="notificationex.js" />
+    <script src="ShareKitPlugin.js" />
 
 
 </module>

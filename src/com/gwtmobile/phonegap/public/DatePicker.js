@@ -16,7 +16,7 @@ if (typeof PhoneGap !== "undefined") {
      */
     DatePicker.prototype.show = function(options, cb) {
         if (options.date) {
-            options.date = (options.date.getMonth()+1)+"/"+(options.date.getDate())+"/"+(options.date.getFullYear());
+            //options.date = (options.date.getMonth()+1)+"/"+(options.date.getDate())+"/"+(options.date.getFullYear());
         }
         var defaults = {
             mode: '',
