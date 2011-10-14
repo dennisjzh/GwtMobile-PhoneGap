@@ -11,7 +11,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * Time: 4:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ShareKit {
+public class ShareKit implements ShareService {
 
     private JavaScriptObject shareKit;
     private EventBus eventBus = new SimpleEventBus();

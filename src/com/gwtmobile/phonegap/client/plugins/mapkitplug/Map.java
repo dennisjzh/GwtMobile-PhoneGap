@@ -55,6 +55,14 @@ public class Map {
         map.addMapPins(pins);
     }-*/;
 
+    public void zoomToFitMapAnnotations(){
+        zoomToFitMapAnnotations(mapKit);
+    }
+
+    private native Void zoomToFitMapAnnotations(JavaScriptObject map)/*-{
+        map.zoomToFitMapAnnotations();
+    }-*/;
+
     public void clearMapPins(){
         clearMapPinsNative(mapKit);
     }

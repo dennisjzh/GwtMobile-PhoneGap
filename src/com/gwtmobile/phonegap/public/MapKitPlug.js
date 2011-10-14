@@ -101,6 +101,10 @@ MapKitPlug.prototype.addMapPins = function(pins) {
 
 }
 
+MapKitPlug.prototype.zoomToFitMapAnnotations = function(){
+    PhoneGap.exec("MapKitView.zoomToFitMapAnnotations");
+}
+
 MapKitPlug.prototype.clearMapPins = function() {
 
   PhoneGap.exec("MapKitView.clearMapPins");
