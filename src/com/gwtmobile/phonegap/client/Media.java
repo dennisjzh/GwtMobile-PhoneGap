@@ -77,6 +77,10 @@ public class Media extends JavaScriptObject {
 	public native final int getDuration() /*-{
 		return this.getDuration();
 	}-*/;
+	
+	public native final void seekTo(int milliseconds)/*-{
+		this.seekTo(milliseconds);
+	}-*/;
 
     public interface Callback {
     	void onSuccess();

@@ -75,6 +75,32 @@ public class Event {
 	    }, false);
 	}-*/;
 
+	// below are BlackBerry WebWorks (OS 5.0 and higher) specific events.
+	
+	public native static void onStartCallButton(Callback callback) /*-{
+	    $doc.addEventListener("startcallbutton", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onEndCallButton(Callback callback) /*-{
+	    $doc.addEventListener("endcallbutton", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onVolumeDownButton(Callback callback) /*-{
+	    $doc.addEventListener("volumedownbutton", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onVolumeUpButton(Callback callback) /*-{
+	    $doc.addEventListener("volumeupbutton", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+	
 	public interface Callback {
 		public void onEventFired();
 	}
