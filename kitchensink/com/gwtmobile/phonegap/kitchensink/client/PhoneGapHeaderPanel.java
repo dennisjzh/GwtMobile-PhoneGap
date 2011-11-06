@@ -2,6 +2,8 @@ package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.gwtmobile.phonegap.client.Utils;
 import com.gwtmobile.phonegap.client.plugins.ChildBrowser;
 import com.gwtmobile.ui.client.widgets.HeaderPanel;
 
@@ -16,7 +18,8 @@ public class PhoneGapHeaderPanel extends HeaderPanel {
 		this.setRightButtonClickHandler(new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
-				String url = "http://docs.phonegap.com/";
+				String url = Utils.isAndroid() ? "http://docs.phonegap.com/en/1.1.0/" 
+						: Window.Location.getHref() + "/../docs/";
 				String caption = PhoneGapHeaderPanel.this.getCaption();
 				url = url + "phonegap_" + getDocument() + "_" + getDocument2() + 
 					".md.html#" + caption;

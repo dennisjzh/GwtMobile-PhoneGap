@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Compass;
 import com.gwtmobile.phonegap.client.Compass.Callback;
+import com.gwtmobile.phonegap.client.Compass.CompassHeading;
 import com.gwtmobile.phonegap.client.Compass.Options;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
@@ -66,8 +67,13 @@ public class CompassUi extends Page {
     public void getCurrentHeading() {
 		Compass.getCurrentHeading(new Callback() {			
 			@Override
-			public void onSuccess(float heading) {
-				text.setHTML("Current Heading:<br/>" + heading);				
+			public void onSuccess(CompassHeading heading) {
+				text.setHTML(
+					"Current Heading:<br/>" + 				
+					"Nagnetic Heading: " + heading.getMagneticHeading() + "<br/>" + 
+					"True Heading: " + heading.getTrueHeading() + "<br/>" +
+					"Heading Accuracy: " + heading.getHeadingAccuracy() + "<br/>" + 
+					"Timestamp: " + heading.getTimestamp() + "<br/>");				
 			}			
 			@Override
 			public void onError() {
@@ -79,8 +85,13 @@ public class CompassUi extends Page {
     public void watchHeading() {
 		watchId = Compass.watchHeading(new Callback() {			
 			@Override
-			public void onSuccess(float heading) {
-				text.setHTML("Watch Heading:<br/>" + heading);				
+			public void onSuccess(CompassHeading heading) {
+				text.setHTML(
+					"Watch Heading:<br/>" + 				
+					"Nagnetic Heading: " + heading.getMagneticHeading() + "<br/>" + 
+					"True Heading: " + heading.getTrueHeading() + "<br/>" +
+					"Heading Accuracy: " + heading.getHeadingAccuracy() + "<br/>" + 
+					"Timestamp: " + heading.getTimestamp() + "<br/>");				
 			}			
 			@Override
 			public void onError() {

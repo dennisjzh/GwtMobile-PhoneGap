@@ -16,13 +16,15 @@
 
 package com.gwtmobile.phonegap.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class Compass {
 	
 	public static native void getCurrentHeading(Callback callback) /*-{
 		$wnd.navigator.compass.getCurrentHeading(function(heading) {
-	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onSuccess(F)(heading);
+	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/Compass$CompassHeading;)(heading);
 	    }, function() {
 	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onError()();
 	    });
@@ -38,7 +40,7 @@ public class Compass {
 	
     private static native String watchHeading(Callback callback, JavaScriptObject options) /*-{
 	    var id = $wnd.navigator.compass.watchHeading(function(heading) {
-	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onSuccess(F)(heading);
+	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/Compass$CompassHeading;)(heading);
 	    }, function() {
 	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onError()();
 	    }, options);
@@ -51,7 +53,7 @@ public class Compass {
         
 
     public interface Callback {
-    	void onSuccess(float heading);
+    	void onSuccess(CompassHeading heading);
     	void onError();
     }
     
@@ -69,6 +71,30 @@ public class Compass {
 			return options;    		
     	}
 
+    }
+
+    public static class CompassHeading extends JavaScriptObject {
+
+    	public native double getMagneticHeading() /*-{
+    		return this.magneticHeading;
+    	}-*/;
+    	
+    	public native double getTrueHeading() /*-{
+			return this.trueHeading;
+		}-*/;
+	
+    	public native double getHeadingAccuracy() /*-{
+			return this.headingAccuracy;
+		}-*/;
+
+    	public Date getTimestamp() {
+			return new Date((long) getTimestampNative());
+		}
+
+    	private native double getTimestampNative() /*-{
+			return this.timestamp;
+		}-*/;
+	
     }
 
 }
