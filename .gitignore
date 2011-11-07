@@ -8,4 +8,11 @@ war/childbrowser.js
 war/phonegap*.js
 war/com.gwtmobile.phonegap.gwtmobile_phonegap
 .gwt-tmp
+gwt-unitCache
+war/childbrowser
+war/docs
+war/facebook_js_sdk.js
+war/pg-plugin-fb-connect.js
+jars
+.settings
 
