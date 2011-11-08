@@ -43,6 +43,9 @@ public class PluginsUi extends Page {
     	case 1:
     		goTo(new BluetoothUi());
     		break;
+    	case 2:
+    		goTo(new FacebookUi());
+    		break;
     	}
     }
 

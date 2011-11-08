@@ -16,6 +16,8 @@
 
 package com.gwtmobile.phonegap.client.plugins;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 
@@ -25,26 +27,64 @@ public class Facebook {
 		return $wnd.FB.init({appId: appId, nativeInterface: $wnd.PG.FB});
 	}-*/;
 	
-	public native void login(Callback callback, String permissions) /*-{
+	public native static void login(Callback callback, String permissions) /*-{
 	    $wnd.FB.login(function(response){
-		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/google/gwt/core/client/JavaScriptObject;)(response);
+		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
 		}, {perms:permissions});
 	}-*/;
 
-	public native void logout(Callback callback) /*-{
+	public native static void logout(Callback callback) /*-{
 	    $wnd.FB.logout(function(response){
-		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/google/gwt/core/client/JavaScriptObject;)(response);
+		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
 		});
 	}-*/;
 
-	public native void getLoginStatus(Callback callback) /*-{
-    $wnd.FB.getLoginStatus(function(response){
-	    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/google/gwt/core/client/JavaScriptObject;)(response);
-	});
-}-*/;
+	public native static void getLoginStatus(Callback callback) /*-{
+	    $wnd.FB.getLoginStatus(function(response){
+		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
+		});
+	}-*/;
 
 	public interface Callback {
-		void onSuccess(JavaScriptObject response);
+		void onSuccess(Response response);
 	}
 
+	public static class Response extends JavaScriptObject {
+		
+		protected Response() {}
+		
+		public final native String getStatus() /*-{
+			return this.status;
+		}-*/;
+
+		public final native Session getSession() /*-{
+			if (typeof this.session != "undefined")
+				return this.session;
+			return null;
+		}-*/;
+	}
+
+	public static class Session extends JavaScriptObject {
+		
+		protected Session() {}
+		
+		public final native String getAccessToken() /*-{
+			return this.access_token;
+		}-*/;
+
+		public final Date getExpiresIn() {
+			return new Date((long) getExpiresInNative());
+		}
+		private final native double getExpiresInNative() /*-{
+			return this.expires;
+		}-*/;
+		
+		public final native String getSignedRequest() /*-{
+			return this.sig;
+		}-*/;
+
+		public final native String getUserID() /*-{
+			return this.uid;
+		}-*/;
+	}
 }
