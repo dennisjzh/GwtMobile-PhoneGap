@@ -19,6 +19,7 @@ package com.gwtmobile.phonegap.client.plugins;
 import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.json.client.JSONObject;
 
 
 public class Facebook {
@@ -28,19 +29,25 @@ public class Facebook {
 	}-*/;
 	
 	public native static void login(Callback callback, String permissions) /*-{
-	    $wnd.FB.login(function(response){
+	    $wnd.FB.login(function(response) {
 		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
 		}, {perms:permissions});
 	}-*/;
 
 	public native static void logout(Callback callback) /*-{
-	    $wnd.FB.logout(function(response){
+	    $wnd.FB.logout(function(response) {
 		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
 		});
 	}-*/;
 
 	public native static void getLoginStatus(Callback callback) /*-{
-	    $wnd.FB.getLoginStatus(function(response){
+	    $wnd.FB.getLoginStatus(function(response) {
+		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
+		});
+	}-*/;
+	
+	public native static void api(String path, String method, Params params, Callback callback) /*-{
+		$wnd.FB.api(path, method, params, function(response) {
 		    callback.@com.gwtmobile.phonegap.client.plugins.Facebook.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/plugins/Facebook$Response;)(response);
 		});
 	}-*/;
@@ -52,9 +59,11 @@ public class Facebook {
 	public static class Response extends JavaScriptObject {
 		
 		protected Response() {}
-		
+
 		public final native String getStatus() /*-{
-			return this.status;
+			if (typeof this.status != "undefined")
+				return this.status;
+			return null;
 		}-*/;
 
 		public final native Session getSession() /*-{
@@ -62,6 +71,13 @@ public class Facebook {
 				return this.session;
 			return null;
 		}-*/;
+		
+		public final native String get(String key) /*-{
+			if (typeof this[key] != "undefined")
+				return this[key];
+			return null;
+		}-*/;
+			
 	}
 
 	public static class Session extends JavaScriptObject {
@@ -75,6 +91,7 @@ public class Facebook {
 		public final Date getExpiresIn() {
 			return new Date((long) getExpiresInNative());
 		}
+		
 		private final native double getExpiresInNative() /*-{
 			return this.expires;
 		}-*/;
@@ -87,4 +104,24 @@ public class Facebook {
 			return this.uid;
 		}-*/;
 	}
+	
+	public static class Params extends JavaScriptObject {
+		
+		protected Params() {}
+		
+		public final static Params createParams() {
+			return (Params) JavaScriptObject.createObject();
+		}
+
+		public final native void set(String key, String value) /*-{
+			this[key] = value;
+		}-*/;
+		
+		public final native String get(String key) /*-{
+			if (typeof this[key] != "undefined")
+				return this[key];
+			return null;
+		}-*/;
+	}
+
 }

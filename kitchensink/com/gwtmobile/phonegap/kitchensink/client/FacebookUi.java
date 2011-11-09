@@ -18,6 +18,8 @@
 package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -25,7 +27,9 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.plugins.Facebook;
 import com.gwtmobile.phonegap.client.plugins.Facebook.Callback;
+import com.gwtmobile.phonegap.client.plugins.Facebook.Params;
 import com.gwtmobile.phonegap.client.plugins.Facebook.Response;
+import com.gwtmobile.phonegap.client.plugins.Facebook.Session;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
 
@@ -120,8 +124,30 @@ public class FacebookUi extends Page {
 			text.setHTML("Facebook plugin not initialized.");
 			return;
 		}
-		// TODO Auto-generated method stub
-		
+		Facebook.getLoginStatus(new Callback() {
+			@Override
+			public void onSuccess(Response response) {
+				Session session = response.getSession();
+				if (session == null) {
+					text.setHTML("Need to login to Facebook first.");
+					return;
+				}
+				String path = session.getUserID() + "/feed";
+				Params params = Params.createParams();
+				params.set("message", "Hello World!!!");
+				Facebook.api(path, "post", params, new Callback() {
+					@Override
+					public void onSuccess(Response response) {
+						if (response.get("id") != null) {
+							text.setHTML(response.get("id"));
+						}
+						else {
+							text.setHTML(new JSONObject(response).toString());
+						}
+					}
+				});
+			}
+		});		
 	}
 
 	private void logout() {
