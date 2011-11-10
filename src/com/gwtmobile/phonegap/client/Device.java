@@ -38,12 +38,4 @@ public class Device {
 		return $wnd.device.version;
 	}-*/;
 
-	// below are Android specific APIs.	
-	
-	public native static void exitApp() /*-{
-		if ($wnd.navigator.app && typeof $wnd.navigator.app.exitApp == "function") {
-			$wnd.navigator.app.exitApp();
-		}
-	}-*/;
-
 }
