@@ -93,7 +93,7 @@ public class Media extends JavaScriptObject {
     }
     
     public enum MediaErrorCode {
-    	MEDIA_ERR_ABORTED, MEDIA_ERR_NETWORK, MEDIA_ERR_DECODE, MEDIA_ERR_NONE_SUPPORTED };
+    	MEDIA_ERR_NONE_ACTIVE, MEDIA_ERR_ABORTED, MEDIA_ERR_NETWORK, MEDIA_ERR_DECODE, MEDIA_ERR_NONE_SUPPORTED };
     
     public static class MediaError extends JavaScriptObject {
     	
