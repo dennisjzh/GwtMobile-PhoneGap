@@ -15,14 +15,20 @@
 
 package com.gwtmobile.phonegap.kitchensink.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.gwtmobile.phonegap.client.Device;
+import com.gwtmobile.phonegap.client.App;
+import com.gwtmobile.phonegap.client.App.LoadUrlOptions;
 import com.gwtmobile.phonegap.client.Event;
 import com.gwtmobile.phonegap.client.Event.Callback;
+import com.gwtmobile.phonegap.client.Notification;
+import com.gwtmobile.phonegap.client.Notification.ConfirmCallback;
+import com.gwtmobile.phonegap.client.Storage;
 import com.gwtmobile.ui.client.page.Page;
 import com.gwtmobile.ui.client.page.PageHistory;
 import com.gwtmobile.ui.client.utils.Utils;
@@ -74,7 +80,30 @@ public class KitchenSink implements EntryPoint {
 	
     public void onBackKeyDown() {
     	if (PageHistory.Instance.from() == null) {
-    		Device.exitApp();    		
+    		String showed = Storage.LocalStorage.getItem("ShowRatingDialog");
+    		if (showed == null) {
+        		Notification.confirm("If you think GWT Mobile PhoneGap is useful, " + 
+        				"do you want to give it a good rating and comment?", 
+        				new ConfirmCallback() {
+    						@Override
+    						public void onComplete(int selection) {
+    							switch (selection) {
+    								case 1:  //sure
+    									App.loadUrl("market://details?id=com.gwtmobile.phonegap", 
+    											LoadUrlOptions.get().openExternal(true));
+    								case 2:  //nope
+    									Storage.LocalStorage.setItem("ShowRatingDialog", new Date().toString());
+    									Storage.LocalStorage.setItem("ShowRatingSelection", selection + "");
+    									break;
+    								case 3:  //later
+    							}
+    				    		App.exitApp();    		
+    						}
+    					}, "Rate the app", "Sure!,Nope,Later");
+    		}
+    		else {
+	    		App.exitApp();    		
+    		}
     	}
     	else {
     		if (!PageHistory.Instance.current().getClass().toString().endsWith(".EventUi")) {
