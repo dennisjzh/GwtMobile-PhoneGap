@@ -19,7 +19,6 @@ package com.gwtmobile.phonegap.client.plugins;
 import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.json.client.JSONObject;
 
 
 public class Facebook {

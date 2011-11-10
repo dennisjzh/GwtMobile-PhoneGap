@@ -92,19 +92,22 @@ public class MediaUi extends Page {
     		play();
     		break;
     	case 3:
-    		pause();
+    		seekTo();
     		break;
     	case 4:
-    		stop();
+    		pause();
     		break;
     	case 5:
+    		stop();
+    		break;
+    	case 6:
     		release();
     		break;
     	}
     }
 
 
-    public void play() {
+	public void play() {
     	text.setHTML("Playing...");
 		media.play();
 		timer = new Timer() {
@@ -167,4 +170,11 @@ public class MediaUi extends Page {
     	media.release();
     	text.setHTML("Media released.");
     }
+    
+    public void seekTo() {
+    	media.seekTo(5000);
+    	text.setHTML("Seeked to 5000ms.");
+	}
+
+
 }
