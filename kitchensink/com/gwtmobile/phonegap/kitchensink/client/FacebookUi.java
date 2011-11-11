@@ -133,12 +133,14 @@ public class FacebookUi extends Page {
 				}
 				String path = session.getUserID() + "/feed";
 				Params params = Params.createParams();
-				params.set("message", "Hello World!!!");
+				final String message = "I am checking out the GWT Mobile PhoneGap app!";
+				params.set("message", message);
 				Facebook.api(path, "post", params, new Callback() {
 					@Override
 					public void onSuccess(Response response) {
 						if (response.get("id") != null) {
-							text.setHTML(response.get("id"));
+							text.setHTML("Message \"" + message + "\" has been posted to your facebook wall.<br/>" 
+									+ "id:" + response.get("id"));
 						}
 						else {
 							text.setHTML(new JSONObject(response).toString());
