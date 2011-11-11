@@ -10,6 +10,7 @@
     <script src="DatePicker.js" />
     <script src="notificationex.js" />
     <script src="ShareKitPlugin.js" />
+    <script src="Prompt.js" />
 
 
 </module>
