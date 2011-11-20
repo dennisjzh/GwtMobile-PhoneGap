@@ -11,6 +11,7 @@
     <script src="notificationex.js" />
     <script src="ShareKitPlugin.js" />
     <script src="Prompt.js" />
+    <script src="TestFlight.js" />
 
 
 </module>

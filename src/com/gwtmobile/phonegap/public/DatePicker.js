@@ -1,4 +1,4 @@
-/**
+    /**
 	Phonegap DatePicker Plugin
 	Copyright (c) Greg Allen 2011
 	MIT Licensed
