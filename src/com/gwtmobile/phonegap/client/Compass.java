@@ -75,23 +75,25 @@ public class Compass {
 
     public static class CompassHeading extends JavaScriptObject {
 
-    	public native double getMagneticHeading() /*-{
+    	protected CompassHeading() {}
+    	
+    	public native final double getMagneticHeading() /*-{
     		return this.magneticHeading;
     	}-*/;
     	
-    	public native double getTrueHeading() /*-{
+    	public native final double getTrueHeading() /*-{
 			return this.trueHeading;
 		}-*/;
 	
-    	public native double getHeadingAccuracy() /*-{
+    	public native final double getHeadingAccuracy() /*-{
 			return this.headingAccuracy;
 		}-*/;
 
-    	public Date getTimestamp() {
+    	public final Date getTimestamp() {
 			return new Date((long) getTimestampNative());
 		}
 
-    	private native double getTimestampNative() /*-{
+    	private native final double getTimestampNative() /*-{
 			return this.timestamp;
 		}-*/;
 	
