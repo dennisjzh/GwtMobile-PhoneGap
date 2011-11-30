@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact name="GwtMobile-PhoneGap:GWT">
-    <output-path>$PROJECT_DIR$/out/artifacts/GwtMobile_PhoneGap_GWT</output-path>
-    <root id="root">
-      <element id="gwt-compiler-output" facet="GwtMobile-PhoneGap/gwt/GWT" />
-    </root>
-  </artifact>
-</component>
