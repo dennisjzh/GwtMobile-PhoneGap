@@ -38,7 +38,7 @@ public class PluginsUi extends Page {
 	void onListSelectionChanged(SelectionChangedEvent e) {
     	switch (e.getSelection()) {
     	case 0:
-    		ChildBrowser.showWebPage("http://www.phonegap.com", true);
+    		//ChildBrowser.showWebPage("http://www.phonegap.com", true);
     		break;
     	case 1:
     		goTo(new BluetoothUi());

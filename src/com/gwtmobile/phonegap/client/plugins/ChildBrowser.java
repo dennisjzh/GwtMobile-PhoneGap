@@ -16,22 +16,89 @@
 
 package com.gwtmobile.phonegap.client.plugins;
 
-import com.gwtmobile.phonegap.client.Utils;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.SimpleEventBus;
 
 public class ChildBrowser {
-	
-	static {
-		if (Utils.isIOS()) {
-			install();
-		}
-	}
 
-	public native static String showWebPage(String url, boolean usePhoneGap) /*-{
-		return $wnd.plugins.childBrowser.showWebPage(url, usePhoneGap);
-	}-*/;
-	
-	private native static void install() /*-{
-		return $wnd.ChildBrowser.install();
-	}-*/;
+    private EventBus handlerManager = new SimpleEventBus();
+    private boolean initialized;
+    private JavaScriptObject cb;
+
+    public void initialize() {
+        cb = install();
+        initialized = true;
+    }
+
+    private native JavaScriptObject install() /*-{
+        var instance = this;
+        var cb = $wnd.ChildBrowser.install();
+
+        cb.onLocationChange = function(loc) {
+            instance.@com.gwtmobile.phonegap.client.plugins.ChildBrowser::onLocationChange(Ljava/lang/String;)(loc);
+        };
+        cb.onClose = function() {
+            instance.@com.gwtmobile.phonegap.client.plugins.ChildBrowser::onClose()();
+        };
+        cb.onOpenExternal = function() {
+            instance.@com.gwtmobile.phonegap.client.plugins.ChildBrowser::onOpenExternal()();
+        };
+
+        return cb;
+
+    }-*/;
+
+    public void showWebPage(String url) {
+        if (!initialized) {
+            throw new IllegalStateException("you have to initialize Childbrowser before using it");
+        }
+
+        showWebPageNative(cb, url);
+
+    }
+
+    private native void showWebPageNative(JavaScriptObject cb, String url)/*-{
+        cb.showWebPage(url);
+    }-*/;
+
+    public void close() {
+        if (!initialized) {
+            throw new IllegalStateException("you have to initialize Childbrowser before using it");
+        }
+
+        closeNative(cb);
+    }
+
+    private native void closeNative(JavaScriptObject cb)/*-{
+        cb.close();
+    }-*/;
+
+
+    public HandlerRegistration addLocationChangeHandler(ChildBrowserLocationChangedHandler handler) {
+        return handlerManager.addHandler(ChildBrowserLocationChangedEvent.getType(), handler);
+    }
+
+    public HandlerRegistration addCloseHandler(ChildBrowserCloseHandler handler) {
+        return handlerManager.addHandler(ChildBrowserCloseEvent.getType(), handler);
+    }
+
+    public HandlerRegistration addOpenExternalHandler(ChildBrowserOpenExternalHandler handler) {
+        return handlerManager.addHandler(ChildBrowserOpenExternalEvent.getType(), handler);
+    }
+
+    private void onClose() {
+        handlerManager.fireEvent(new ChildBrowserCloseEvent());
+    }
+
+    private void onOpenExternal() {
+        handlerManager.fireEvent(new ChildBrowserOpenExternalEvent());
+    }
+
+    private void onLocationChange(String url) {
+        handlerManager.fireEvent(new ChildBrowserLocationChangedEvent(url));
+    }
+
 
 }
