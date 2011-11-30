@@ -23,7 +23,7 @@ public class PhoneGapHeaderPanel extends HeaderPanel {
 				String caption = PhoneGapHeaderPanel.this.getCaption();
 				url = url + "phonegap_" + getDocument() + "_" + getDocument2() + 
 					".md.html#" + caption;
-				//ChildBrowser.showWebPage(url, true);
+				ChildBrowser.showWebPage(url);
 			}
 		});
 	}

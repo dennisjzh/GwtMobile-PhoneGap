@@ -16,89 +16,76 @@
 
 package com.gwtmobile.phonegap.client.plugins;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.SimpleEventBus;
+import com.gwtmobile.phonegap.client.Utils;
+
 
 public class ChildBrowser {
 
-    private EventBus handlerManager = new SimpleEventBus();
-    private boolean initialized;
-    private JavaScriptObject cb;
+	private static EventHandler eventHandler;
 
-    public void initialize() {
-        cb = install();
-        initialized = true;
-    }
-
-    private native JavaScriptObject install() /*-{
-        var instance = this;
-        var cb = $wnd.ChildBrowser.install();
-
-        cb.onLocationChange = function(loc) {
-            instance.@com.gwtmobile.phonegap.client.plugins.ChildBrowser::onLocationChange(Ljava/lang/String;)(loc);
+	static {
+		if (Utils.isIOS()) {
+			install();
+		}
+		initCallbacks();
+	}
+    		  	
+    private native static void install() /*-{
+        $wnd.ChildBrowser.install();
+    }-*/;
+    
+    private native static void initCallbacks() /*-{
+        $wnd.plugins.childBrowser.onLocationChange = function(loc) {
+            @com.gwtmobile.phonegap.client.plugins.ChildBrowser::onLocationChange(Ljava/lang/String;)(loc);
         };
-        cb.onClose = function() {
-            instance.@com.gwtmobile.phonegap.client.plugins.ChildBrowser::onClose()();
+        $wnd.plugins.childBrowser.onClose = function() {
+            @com.gwtmobile.phonegap.client.plugins.ChildBrowser::onClose()();
         };
-        cb.onOpenExternal = function() {
-            instance.@com.gwtmobile.phonegap.client.plugins.ChildBrowser::onOpenExternal()();
+        $wnd.plugins.childBrowser.onOpenExternal = function() {
+            @com.gwtmobile.phonegap.client.plugins.ChildBrowser::onOpenExternal()();
         };
-
-        return cb;
 
     }-*/;
 
-    public void showWebPage(String url) {
-        if (!initialized) {
-            throw new IllegalStateException("you have to initialize Childbrowser before using it");
-        }
-
-        showWebPageNative(cb, url);
-
-    }
-
-    private native void showWebPageNative(JavaScriptObject cb, String url)/*-{
-        cb.showWebPage(url);
+    public static native void showWebPage(String url) /*-{
+        $wnd.plugins.childBrowser.showWebPage(url);
     }-*/;
 
-    public void close() {
-        if (!initialized) {
-            throw new IllegalStateException("you have to initialize Childbrowser before using it");
-        }
-
-        closeNative(cb);
-    }
-
-    private native void closeNative(JavaScriptObject cb)/*-{
-        cb.close();
+    public static native void close() /*-{
+        $wnd.plugins.childBrowser.close();
     }-*/;
 
 
-    public HandlerRegistration addLocationChangeHandler(ChildBrowserLocationChangedHandler handler) {
-        return handlerManager.addHandler(ChildBrowserLocationChangedEvent.getType(), handler);
+    private static void onClose() {
+    	if (eventHandler != null) {
+    		eventHandler.onClose();
+    	}
     }
 
-    public HandlerRegistration addCloseHandler(ChildBrowserCloseHandler handler) {
-        return handlerManager.addHandler(ChildBrowserCloseEvent.getType(), handler);
+    private static void onOpenExternal() {
+    	if (eventHandler != null) {
+    		eventHandler.onOpenExternal();
+    	}
     }
 
-    public HandlerRegistration addOpenExternalHandler(ChildBrowserOpenExternalHandler handler) {
-        return handlerManager.addHandler(ChildBrowserOpenExternalEvent.getType(), handler);
+    private static void onLocationChange(String url) {
+    	if (eventHandler != null) {
+    		eventHandler.onLocationChange(url);
+    	}
     }
 
-    private void onClose() {
-        handlerManager.fireEvent(new ChildBrowserCloseEvent());
+    public static interface EventHandler {
+        void onClose();
+        void onOpenExternal();
+        void onLocationChange(String url);
     }
 
-    private void onOpenExternal() {
-        handlerManager.fireEvent(new ChildBrowserOpenExternalEvent());
+    public static void setEventHandler(EventHandler eventHandler) {
+    	ChildBrowser.eventHandler = eventHandler;
     }
-
-    private void onLocationChange(String url) {
-        handlerManager.fireEvent(new ChildBrowserLocationChangedEvent(url));
+    
+    public static EventHandler getEventHandler() {
+    	return ChildBrowser.eventHandler; 
     }
-
-
+    
 }
