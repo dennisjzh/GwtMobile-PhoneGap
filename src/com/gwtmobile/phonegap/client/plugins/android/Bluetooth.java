@@ -16,71 +16,71 @@
  */
 
 
-package com.gwtmobile.phonegap.client.plugins;
+package com.gwtmobile.phonegap.client.plugins.android;
 
 public class Bluetooth {
 	
 	public static native void isBTEnabled(Callback callback) /*-{
 		$wnd.plugins.bluetooth.isBTEnabled(null, function(state) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onSuccess(Z)(state);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onSuccess(Z)(state);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 
 	public static native void enableBT(Callback callback) /*-{
 		$wnd.plugins.bluetooth.enableBT(null, function(state) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onSuccess(Z)(state);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onSuccess(Z)(state);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	
 	public static native void disableBT(Callback callback) /*-{
 		$wnd.plugins.bluetooth.disableBT(null, function(state) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onSuccess(Z)(state);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onSuccess(Z)(state);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	
 	public static native void listDevices(StringCallback callback) /*-{
 		$wnd.plugins.bluetooth.listDevices(null, function(result) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.StringCallback::onSuccess(Ljava/lang/String;)(result);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.StringCallback::onSuccess(Ljava/lang/String;)(result);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.StringCallback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.StringCallback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	
 	public static native void pairBT(String address,Callback callback) /*-{
 		$wnd.plugins.bluetooth.pairBT(address, function(state) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onSuccess(Z)(state);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onSuccess(Z)(state);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	
 	public static native void listBoundDevices(StringCallback callback) /*-{
 		$wnd.plugins.bluetooth.listBoundDevices(null, function(result) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.StringCallback::onSuccess(Ljava/lang/String;)(result);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.StringCallback::onSuccess(Ljava/lang/String;)(result);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.StringCallback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.StringCallback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	
 	public static native void stopDiscovering(Callback callback) /*-{
 		$wnd.plugins.bluetooth.stopDiscovering(null, function(state) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onSuccess(Z)(state);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onSuccess(Z)(state);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	
 	public static native void isBound(String address,Callback callback) /*-{
 		$wnd.plugins.bluetooth.isBound(address, function(state) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onSuccess(Z)(state);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onSuccess(Z)(state);
 	    },function(message) {
-	    	callback.@com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
+	    	callback.@com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback::onError(Ljava/lang/String;)(message);
 	    });
 	 }-*/;
 	

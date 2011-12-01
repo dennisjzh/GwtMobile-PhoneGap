@@ -1,4 +1,4 @@
-package com.gwtmobile.phonegap.client.plugins.iphone.customUrl;
+package com.gwtmobile.phonegap.client.plugins.iphone;
 
 import com.gwtmobile.phonegap.client.Event;
 
@@ -31,7 +31,8 @@ public class CustomUrl {
 
     public static void onDeviceReady(final UrlReceivedCallback callback){
         Event.onDeviceReady(new Event.Callback() {
-            public void onEventFired() {
+            @Override
+			public void onEventFired() {
                 nativeOnDeviceReady(callback);
             }
         });
@@ -39,15 +40,15 @@ public class CustomUrl {
 
     private static native void nativeOnDeviceReady(UrlReceivedCallback callback)/*-{
         if($wnd.invokeString != null){
-            callback.@com.gwtmobile.phonegap.client.plugins.iphone.customUrl.CustomUrl.UrlReceivedCallback::onUrlReceived(Ljava/lang/String;)($wnd.invokeString);
+            callback.@com.gwtmobile.phonegap.client.plugins.iphone.CustomUrl.UrlReceivedCallback::onUrlReceived(Ljava/lang/String;)($wnd.invokeString);
         }else{
-            callback.@com.gwtmobile.phonegap.client.plugins.iphone.customUrl.CustomUrl.UrlReceivedCallback::onUrlReceived(Ljava/lang/String;)(null);
+            callback.@com.gwtmobile.phonegap.client.plugins.iphone.CustomUrl.UrlReceivedCallback::onUrlReceived(Ljava/lang/String;)(null);
         }
     }-*/;
 
     public static native void onResumedWithUrl(UrlReceivedCallback callback)/*-{
         $wnd.handleOpenURL = function(url){
-            $entry(callback.@com.gwtmobile.phonegap.client.plugins.iphone.customUrl.CustomUrl.UrlReceivedCallback::onUrlReceived(Ljava/lang/String;)(url));
+            $entry(callback.@com.gwtmobile.phonegap.client.plugins.iphone.CustomUrl.UrlReceivedCallback::onUrlReceived(Ljava/lang/String;)(url));
         }
 
     }-*/;

@@ -1,6 +1,4 @@
-package com.gwtmobile.phonegap.client.plugins.iphone.DatePicker;
-
-import com.google.gwt.event.shared.EventHandler;
+package com.gwtmobile.phonegap.client.plugins.iphone;
 
 /* Copyright (c) 2011 Smithimage (Robert Wallström)
  *
@@ -18,6 +16,21 @@ import com.google.gwt.event.shared.EventHandler;
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-public interface DateSelectedEventHandler extends EventHandler {
-    void onDateSelected(String date);
+public class NotificationEx {
+
+    public static native void loadingStart()/*-{
+        $wnd.navigator.notificationEx.loadingStart();
+    }-*/;
+
+    public static native void loadingStop()/*-{
+        $wnd.navigator.notificationEx.loadingStop();
+    }-*/;
+
+    public static native void activityStart()/*-{
+        $wnd.navigator.notificationEx.activityStart();
+    }-*/;
+
+    public static native void activityStop()/*-{
+        $wnd.navigator.notificationEx.activityStop();
+    }-*/;
 }

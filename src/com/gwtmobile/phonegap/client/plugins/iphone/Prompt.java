@@ -1,4 +1,4 @@
-package com.gwtmobile.phonegap.client.plugins.iphone.Prompt;
+package com.gwtmobile.phonegap.client.plugins.iphone;
 
 /* Copyright (c) 2011 Smithimage (Robert Wallström)
  *
@@ -18,14 +18,19 @@ package com.gwtmobile.phonegap.client.plugins.iphone.Prompt;
  */
 public class Prompt {
 
-    public static native void show(String title, OkCallback okCallback, CancelCallback cancelCallback, String okButtonCaption, String cancelButtonCaption)/*-{
+    public static native void show(String title, String okButtonCaption, String cancelButtonCaption, Callback callback)/*-{
         $wnd.plugins.Prompt.show(title,
                 function(userInput){
-                    okCallback.@com.gwtmobile.phonegap.client.plugins.iphone.Prompt.OkCallback::onOk(Ljava/lang/String;)(userInput);
+                    callback.@com.gwtmobile.phonegap.client.plugins.iphone.Prompt.Callback::onOk(Ljava/lang/String;)(userInput);
                 },
                 function(){
-                    cancelCallback.@com.gwtmobile.phonegap.client.plugins.iphone.Prompt.CancelCallback::onCancel()();
+                    callback.@com.gwtmobile.phonegap.client.plugins.iphone.Prompt.Callback::onCancel()();
                 },
                 okButtonCaption, cancelButtonCaption);
     }-*/;
+    
+    public interface Callback {
+        void onOk(String userInput);
+        void onCancel();
+    }
 }

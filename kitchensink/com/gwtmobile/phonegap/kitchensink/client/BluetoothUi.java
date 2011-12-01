@@ -29,9 +29,9 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page; 
-import com.gwtmobile.phonegap.client.plugins.Bluetooth;
-import com.gwtmobile.phonegap.client.plugins.Bluetooth.Callback;
-import com.gwtmobile.phonegap.client.plugins.Bluetooth.StringCallback;
+import com.gwtmobile.phonegap.client.plugins.android.Bluetooth;
+import com.gwtmobile.phonegap.client.plugins.android.Bluetooth.Callback;
+import com.gwtmobile.phonegap.client.plugins.android.Bluetooth.StringCallback;
 
 public class BluetoothUi extends Page {
 
