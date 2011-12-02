@@ -30,24 +30,30 @@ public class DatePicker {
     }-*/;
 
     public interface Callback {
-    	//FIXME: Date type?
-    	void onDateSelected(String date);
+        //FIXME: Date type?
+        void onDateSelected(String date);
     }
-    
+
+    public static native String webDateToMilliSec(String webDate) /*-{
+        var longDate = Date.parse(webDate);
+        return longDate.toString();
+    }-*/;
+
+
     public static class Options extends JavaScriptObject {
 
-    	protected Options() {};
-    	
-    	public static Options newInstance() {
-    		return (Options) JavaScriptObject.createObject();
-    	}
-    	
-        public native Options date(String d)/*-{
+        protected Options() {};
+
+        public static Options newInstance() {
+            return (Options) JavaScriptObject.createObject();
+        }
+
+        public final native Options date(String d)/*-{
             this.date = d;
             return this;
         }-*/;
 
-        public native Options mode(String m)/*-{
+        public final native Options mode(String m)/*-{
             this.mode = m;
             return this;
         }-*/;

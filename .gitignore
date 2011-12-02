@@ -15,4 +15,4 @@ war/facebook_js_sdk.js
 war/pg-plugin-fb-connect.js
 jars
 .settings
-
+.DS_Store
