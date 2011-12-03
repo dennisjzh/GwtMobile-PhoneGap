@@ -1,12 +1,9 @@
 package com.gwtmobile.phonegap.client.plugins.mapkitplug;
 
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.SimpleEventBus;
-
-import java.util.List;
 
 /* Copyright (c) 2011 Smithimage (Robert Wallström)
  *
@@ -26,179 +23,156 @@ import java.util.List;
  */
 public class Map {
 
-    private JavaScriptObject mapKit;
-    private EventBus handlerManager = new SimpleEventBus();
-
-    public Map(){
-        mapKit = getMapKit();
-        onMapCallback(this);
+	private static Callback callback;
+	
+    static {
+        onMapCallback();
     }
 
-    public void show(){
-        onMapCallback(this);
-        showNative(mapKit);
-    }
-
-    public void hide(){
-        hideNative(mapKit);
-    }
-
-    private native void hideNative(JavaScriptObject map)/*-{
-        map.hideMap();
+	public static void setMapEventCallback(Callback callback) {
+		Map.callback = callback;
+	}
+	
+    public static native void show()/*-{
+        $wnd.plugins.mapKit.showMap();
     }-*/;
 
-    private native void showNative(JavaScriptObject map)/*-{
-        map.showMap();
-    }-*/;
+    public static native void hide()/*-{
+	    $wnd.plugins.mapKit.hideMap();
+	}-*/;
 
-    public void addMapPins(List<Pin> pins){
-        JsArray<JavaScriptObject> jsPins = (JsArray<JavaScriptObject>) JsArray.createArray();
+	public static void addMapPins(List<Pin> pins){
+	    @SuppressWarnings("unchecked")
+		JsArray<JavaScriptObject> jsPins = (JsArray<JavaScriptObject>) JsArray.createArray();
         for(Pin pin : pins){
-            jsPins.push(pin.getPin());
+            jsPins.push(pin);
         }
-        addMapPinsNative(mapKit, jsPins);
+        addMapPinsNative(jsPins);
     }
 
-    private native void addMapPinsNative(JavaScriptObject map, JavaScriptObject pins)/*-{
-        map.addMapPins(pins);
+    private static native void addMapPinsNative(JavaScriptObject pins)/*-{
+        $wnd.plugins.mapKit.addMapPins(pins);
     }-*/;
 
-    public void zoomToFitMapAnnotations(){
-        zoomToFitMapAnnotations(mapKit);
-    }
-
-    private native Void zoomToFitMapAnnotations(JavaScriptObject map)/*-{
-        map.zoomToFitMapAnnotations();
+    public static native Void zoomToFitMapAnnotations()/*-{
+        $wnd.plugins.mapKit.zoomToFitMapAnnotations();
     }-*/;
 
-    public void clearMapPins(){
-        clearMapPinsNative(mapKit);
-    }
-
-    private native void clearMapPinsNative(JavaScriptObject map)/*-{
-        map.clearMapPins();
+    public static native void clearMapPinsNative()/*-{
+        $wnd.plugins.mapKit.clearMapPins();
     }-*/;
 
-    public void setMapData(Options options){
-        setMapData(mapKit, options.getOptions());
-    }
-
-    private native void setMapData(JavaScriptObject map, JavaScriptObject options)/*-{
-        map.setMapData(options)
+    public static native void setMapData(Options options)/*-{
+        map.setMapData(options);
     }-*/;
 
-    private native JavaScriptObject getMapKit()/*-{
-        return $wnd.plugins.mapKit;
-    }-*/;
-
-    private native void onMapCallback(Map map)/*-{
-        var instance = map;
+    private static native void onMapCallback() /*-{
+		//FIXME: pinIndex is string?
         $wnd.plugins.mapKit.onMapCallback = function(v){
-            instance.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map::onMapClicked(Ljava/lang/String;)(v);
+            @com.gwtmobile.phonegap.client.plugins.mapkitplug.Map::onMapClicked(Ljava/lang/String;)(v);
         }
     }-*/;
 
-    private void onMapClicked(String var) {
-        handlerManager.fireEvent(new MapClickedEvent(var));
+    private static void onMapClicked(String pinIndex) {
+    	if (callback != null) {
+    		callback.onMapClicked(pinIndex);
+    	}
     }
 
-    public HandlerRegistration addPinClickedHandler(MapClickedEventHandler handler){
-        return handlerManager.addHandler(MapClickedEvent.getType(), handler);
-    }
+	public interface Callback {
+		void onMapClicked(String pinIndex);
+	}
+	
 
+    public static class Pin extends JavaScriptObject {
 
-    public static class Pin {
-
-        private Pin self = this;
-        private JavaScriptObject pin = JavaScriptObject.createObject();
-
+    	public static Pin newInstance() {
+            return (Pin) JavaScriptObject.createObject();
+    	}
+    	
+    	protected Pin() {};
+    	
         public native Pin latitude(double latitude)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lat = latitude;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.lat = latitude;
+            return this;
         }-*/;
 
          public native double getLatitude()/*-{
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lat;
+            return this.lat;
         }-*/;
 
         public native Pin longitude(double longitude)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lon = longitude;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.lon = longitude;
+            return this;
         }-*/;
 
         public native double getLongitude()/*-{
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.lon;
+            return this.lon;
         }-*/;
 
         public native Pin title(String t)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.title = t;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.title = t;
+            return this;
         }-*/;
 
         public native Pin subTitle(String t)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.subTitle = t;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.subTitle = t;
+            return this;
         }-*/;
 
         public native Pin pinColor(String color)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.pinColor = color;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.pinColor = color;
+            return this;
         }-*/;
 
         public native Pin index(int i)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.index = i;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.index = i;
+            return this;
         }-*/;
 
         public native Pin selected(int s)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.selected = s;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.selected = s;
+            return this;
         }-*/;
 
         public native Pin image(String url)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::pin.imageURL = url;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Pin::self;
+            this.imageURL = url;
+            return this;
         }-*/;
-
-        private JavaScriptObject getPin() {
-            return pin;
-        }
-
     }
 
-    public static class Options {
+    public static class Options extends JavaScriptObject {
 
-        private Options self = this;
-        private JavaScriptObject options = JavaScriptObject.createObject();
-
+    	public static Options newInstance() {
+    		return (Options) JavaScriptObject.createObject();
+    	}
+    	
+    	protected Options() {};
+    	
         public native Options latitude(double latitude)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.lat = latitude;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
+            this.lat = latitude;
+            return this;
         }-*/;
 
         public native Options longitude(double longitude)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.lon = longitude;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
+            this.lon = longitude;
+            return this;
         }-*/;
 
         public native Options height(double h)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.height = h;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
+            this.height = h;
+            return this;
         }-*/;
 
         public native Options diameter(double d)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.diameter = d;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
+            this.diameter = d;
+            return this;
         }-*/;
 
         public native Options offsetTop(double o)/*-{
-            this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::options.offsetTop = o;
-            return this.@com.gwtmobile.phonegap.client.plugins.mapkitplug.Map.Options::self;
+            this.offsetTop = o;
+            return this;
         }-*/;
-
-        private JavaScriptObject getOptions() {
-            return options;
-        }
 
     }
 }
