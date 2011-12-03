@@ -1,4 +1,4 @@
-package com.gwtmobile.phonegap.client.plugins.nativecontrols;
+package com.gwtmobile.phonegap.client.plugins.iphone;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -111,7 +111,7 @@ public class TabBar {
 
         private native void setOnSelectCallback()/*-{
             this.onSelect = function(id){
-                    @com.gwtmobile.phonegap.client.plugins.nativecontrols.TabBar::onTabItemSelected(Ljava/lang/String;)(id);
+                    @com.gwtmobile.phonegap.client.plugins.iphone.TabBar::onTabItemSelected(Ljava/lang/String;)(id);
             };
         }-*/;
 
