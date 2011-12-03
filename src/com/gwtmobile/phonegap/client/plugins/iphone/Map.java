@@ -1,4 +1,4 @@
-package com.gwtmobile.phonegap.client.plugins.mapkitplug;
+package com.gwtmobile.phonegap.client.plugins.iphone;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class Map {
     private static native void onMapCallback() /*-{
 		//FIXME: pinIndex is string?
         $wnd.plugins.mapKit.onMapCallback = function(v){
-            @com.gwtmobile.phonegap.client.plugins.mapkitplug.Map::onMapClicked(Ljava/lang/String;)(v);
+            @com.gwtmobile.phonegap.client.plugins.iphone.Map::onMapClicked(Ljava/lang/String;)(v);
         }
     }-*/;
 
