@@ -17,16 +17,20 @@ package com.gwtmobile.phonegap.kitchensink.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
 import com.gwtmobile.ui.client.page.Page;
+import com.gwtmobile.ui.client.widgets.ListPanel;
 
 public class MainUi extends Page {
 
 	private static MainUiUiBinder uiBinder = GWT.create(MainUiUiBinder.class);
+    @UiField
+    ListPanel list;
 
-	interface MainUiUiBinder extends UiBinder<Widget, MainUi> {
+    interface MainUiUiBinder extends UiBinder<Widget, MainUi> {
 	}
 
 	public MainUi() {
@@ -35,6 +39,7 @@ public class MainUi extends Page {
 
     @UiHandler("list")
 	void onListSelectionChanged(SelectionChangedEvent e) {
+
     	switch (e.getSelection()) {
     	case 0:
     		goTo(new AccelerometerUi());
@@ -78,6 +83,18 @@ public class MainUi extends Page {
     	case 13:
     		goTo(new StorageUi());
     		break;
+        case 14:
+            goTo(new DatepickerUI());
+            break;
+        case 15:
+            goTo(new NotificationExUI());
+            break;
+        case 16:
+            goTo(new PromptUI());
+            break;
+        case 17:
+            goTo(new TabBarUI());
+            break;
     	}
     }
 
