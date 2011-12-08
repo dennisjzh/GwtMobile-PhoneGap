@@ -86,6 +86,9 @@ public class MainUi extends Page {
         case 14:
             goTo(new DatepickerUI());
             break;
+        case 15:
+            goTo(new NotificationExUI());
+            break;
     	}
     }
 
