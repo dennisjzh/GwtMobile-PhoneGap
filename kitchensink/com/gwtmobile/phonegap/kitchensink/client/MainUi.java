@@ -92,6 +92,9 @@ public class MainUi extends Page {
         case 16:
             goTo(new PromptUI());
             break;
+        case 17:
+            goTo(new TabBarUI());
+            break;
     	}
     }
 

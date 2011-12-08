@@ -5,7 +5,7 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<p:PhoneGapHeaderPanel caption="DatePicker" document="media_capture" document2="capture"/>
+		<p:PhoneGapHeaderPanel caption="NotificationEx" document="media_capture" document2="capture"/>
 		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<m:ListPanel ui:field="list">

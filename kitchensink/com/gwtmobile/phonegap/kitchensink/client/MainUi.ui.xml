@@ -26,6 +26,7 @@
                 <g:Label>Datepicker</g:Label>
                 <g:Label>NotificationEx</g:Label>
                 <g:Label>Prompt</g:Label>
+                <g:Label>TabBar</g:Label>
 			</m:ListPanel>
 		</m:ScrollPanel>
 	</g:HTMLPanel>

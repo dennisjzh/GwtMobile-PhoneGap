@@ -5,11 +5,12 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
-		<p:PhoneGapHeaderPanel caption="Prompt" document="media_capture" document2="capture"/>
+		<p:PhoneGapHeaderPanel caption="TabBar" document="media_capture" document2="capture"/>
 		<m:ScrollPanel>
 			<g:HTMLPanel styleName="Container">
 				<m:ListPanel ui:field="list">
-					<g:Label>Prompt</g:Label>
+					<g:Label>Show</g:Label>
+                    <g:Label>Hide</g:Label>
 				</m:ListPanel>
 				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
 			</g:HTMLPanel>
