@@ -42,12 +42,12 @@ public class DatePicker {
     		return (Options) JavaScriptObject.createObject();
     	}
     	
-        public native Options date(String d)/*-{
+        public final native Options date(String d)/*-{
             this.date = d;
             return this;
         }-*/;
 
-        public native Options mode(String m)/*-{
+        public final native Options mode(String m)/*-{
             this.mode = m;
             return this;
         }-*/;

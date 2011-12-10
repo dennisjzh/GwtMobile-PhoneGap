@@ -92,50 +92,50 @@ public class Map {
     	
     	protected Pin() {};
     	
-        public native Pin latitude(double latitude)/*-{
+        public final native Pin latitude(double latitude)/*-{
             this.lat = latitude;
             return this;
         }-*/;
 
-         public native double getLatitude()/*-{
+         public final native double getLatitude()/*-{
             return this.lat;
         }-*/;
 
-        public native Pin longitude(double longitude)/*-{
+        public final native Pin longitude(double longitude)/*-{
             this.lon = longitude;
             return this;
         }-*/;
 
-        public native double getLongitude()/*-{
+        public final native double getLongitude()/*-{
             return this.lon;
         }-*/;
 
-        public native Pin title(String t)/*-{
+        public final native Pin title(String t)/*-{
             this.title = t;
             return this;
         }-*/;
 
-        public native Pin subTitle(String t)/*-{
+        public final native Pin subTitle(String t)/*-{
             this.subTitle = t;
             return this;
         }-*/;
 
-        public native Pin pinColor(String color)/*-{
+        public final native Pin pinColor(String color)/*-{
             this.pinColor = color;
             return this;
         }-*/;
 
-        public native Pin index(int i)/*-{
+        public final native Pin index(int i)/*-{
             this.index = i;
             return this;
         }-*/;
 
-        public native Pin selected(int s)/*-{
+        public final native Pin selected(int s)/*-{
             this.selected = s;
             return this;
         }-*/;
 
-        public native Pin image(String url)/*-{
+        public final native Pin image(String url)/*-{
             this.imageURL = url;
             return this;
         }-*/;
@@ -149,27 +149,27 @@ public class Map {
     	
     	protected Options() {};
     	
-        public native Options latitude(double latitude)/*-{
+        public final native Options latitude(double latitude)/*-{
             this.lat = latitude;
             return this;
         }-*/;
 
-        public native Options longitude(double longitude)/*-{
+        public final native Options longitude(double longitude)/*-{
             this.lon = longitude;
             return this;
         }-*/;
 
-        public native Options height(double h)/*-{
+        public final native Options height(double h)/*-{
             this.height = h;
             return this;
         }-*/;
 
-        public native Options diameter(double d)/*-{
+        public final native Options diameter(double d)/*-{
             this.diameter = d;
             return this;
         }-*/;
 
-        public native Options offsetTop(double o)/*-{
+        public final native Options offsetTop(double o)/*-{
             this.offsetTop = o;
             return this;
         }-*/;

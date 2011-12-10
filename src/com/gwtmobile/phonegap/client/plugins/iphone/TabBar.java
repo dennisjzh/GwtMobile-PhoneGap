@@ -92,24 +92,24 @@ public class TabBar {
     		return options;
     	}
     	
-    	private Options() {};
+    	protected Options() {};
 
-        public native Options position(String p) /*-{
+        public final native Options position(String p) /*-{
             this.position = p;
             return this;
         }-*/;
 
-        public native Options height(int h)/*-{
+        public final native Options height(int h)/*-{
             this.height = h;
             return this;
         }-*/;
 
-        public native Options animate(boolean a)/*-{
+        public final native Options animate(boolean a)/*-{
             this.animate = a;
             return this;
         }-*/;
 
-        private native void setOnSelectCallback()/*-{
+        private final native void setOnSelectCallback()/*-{
             this.onSelect = function(id){
                     @com.gwtmobile.phonegap.client.plugins.iphone.TabBar::onTabItemSelected(Ljava/lang/String;)(id);
             };
