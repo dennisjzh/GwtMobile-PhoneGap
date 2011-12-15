@@ -30,10 +30,16 @@ public class DatePicker {
     }-*/;
 
     public interface Callback {
-    	//FIXME: Date type?
-    	void onDateSelected(String date);
+        //FIXME: Date type?
+        void onDateSelected(String date);
     }
-    
+
+    public static native String webDateToMilliSec(String webDate) /*-{
+        var longDate = Date.parse(webDate);
+        return longDate.toString();
+    }-*/;
+
+
     public static class Options extends JavaScriptObject {
 
     	protected Options() {};

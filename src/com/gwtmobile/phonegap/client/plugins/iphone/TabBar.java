@@ -31,7 +31,7 @@ public class TabBar {
 	};
 
     public static native void creatItem(String name, String label, String image, Options options)/*-{
-        controls.createTabBarItem(name, label, image, options);
+        $wnd.plugins.nativeControls.createTabBarItem(name, label, image, options);
     }-*/;
 
     public static void show(){

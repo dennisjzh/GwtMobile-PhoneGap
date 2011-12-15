@@ -22,7 +22,11 @@
 				<g:Label>Network</g:Label>			
 				<g:Label>Notification</g:Label>			
 				<g:Label>Plugins</g:Label>			
-				<g:Label>Storage</g:Label>			
+				<g:Label>Storage</g:Label>
+                <g:Label>Datepicker</g:Label>
+                <g:Label>NotificationEx</g:Label>
+                <g:Label>Prompt</g:Label>
+                <g:Label>TabBar</g:Label>
 			</m:ListPanel>
 		</m:ScrollPanel>
 	</g:HTMLPanel>
