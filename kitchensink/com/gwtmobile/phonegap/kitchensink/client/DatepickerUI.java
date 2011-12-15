@@ -46,7 +46,8 @@ public class DatepickerUI extends Page {
             case 0:
                 DatePicker.show(DatePicker.Options.newInstance().date(dateTimeFormat.format(new Date())),
                         new DatePicker.Callback() {
-                            public void onDateSelected(String sDate) {
+                            @Override
+							public void onDateSelected(String sDate) {
                                 Date date = new Date(Long.parseLong(DatePicker.webDateToMilliSec(sDate)));
                                 text.setHTML("Selected date :" + dateTimeFormat.format(date));
                             }
