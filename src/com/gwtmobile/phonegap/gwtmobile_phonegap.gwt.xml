@@ -7,7 +7,7 @@
 
     <set-property name="user.agent" value="safari"/>
     
-    <script src="phonegap-1.0.0.js"/>
+    <!--script src="phonegap-1.0.0.js"/>
     <script src="ChildBrowser.js" />
     <script src="NativeControls.js" />
     <script src="MapKitPlug.js" />
@@ -15,7 +15,9 @@
     <script src="notificationex.js" />
     <script src="ShareKitPlugin.js" />
     <script src="Prompt.js" />
-    <script src="TestFlight.js" />
+    <script src="TestFlight.js" /-->
+
+  <add-linker name="xsiframe" /> 
 
 
 </module>
