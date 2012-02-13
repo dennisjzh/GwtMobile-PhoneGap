@@ -106,7 +106,7 @@ public class ContactsUi extends Page {
 				public void onError(ContactError error) {
 					text.setHTML("Contact find failed.<br/>" + error.getCode());
 				}
-			}, new ContactFindOptions().filter("Plumber"));
+			}, ContactFindOptions.newInstance().filter("Plumber"));
 		
 		} 
 		catch (Exception exception) {
@@ -144,7 +144,7 @@ public class ContactsUi extends Page {
 			public void onError(ContactError error) {
 				text.setHTML("Failed to find contact to delete.<br/>" + error.getCode());
 			}
-		}, new ContactFindOptions().filter("Plumber"));
+		}, ContactFindOptions.newInstance().filter("Plumber"));
     }
     
     private void cloneContact() {
@@ -180,7 +180,7 @@ public class ContactsUi extends Page {
 			public void onError(ContactError error) {
 				text.setHTML("Failed to find contact to clone.<br/>" + error.getCode());
 			}
-		}, new ContactFindOptions().filter("Plumber"));
+		}, ContactFindOptions.newInstance().filter("Plumber"));
     }
 
 }

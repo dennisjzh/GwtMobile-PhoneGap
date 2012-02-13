@@ -81,25 +81,25 @@ public class CaptureUi extends Page {
 
     void captureAudio() {
 		Capture.captureAudio(callback, 
-			new CaptureOptions()
-				.limit(1)
-				.duration(10)
+			CaptureOptions.newInstance()
+			.limit(1)
+			.duration(10)
 		);
 	}
 
     void captureImage() {
 		Capture.captureImage(callback, 
-			new CaptureOptions()
-				.limit(1)
-				.duration(10)
+			CaptureOptions.newInstance()
+			.limit(1)
+			.duration(10)
 		);
 	}
 
     void captureVideo() {
 		Capture.captureVideo(callback, 
-			new CaptureOptions()
-				.limit(1)
-				.duration(10)
+			CaptureOptions.newInstance()
+			.limit(1)
+			.duration(10)
 		);
 	}
 

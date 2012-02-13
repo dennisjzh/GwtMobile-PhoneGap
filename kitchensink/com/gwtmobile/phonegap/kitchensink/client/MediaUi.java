@@ -149,6 +149,7 @@ public class MediaUi extends Page {
 	}
     
     public void startRecord() {
+    	media.release(); //make sure last record is released.
     	text.setHTML("Recording. Say or sing something.<br/>");    	
     	media.startRecord();
     	timer = new Timer() {

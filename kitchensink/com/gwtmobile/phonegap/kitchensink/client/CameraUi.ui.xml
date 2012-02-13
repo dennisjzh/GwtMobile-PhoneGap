@@ -4,16 +4,19 @@
 	xmlns:m="urn:import:com.gwtmobile.ui.client.widgets"
 	xmlns:p="urn:import:com.gwtmobile.phonegap.kitchensink.client">
 	<ui:style>
+		.container {
+			padding-top: .3em;
+		}
 	</ui:style>
 	<g:HTMLPanel>
 		<p:PhoneGapHeaderPanel caption="Camera"></p:PhoneGapHeaderPanel>
-		<m:ScrollPanel>
-			<g:HTMLPanel styleName="Container">
-				<m:ListPanel ui:field="list">
-					<g:Label>Get Picture</g:Label>
-				</m:ListPanel>
-				<g:HTML ui:field="text" styleName="Output">Console</g:HTML>
-			</g:HTMLPanel>
-		</m:ScrollPanel>
+		<g:HTMLPanel styleName="Container {style.container}">
+			<m:ListPanel ui:field="list">
+				<g:Label>Get Picture</g:Label>
+			</m:ListPanel>
+			<m:ScrollPanel secondaryStyle="Output">
+				<g:HTML ui:field="text">Console</g:HTML>
+			</m:ScrollPanel>
+		</g:HTMLPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

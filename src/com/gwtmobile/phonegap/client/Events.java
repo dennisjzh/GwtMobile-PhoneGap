@@ -16,30 +16,60 @@
 
 package com.gwtmobile.phonegap.client;
 
-public class Event {
+public class Events {
 	
 	public native static void onDeviceReady(Callback callback) /*-{
 		//Have to manually fire the event for iOS if device is already initialized.
 		if ($wnd.navigator.userAgent.indexOf("Android") == -1 
 			&& $wnd.device != null && $wnd.device.uuid != null) {
-			callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+			callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 		}
 		else {
 		    $doc.addEventListener("deviceready", function() {
-		    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+		    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 		    }, false);
 		}
 	}-*/;
 	
 	public native static void onPause(Callback callback) /*-{
 	    $doc.addEventListener("pause", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
 	public native static void onResume(Callback callback) /*-{
 	    $doc.addEventListener("resume", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onOnline(Callback callback) /*-{
+	    $doc.addEventListener("online", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+	
+	public native static void onOffline(Callback callback) /*-{
+	    $doc.addEventListener("offline", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onBatteryCritical(Callback callback) /*-{
+	    $doc.addEventListener("batterycritical", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onBatteryLow(Callback callback) /*-{
+	    $doc.addEventListener("batterylow", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
+	    }, false);
+	}-*/;
+
+	public native static void onBatteryStatus(Callback callback) /*-{
+	    $doc.addEventListener("batterystatus", function() {
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
@@ -47,31 +77,19 @@ public class Event {
 	
 	public native static void onBackButton(Callback callback) /*-{
 	    $doc.addEventListener("backbutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
 	public native static void onMenuButton(Callback callback) /*-{
 	    $doc.addEventListener("menubutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
 	public native static void onSearchButton(Callback callback) /*-{
 	    $doc.addEventListener("searchbutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
-	    }, false);
-	}-*/;
-
-	public native static void onOnline(Callback callback) /*-{
-	    $doc.addEventListener("online", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
-	    }, false);
-	}-*/;
-
-	public native static void onOffline(Callback callback) /*-{
-	    $doc.addEventListener("offline", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
@@ -79,25 +97,25 @@ public class Event {
 	
 	public native static void onStartCallButton(Callback callback) /*-{
 	    $doc.addEventListener("startcallbutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
 	public native static void onEndCallButton(Callback callback) /*-{
 	    $doc.addEventListener("endcallbutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
 	public native static void onVolumeDownButton(Callback callback) /*-{
 	    $doc.addEventListener("volumedownbutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 
 	public native static void onVolumeUpButton(Callback callback) /*-{
 	    $doc.addEventListener("volumeupbutton", function() {
-	    	callback.@com.gwtmobile.phonegap.client.Event.Callback::onEventFired()();
+	    	callback.@com.gwtmobile.phonegap.client.Events.Callback::onEventFired()();
 	    }, false);
 	}-*/;
 	

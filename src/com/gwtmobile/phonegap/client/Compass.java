@@ -31,14 +31,10 @@ public class Compass {
 	}-*/;
 
     public static String watchHeading(Callback callback) {
-    	return watchHeading(callback, (JavaScriptObject)null);
+    	return watchHeading(callback, null);
 	}
 	
-    public static String watchHeading(Callback callback, Options options) {
-    	return watchHeading(callback, options.getOptions());
-	}
-	
-    private static native String watchHeading(Callback callback, JavaScriptObject options) /*-{
+    public final static native String watchHeading(Callback callback, Options options) /*-{
 	    var id = $wnd.navigator.compass.watchHeading(function(heading) {
 	    	callback.@com.gwtmobile.phonegap.client.Compass.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/Compass$CompassHeading;)(heading);
 	    }, function() {
@@ -57,20 +53,19 @@ public class Compass {
     	void onError();
     }
     
-    public static class Options {
+    public static class Options extends JavaScriptObject {
 
-		private Options self = this;
-		private JavaScriptObject options = JavaScriptObject.createObject();
+    	protected Options() {};
+
+    	public static Options newInstance() {
+    		return (Options) JavaScriptObject.createObject();
+    	}
     	
-    	public native Options frequency(int f) /*-{
-    		this.@com.gwtmobile.phonegap.client.Compass.Options::options.frequency = f;
-    		return this.@com.gwtmobile.phonegap.client.Compass.Options::self;
+    	public final native Options frequency(int f) /*-{
+    		this.frequency = f;
+    		return this;
     	}-*/;
     	
-    	private JavaScriptObject getOptions() {
-			return options;    		
-    	}
-
     }
 
     public static class CompassHeading extends JavaScriptObject {

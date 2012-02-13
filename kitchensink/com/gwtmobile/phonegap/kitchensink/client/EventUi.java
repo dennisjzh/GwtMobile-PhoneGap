@@ -22,8 +22,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtmobile.phonegap.client.Event;
-import com.gwtmobile.phonegap.client.Event.Callback;
+import com.gwtmobile.phonegap.client.Events;
+import com.gwtmobile.phonegap.client.Events.Callback;
 import com.gwtmobile.ui.client.page.Page;
 import com.gwtmobile.ui.client.widgets.BackButton;
 import com.gwtmobile.ui.client.widgets.HeaderPanel;
@@ -50,56 +50,56 @@ public class EventUi extends Page {
 		BackButton back = (BackButton) header.getLeftButton();
 		back.setReturnParameter("Back");
 		
-		Event.onDeviceReady(new Callback() {			
+		Events.onDeviceReady(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onDeviceReady<br/>" + text.getHTML());
 			}
 		});
 		
-		Event.onPause(new Callback() {			
+		Events.onPause(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onPause<br/>" + text.getHTML());
 			}
 		});
 
-		Event.onResume(new Callback() {			
+		Events.onResume(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onResume<br/>" + text.getHTML());
 			}
 		});
 
-		Event.onBackButton(new Callback() {			
+		Events.onBackButton(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onBackButton<br/>" + text.getHTML());
 			}
 		});
 
-		Event.onMenuButton(new Callback() {			
+		Events.onMenuButton(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onMenuButton<br/>" + text.getHTML());
 			}
 		});
 		
-		Event.onSearchButton(new Callback() {			
+		Events.onSearchButton(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onSearchButton<br/>" + text.getHTML());
 			}
 		});
 		
-		Event.onOnline(new Callback() {			
+		Events.onOnline(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onOnline<br/>" + text.getHTML());
 			}
 		});
 		
-		Event.onOffline(new Callback() {			
+		Events.onOffline(new Callback() {			
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onOffline<br/>" + text.getHTML());

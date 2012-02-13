@@ -54,11 +54,7 @@ public class Capture {
 		}-*/;
 	}
 	
-	public static void captureAudio(CaptureCallback callback, CaptureOptions options) {
-		captureAudio(callback, options.getOptions());
-	}
-	
-	private native static void captureAudio(CaptureCallback callback, JavaScriptObject options) /*-{
+	public native static void captureAudio(CaptureCallback callback, CaptureOptions options) /*-{
 		$wnd.navigator.device.capture.captureAudio(function(mediaFiles) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
 	    }, function(message) {
@@ -66,11 +62,7 @@ public class Capture {
 		}, options);
 	}-*/;
 
-	public static void captureImage(CaptureCallback callback, CaptureOptions options) {
-		captureImage(callback, options.getOptions());
-	}
-	
-	private native static void captureImage(CaptureCallback callback, JavaScriptObject options) /*-{
+	public native static void captureImage(CaptureCallback callback, CaptureOptions options) /*-{
 		$wnd.navigator.device.capture.captureImage(function(mediaFiles) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
 	    }, function(message) {
@@ -78,11 +70,7 @@ public class Capture {
 		}, options);
 	}-*/;
 
-	public static void captureVideo(CaptureCallback callback, CaptureOptions options) {
-		captureVideo(callback, options.getOptions());
-	}
-	
-	private native static void captureVideo(CaptureCallback callback, JavaScriptObject options) /*-{
+	public native static void captureVideo(CaptureCallback callback, CaptureOptions options) /*-{
 		$wnd.navigator.device.capture.captureVideo(function(mediaFiles) {
 	    	callback.@com.gwtmobile.phonegap.client.Capture.CaptureCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(mediaFiles);
 	    }, function(message) {
@@ -116,29 +104,29 @@ public class Capture {
 		CAPTURE_NOT_SUPPORTED
 	}
 
-	public static class CaptureOptions {
+	public static class CaptureOptions extends JavaScriptObject {
 		
-		CaptureOptions self = this;
-		JavaScriptObject options = JavaScriptObject.createObject();
+    	protected CaptureOptions() {};
 
-		public native CaptureOptions limit(int limit) /*-{
-			this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::options.limit = limit;
-			return this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::self;
+    	public static CaptureOptions newInstance() {
+    		return (CaptureOptions) JavaScriptObject.createObject();
+    	}
+
+		public final native CaptureOptions limit(int limit) /*-{
+			this.limit = limit;
+			return this;
 		}-*/;
 		
-		public native CaptureOptions duration(int duration) /*-{
-			this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::options.duration = duration;
-			return this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::self;
+		public final native CaptureOptions duration(int duration) /*-{
+			this.duration = duration;
+			return this;
 		}-*/;
 
-		public native CaptureOptions mode(String mode) /*-{
-			this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::options.mode = mode;
-			return this.@com.gwtmobile.phonegap.client.Capture.CaptureOptions::self;
+		public final native CaptureOptions mode(String mode) /*-{
+			this.mode = mode;
+			return this;
 		}-*/;
 
-		private JavaScriptObject getOptions() {
-			return options;
-		}
 	}
 
 	public static class MediaFile extends JavaScriptObject {

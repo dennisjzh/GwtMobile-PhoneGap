@@ -29,10 +29,10 @@ public class Contacts {
 	}-*/;
 
 	public static final void find(ContactFields fields, ContactFindCallback callback, ContactFindOptions options) {
-		find(fields.getFields(), callback, options.getOptions());
+		find(fields.getFields(), callback, options);
 	}
-	
-	private static final native void find(JsArrayString fields, ContactFindCallback callback, JavaScriptObject options) /*-{
+
+	private static final native void find(JsArrayString fields, ContactFindCallback callback, ContactFindOptions options) /*-{
 		$wnd.navigator.contacts.find(fields, function(contacts) {
 			callback.@com.gwtmobile.phonegap.client.Contacts.ContactFindCallback::onSuccess(Lcom/google/gwt/core/client/JsArray;)(contacts);
 		}, function(error) {
@@ -552,37 +552,38 @@ public class Contacts {
 		}
 	}
 
-	public static class ContactFindOptions {
-		ContactFindOptions self = this;
-		JavaScriptObject options = JavaScriptObject.createObject();
+	public static class ContactFindOptions extends JavaScriptObject {
 
-		public native ContactFindOptions filter(String filter) /*-{
-			this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.filter = filter;
-			return this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
+    	protected ContactFindOptions() {};
+
+    	public static ContactFindOptions newInstance() {
+    		return (ContactFindOptions) JavaScriptObject.createObject();
+    	}
+
+    	public final native ContactFindOptions filter(String filter) /*-{
+			this.filter = filter;
+			return this;
 		}-*/;
 
-		public native ContactFindOptions multiple(boolean multiple) /*-{
-			this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.multiple = multiple;
-			return this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
+		public final native ContactFindOptions multiple(boolean multiple) /*-{
+			this.multiple = multiple;
+			return this;
 		}-*/;
 
-		public native ContactFindOptions limit(int limit) /*-{
-			this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.limit = limit;
-			return this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
+		public final native ContactFindOptions limit(int limit) /*-{
+			this.limit = limit;
+			return this;
 		}-*/;
 
-		public ContactFindOptions updatedSince(Date updatedSince) {
+		public final ContactFindOptions updatedSince(Date updatedSince) {
 			return updatedSince(updatedSince.toString());
 		}
 
-		private native ContactFindOptions updatedSince(String updatedSince) /*-{
-			this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::options.updatedSince = filter;
-			return this.@com.gwtmobile.phonegap.client.Contacts.ContactFindOptions::self;
+		private final native ContactFindOptions updatedSince(String updatedSince) /*-{
+			this.updatedSince = filter;
+			return this;
 		}-*/;
 
-		private JavaScriptObject getOptions() {
-			return options;
-		}
 	}
 
 }

@@ -97,7 +97,7 @@ public class CompassUi extends Page {
 			public void onError() {
 				text.setHTML("Error");
 			}
-		}, new Options().frequency(100));
+		}, Options.newInstance().frequency(100));
 	}
 
     public void clearWatch() {

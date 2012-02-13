@@ -24,6 +24,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtmobile.phonegap.client.Camera;
 import com.gwtmobile.phonegap.client.Camera.Callback;
 import com.gwtmobile.phonegap.client.Camera.DestinationType;
+import com.gwtmobile.phonegap.client.Camera.EncodingType;
+import com.gwtmobile.phonegap.client.Camera.MediaType;
 import com.gwtmobile.phonegap.client.Camera.Options;
 import com.gwtmobile.phonegap.client.Camera.SourceType;
 import com.gwtmobile.ui.client.event.SelectionChangedEvent;
@@ -54,17 +56,22 @@ public class CameraUi extends Page {
 		Camera.getPicture(new Callback() {			
 			@Override
 			public void onSuccess(String imageData) {
-				text.setHTML("Success: " + imageData);
+				text.setHTML("Success: " + imageData + "<br/>" + 
+						"<img src='" + imageData + "'/>");
 			}			
 			@Override
 			public void onError(String message) {
 				text.setHTML("Error: " + message);
 			}
-		}, new Options()
+		}, Options.newInstance()
 			.quality(50)
 			.sourceType(SourceType.CAMERA)
 			.destinationType(DestinationType.FILE_URI)
-			.allowEdit(false));
+			.allowEdit(false)
+			.encodingType(EncodingType.PNG)
+			.targetWidth(480)
+			.targetHeight(720)
+			.mediaType(MediaType.PICTURE));
 	}
 
 }

@@ -21,11 +21,12 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.gwtmobile.phonegap.client.App;
 import com.gwtmobile.phonegap.client.App.LoadUrlOptions;
-import com.gwtmobile.phonegap.client.Event;
-import com.gwtmobile.phonegap.client.Event.Callback;
+import com.gwtmobile.phonegap.client.Events;
+import com.gwtmobile.phonegap.client.Events.Callback;
 import com.gwtmobile.phonegap.client.Notification;
 import com.gwtmobile.phonegap.client.Notification.ConfirmCallback;
 import com.gwtmobile.phonegap.client.Storage;
@@ -41,11 +42,10 @@ public class KitchenSink implements EntryPoint {
 	
 	@Override
 	public void onModuleLoad() {
-
 		if (Utils.isAndroid() || Utils.isIOS()) {
 			
 			if (Utils.isAndroid()) {
-				Event.onBackButton(new Event.Callback() {			
+				Events.onBackButton(new Events.Callback() {			
 					@Override
 					public void onEventFired() {
 						onBackKeyDown();
@@ -53,7 +53,7 @@ public class KitchenSink implements EntryPoint {
 				});
 			}
 
-			Event.onDeviceReady(new Callback() {			
+			Events.onDeviceReady(new Callback() {			
 				@Override
 				public void onEventFired() {
 					new Timer() {
@@ -90,7 +90,7 @@ public class KitchenSink implements EntryPoint {
     							switch (selection) {
     								case 1:  //sure
     									App.loadUrl("market://details?id=com.gwtmobile.phonegap", 
-    											LoadUrlOptions.get().openExternal(true));
+    											LoadUrlOptions.newInstance().openExternal(true));
     								case 2:  //nope
     									Storage.LocalStorage.setItem("ShowRatingDialog", new Date().toString());
     									Storage.LocalStorage.setItem("ShowRatingSelection", selection + "");

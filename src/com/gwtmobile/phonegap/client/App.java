@@ -38,7 +38,7 @@ public class App {
 
 		protected LoadUrlOptions() {};
 		
-		public final static LoadUrlOptions get() {
+		public final static LoadUrlOptions newInstance() {
 			return (LoadUrlOptions) JavaScriptObject.createObject();
 		}
 

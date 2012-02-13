@@ -31,14 +31,10 @@ public class Accelerometer {
 	}-*/;
 
     public static String watchAcceleration(Callback callback) {
-    	return watchAcceleration(callback, (JavaScriptObject)null);
+    	return watchAcceleration(callback, null);
 	}
 	
-    public static String watchAcceleration(Callback callback, Options options) {
-    	return watchAcceleration(callback, options.getOptions());
-	}
-	
-    private static native String watchAcceleration(Callback callback, JavaScriptObject options) /*-{
+    public static native String watchAcceleration(Callback callback, Options options) /*-{
 	    var id = $wnd.navigator.accelerometer.watchAcceleration(function(acceleration) {
 	    	callback.@com.gwtmobile.phonegap.client.Accelerometer.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/Accelerometer$Acceleration;)(acceleration);
 	    }, function() {
@@ -81,20 +77,19 @@ public class Accelerometer {
 		}-*/;
     }
     
-    public static class Options {
+    public static class Options extends JavaScriptObject {
 
-		private Options self = this;
-		private JavaScriptObject options = JavaScriptObject.createObject();
+    	protected Options() {};
     	
-    	public native Options frequency(int f) /*-{
-    		this.@com.gwtmobile.phonegap.client.Accelerometer.Options::options.frequency = f;
-    		return this.@com.gwtmobile.phonegap.client.Accelerometer.Options::self;
+    	public static Options newInstance() {
+    		return (Options) JavaScriptObject.createObject();
+    	}
+    	    	
+    	public final native Options frequency(int f) /*-{
+    		this.frequency = f;
+    		return this;
     	}-*/;
     	
-    	private JavaScriptObject getOptions() {
-			return options;    		
-    	}
-
     }
 
 }

@@ -106,7 +106,7 @@ public class GeolocationUi extends Page {
 			public void onError(PositionError error) {
 				text.setHTML("Error<br/>code:" + error.getCode() + "<br/>message: " + error.getMessage());
 			}
-		}, new Options().frequency(100).enableHighAccuracy(true).timeout(1000).maximumAge(1000));
+		}, Options.newInstance().frequency(100).enableHighAccuracy(true).timeout(1000).maximumAge(1000));
 	}
 
     public void clearWatch() {

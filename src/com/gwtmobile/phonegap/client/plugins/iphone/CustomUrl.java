@@ -1,6 +1,6 @@
 package com.gwtmobile.phonegap.client.plugins.iphone;
 
-import com.gwtmobile.phonegap.client.Event;
+import com.gwtmobile.phonegap.client.Events;
 
 import java.util.logging.Logger;
 
@@ -30,7 +30,7 @@ public class CustomUrl {
 
 
     public static void onDeviceReady(final UrlReceivedCallback callback){
-        Event.onDeviceReady(new Event.Callback() {
+        Events.onDeviceReady(new Events.Callback() {
             @Override
 			public void onEventFired() {
                 nativeOnDeviceReady(callback);

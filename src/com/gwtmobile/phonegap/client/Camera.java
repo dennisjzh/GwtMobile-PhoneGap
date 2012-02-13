@@ -21,14 +21,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class Camera {
 
 	public static void getPicture(Callback callback) {
-		getPicture(callback, (JavaScriptObject)null);
+		getPicture(callback, null);
 	}
 
-	public static void getPicture(Callback callback, Options options) {
-		getPicture(callback, options.getOptions());
-	}
-
-	private native static void getPicture(Callback callback, JavaScriptObject options) /*-{
+	public native static void getPicture(Callback callback, Options options) /*-{
 		$wnd.navigator.camera.getPicture(function(imageData) {
 	    	callback.@com.gwtmobile.phonegap.client.Camera.Callback::onSuccess(Ljava/lang/String;)(imageData);
 	    }, function(message) {
@@ -45,41 +41,73 @@ public class Camera {
 
 	public enum SourceType { PHOTOLIBRARY, CAMERA, SAVEDPHOTOALBUM }
 	
-    public static class Options {
-    	Options self = this;
-    	JavaScriptObject options = JavaScriptObject.createObject();
+	public enum EncodingType { JPEG, PNG }
+	
+	public enum MediaType { PICTURE, VIDEO, ALLMEDIA }
+	
+    public static class Options extends JavaScriptObject {
     	
-    	public native Options quality(int q) /*-{
-    		this.@com.gwtmobile.phonegap.client.Camera.Options::options.quality = q;
-    		return this.@com.gwtmobile.phonegap.client.Camera.Options::self;
+    	protected Options() {};
+
+    	public static Options newInstance() {
+    		return (Options) JavaScriptObject.createObject();
+    	}
+    	
+    	public final native Options quality(int q) /*-{
+    		this.quality = q;
+    		return this;
 		}-*/;
 
     	// TODO: is there way to pass enum to javascript without using this method?
-    	public Options destinationType(DestinationType d) {
+    	public final Options destinationType(DestinationType d) {
     		return destinationType(d.ordinal());
     	}
     	
-    	private native Options destinationType(int d) /*-{
-			this.@com.gwtmobile.phonegap.client.Camera.Options::options.destinationType = d;			
-    		return this.@com.gwtmobile.phonegap.client.Camera.Options::self;
+    	private final native Options destinationType(int d) /*-{
+			this.destinationType = d;			
+    		return this;
 		}-*/;
 
-    	public Options sourceType(SourceType s) {
+    	public final Options sourceType(SourceType s) {
     		return sourceType(s.ordinal());
     	}
     	
-    	private native Options sourceType(int s) /*-{
-			this.@com.gwtmobile.phonegap.client.Camera.Options::options.sourceType = s;			
-    		return this.@com.gwtmobile.phonegap.client.Camera.Options::self;
+    	private final native Options sourceType(int s) /*-{
+			this.sourceType = s;			
+    		return this;
 		}-*/;
 
-    	public native Options allowEdit(boolean b) /*-{
-			this.@com.gwtmobile.phonegap.client.Camera.Options::options.allowEdit = b;			
-    		return this.@com.gwtmobile.phonegap.client.Camera.Options::self;
+    	public final native Options allowEdit(boolean b) /*-{
+			this.allowEdit = b;			
+    		return this;
 		}-*/;
 
-		private JavaScriptObject getOptions() {
-			return options;    		
+    	public final Options encodingType(EncodingType e) {
+    		return encodingType(e.ordinal());
     	}
+    	
+    	private final native Options encodingType(int e) /*-{
+			this.encodingType = e;			
+    		return this;
+		}-*/;
+    	
+    	public final native Options targetWidth(int w) /*-{
+			this.targetWidth = w;
+			return this;
+		}-*/;
+
+    	public final native Options targetHeight(int h) /*-{
+			this.targetHeight = h;
+			return this;
+		}-*/;
+
+    	public final Options mediaType(MediaType m) {
+    		return mediaType(m.ordinal());
+    	}
+    	
+    	private final native Options mediaType(int m) /*-{
+			this.mediaType = m;
+    		return this;
+		}-*/;
     }
 }

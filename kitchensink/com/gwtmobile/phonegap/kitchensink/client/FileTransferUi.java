@@ -87,7 +87,7 @@ public class FileTransferUi extends Page {
 			public void onError(String message) {
 				text.setHTML("Error: " + message);
 			}
-		}, new Camera.Options()
+		}, Camera.Options.newInstance()
 		.quality(50)
 		.sourceType(SourceType.CAMERA)
 		.destinationType(DestinationType.FILE_URI)

@@ -64,7 +64,7 @@
 					</m:ListPanel>
 				</g:HTMLPanel>
 				<m:ScrollPanel ui:field="scroller" secondaryStyle="Output">
-					<g:HTML ui:field="text" styleName="O1utput">Console</g:HTML>
+					<g:HTML ui:field="text">Console</g:HTML>
 				</m:ScrollPanel>
 			</g:HTMLPanel>
 <!-- 		</m:ScrollPanel> -->

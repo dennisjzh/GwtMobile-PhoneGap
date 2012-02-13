@@ -32,14 +32,10 @@ public class Geolocation {
 	}-*/;
 
     public static String watchPosition(Callback callback) {
-    	return watchPosition(callback, (JavaScriptObject)null);
+    	return watchPosition(callback, null);
 	}
 	
-    public static String watchPosition(Callback callback, Options options) {
-    	return watchPosition(callback, options.getOptions());
-	}
-	
-    private static native String watchPosition(Callback callback, JavaScriptObject options) /*-{
+    public static native String watchPosition(Callback callback, Options options) /*-{
 	    var id = $wnd.navigator.geolocation.watchPosition(function(position) {
 	    	callback.@com.gwtmobile.phonegap.client.Geolocation.Callback::onSuccess(Lcom/gwtmobile/phonegap/client/Geolocation$Position;)(position);
 	    }, function(error) {
@@ -129,34 +125,34 @@ public class Geolocation {
     }
 
 
-    public static class Options {
-    	Options self = this;
-    	JavaScriptObject options = JavaScriptObject.createObject();
+    public static class Options extends JavaScriptObject {
     	
-    	public native Options frequency(int f) /*-{
-    		this.@com.gwtmobile.phonegap.client.Geolocation.Options::options.frequency = f;
-    		return this.@com.gwtmobile.phonegap.client.Geolocation.Options::self;			
-		}-*/;
+    	protected Options() {};
 
-    	public native Options enableHighAccuracy(boolean b) /*-{
-			this.@com.gwtmobile.phonegap.client.Geolocation.Options::options.enableHighAccuracy = b;			
-    		return this.@com.gwtmobile.phonegap.client.Geolocation.Options::self;			
-		}-*/;
-
-    	public native Options timeout(int t) /*-{
-			this.@com.gwtmobile.phonegap.client.Geolocation.Options::options.timeout = t;			
-    		return this.@com.gwtmobile.phonegap.client.Geolocation.Options::self;			
-		}-*/;
-
-    	public native Options maximumAge(int a) /*-{
-			this.@com.gwtmobile.phonegap.client.Geolocation.Options::options.maximumAge = a;			
-    		return this.@com.gwtmobile.phonegap.client.Geolocation.Options::self;			
-		}-*/;
-
-		private JavaScriptObject getOptions() {
-			return options;    		
+    	public static Options newInstance() {
+    		return (Options) JavaScriptObject.createObject();
     	}
-    	
+
+    	public final native Options frequency(int f) /*-{
+    		this.frequency = f;
+    		return this;			
+		}-*/;
+
+    	public final native Options enableHighAccuracy(boolean b) /*-{
+			this.enableHighAccuracy = b;			
+    		return this;			
+		}-*/;
+
+    	public final native Options timeout(int t) /*-{
+			this.timeout = t;			
+    		return this;			
+		}-*/;
+
+    	public final native Options maximumAge(int a) /*-{
+			this.maximumAge = a;			
+    		return this;			
+		}-*/;
+
     }
 
 }
