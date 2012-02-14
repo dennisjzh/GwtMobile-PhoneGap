@@ -28,17 +28,17 @@ import com.gwtmobile.ui.client.page.Page;
 import com.gwtmobile.ui.client.widgets.BackButton;
 import com.gwtmobile.ui.client.widgets.HeaderPanel;
 
-public class EventUi extends Page {
+public class EventsUi extends Page {
 
-	private static EventUiUiBinder uiBinder = GWT.create(EventUiUiBinder.class);
+	private static EventsUiUiBinder uiBinder = GWT.create(EventsUiUiBinder.class);
 	
 	@UiField HTML text;
 	@UiField HeaderPanel header;
 
-	interface EventUiUiBinder extends UiBinder<Widget, EventUi> {
+	interface EventsUiUiBinder extends UiBinder<Widget, EventsUi> {
 	}
 
-	public EventUi() {
+	public EventsUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
@@ -103,6 +103,27 @@ public class EventUi extends Page {
 			@Override
 			public void onEventFired() {
 				text.setHTML((new Date()).toString() + ": onOffline<br/>" + text.getHTML());
+			}
+		});
+		
+		Events.onBatteryCritical(new Callback() {			
+			@Override
+			public void onEventFired() {
+				text.setHTML((new Date()).toString() + ": onBatteryCritical<br/>" + text.getHTML());
+			}
+		});
+		
+		Events.onBatteryLow(new Callback() {
+			@Override
+			public void onEventFired() {
+				text.setHTML((new Date()).toString() + ": onBatteryLow<br/>" + text.getHTML());
+			}
+		});
+		
+		Events.onBatteryStatus(new Callback() {
+			@Override
+			public void onEventFired() {
+				text.setHTML((new Date()).toString() + ": onBatteryStatus<br/>" + text.getHTML());
 			}
 		});
 		

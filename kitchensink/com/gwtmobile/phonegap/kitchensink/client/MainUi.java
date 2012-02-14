@@ -60,7 +60,7 @@ public class MainUi extends Page {
     		goTo(new DeviceUi());
     		break;
     	case 6:
-    		goTo(new EventUi());
+    		goTo(new EventsUi());
     		break;
     	case 7:
     		goTo(new FileMgrUi());
